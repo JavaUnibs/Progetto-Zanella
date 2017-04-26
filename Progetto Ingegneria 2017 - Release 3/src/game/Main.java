@@ -44,6 +44,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		int scelta;
+		int peso_totale=0;
+		int num_totale;
 		int peso_max=50;
 		int numero_max=5;
 		
@@ -135,8 +137,8 @@ public class Main {
 						return;
 					}
 					
-					int peso_totale=0;
-					int num_totale=mondo.getKeys().size();
+					
+					num_totale=mondo.getKeys().size();
 					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
 					
 					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()&&peso_totale<=peso_max&&num_totale<=numero_max) {
