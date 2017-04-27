@@ -14,7 +14,8 @@ public class World implements Serializable{
 	private final String INCORRECT_STRING2="Le chiavi da mettere nei luoghi non sono definite in modo corretto";
 	private ArrayList<Ground> grounds;
 	private ArrayList<Passage> passages; 
-	private ArrayList<Token> keys;
+	private ArrayList<Token> keytypes;
+	private ArrayList<Token> playerkeys;
 	private boolean depositata;
 	
 	
@@ -23,7 +24,8 @@ public class World implements Serializable{
 
 		grounds= new ArrayList<Ground>();
 		passages= new ArrayList<Passage>();
-		keys= new ArrayList<Token>();
+		keytypes= new ArrayList<Token>();
+		playerkeys= new ArrayList<Token>();
 		depositata=true;
 		
 		for(int h=0;h<height;h++){                                             //genera tutti luoghi combinando le max coordinate
@@ -100,7 +102,6 @@ public class World implements Serializable{
 				int d2=Integer.parseInt(array[i].substring(6, 7));
 				Ground g1= searchGround(h1, w1, d1);
 				Ground g2= searchGround(h2, w2, d2);
-
 
 
 				if((g1!=null)&&(g2!=null)){
@@ -211,19 +212,6 @@ public class World implements Serializable{
 	}
 	
 
-
-	public ArrayList<Token> getKeys() {
-		return keys;
-	}
-
-
-	public void setKeys(ArrayList<Token> keys) {
-		this.keys = keys;
-	}
-
-
-
-
 	public boolean isDepositata() {
 		return depositata;
 	}
@@ -235,6 +223,31 @@ public class World implements Serializable{
 		this.depositata = depositata;
 	}
 	
+	
+	public ArrayList<Token> getKeytypes() {
+		return keytypes;
+	}
+
+
+
+
+	public ArrayList<Token> getPlayerkeys() {
+		return playerkeys;
+	}
+
+
+
+
+	public void setKeytypes(ArrayList<Token> keytypes) {
+		this.keytypes = keytypes;
+	}
+
+
+
+
+	public void setPlayerkeys(ArrayList<Token> playerkeys) {
+		this.playerkeys = playerkeys;
+	}
 	
 	
 	

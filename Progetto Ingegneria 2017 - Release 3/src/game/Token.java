@@ -5,7 +5,7 @@ import java.io.Serializable;
 public enum Token implements Serializable{
 	
 	
-	Rame(35), Oro(45), Argento(40), Ferro(20), Bronzo(30), Platino(50), Stagno(10), Acciaio(25), Piombo(5), Alluminio(15);
+	Rame(5), Oro(25), Argento(15), Ferro(10), Bronzo(15), Platino(25), Stagno(5), Acciaio(15), Piombo(15), Alluminio(10);
 	
 
 

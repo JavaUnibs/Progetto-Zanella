@@ -21,7 +21,7 @@ public class Main {
 	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
 	static final String CURRENT_GROUND="Il luogo corrente è: ";
 	static final String GET_KEY="Vuoi raccogliere la chiave?";
-	static final String WEIGHT="Peso o numero massimo di chiavi trasportabili ecceduti";
+	static final String WEIGHT="La chiave non può essere raccolta perché o il peso massimo o il numero massimo di chiavi trasportabili ecceduti";
 	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'è già una chiave)";
 	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave";
 	static final String GOT_KEY="Hai raccolto la chiave";
@@ -30,24 +30,28 @@ public class Main {
 	static final String SAVE_LOCATION="Immettere il percorso assoluto del file da salvare";
 	static final String NO_OPZ="Opzione non definita";
 	static final String LOADING="Vuoi caricare una sessione precedente?";
-	static final int ALTEZZA = 3, LARGHEZZA = 3, PROFONDITA = 3;
-	static final int START_H = 0, START_W=0, START_D=0;
-	static final int END_H = 2, END_W=2, END_D=2;
-	static final String[] PASSAGGI_APERTI={"000-010","010-110","010-020","020-120","220-221","221-222"};
-	static final String[] LUOGHI_CHIAVE={"020-Alluminio"};
-	static final String[] PASSAGGI_CHIAVE={"120-220-Alluminio"};
+	static final int ALTEZZA = 3, LARGHEZZA = 4, PROFONDITA = 4;
+	static final int START_H = 1, START_W = 2, START_D = 1;
+	static final int END_H = 0, END_W = 0, END_D = 2;
+	static final String[] PASSAGGI_APERTI={"000-010","030-130","020-120","010-110","100-110","100-200","110-210",
+			"210-220","220-230","230-130","200-201","201-101","111-101","001-101","001-011","011-021","021-121",
+			"121-131","131-031","011-012","111-211","211-221","221-231","202-102","112-102","112-212","112-122",
+			"122-222","222-232","232-132","132-133","122-022","022-032","022-012","203-103","203-213","213-223",
+			"223-233","223-123","123-023","023-033","033-133"};
+	static final String[] LUOGHI_CHIAVE={"100-Acciaio","120-Oro","000-Piombo","231-Ferro","111-Rame","212-Bronzo",
+			"232-Stagno","022-Alluminio","233-Argento","003-Platino","023-Argento"};
+	static final String[] PASSAGGI_CHIAVE={"200-201-Rame","120-020-Ferro","020-010-Piombo","020-030-Acciaio",
+			"102-002-Oro","002-012-Platino","032-132-Alluminio","003-103-Argento","003-013-Bronzo","013-113-Stagno",
+			"123-113-Stagno","123-133-Stagno"};
 	
 	
-	
-	
-			
 	public static void main(String[] args) {
 		
 		int scelta;
-		int peso_totale=0;
-		int num_totale;
-		int peso_max=50;
-		int numero_max=5;
+		int peso_totale = 0;
+		int num_totale = 0;
+		int peso_max = 50;
+		int numero_max = 5;
 		
 		Menu elenco = new Menu(MENU_PRINCIPALE);
 		Menu elenco_dir= new Menu(MENU_DIREZIONI);
@@ -72,6 +76,8 @@ public class Main {
 				 save = (Save)SalvataggioFile.caricaOggetto(fgame);
 				 mondo = save.getMondo();
 				 luogo_corrente = save.getLuogo_corrente();
+				 peso_totale = save.getPeso_corrente();
+				 num_totale = save.getNumero_attuale();
 			   }
 			  catch (ClassCastException e)
 			   {
@@ -126,10 +132,8 @@ public class Main {
 				
 				int scelta_dir;
 				
-				
-				do {
-					
-					
+			
+				do {		
 					Ground luogo_prossimo=luogo_corrente;
 					
 					if(luogo_corrente.isEnd()) {
@@ -138,21 +142,25 @@ public class Main {
 					}
 					
 					
-					num_totale=mondo.getKeys().size();
-					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
+					
+					
 					
 					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()&&peso_totale<=peso_max&&num_totale<=numero_max) {
 						Token key=luogo_corrente.getKey();
 						
-						System.out.println(KEY_PRESENT+key);
-						if(LeggiInput.doppiaScelta(GET_KEY)){
-							mondo.getKeys().add(key);
-							luogo_corrente.setKey(null);
-							System.out.println(GOT_KEY);
-						}
-					}else if(!(peso_totale<=peso_max&&num_totale<=numero_max)) System.out.println(WEIGHT);
+						System.out.println(KEY_PRESENT + key + " con peso " + key.getWeight());
+						if(peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max){
+							if(LeggiInput.doppiaScelta(GET_KEY)){
+								mondo.getPlayerkeys().add(key);
+								num_totale=mondo.getPlayerkeys().size();
+								peso_totale=peso_totale + key.getWeight();
+								luogo_corrente.setKey(null);
+								System.out.println(GOT_KEY);
+							}
+						}else System.out.println(WEIGHT);
+					}
 
-					scelta_dir=elenco_dir.stampaMenu();
+					scelta_dir=elenco_dir.stampaMenu(); 
 					
 					switch(scelta_dir){
 					
@@ -205,9 +213,9 @@ public class Main {
 						else {
 							
 							if(ptemp.getKey()!=null){
-								System.out.println(KEY_NEEDED+ptemp.getKey());
+								System.out.println(KEY_NEEDED + ptemp.getKey());
 								
-								if(mondo.getKeys().contains(ptemp.getKey())){
+								if(mondo.getPlayerkeys().contains(ptemp.getKey())){
 									System.out.println(YES_KEY);
 									ptemp.setOpen(true);
 									ptemp.setKey(null);
@@ -229,7 +237,8 @@ public class Main {
 							else if(ptemp.getKey()==null) System.out.println(CLOSED_PASSAGE);
 					}
 					}
-					
+					System.out.println("Peso trasportato = " + peso_totale + 
+							"\nNumero chiavi possedute = " + num_totale); //ATTENZIONE
 					
 				}while(scelta_dir>0);
 				
@@ -239,10 +248,10 @@ public class Main {
 			
 			case 2:{
 				
-				if(!mondo.getKeys().isEmpty()&&!luogo_corrente.isEnd()&&!luogo_corrente.isStart()&&luogo_corrente.getKey()==null){
+				if(!mondo.getPlayerkeys().isEmpty()&&!luogo_corrente.isEnd()&&!luogo_corrente.isStart()&&luogo_corrente.getKey()==null){
 					
 					ArrayList<String> temp= new ArrayList<String>();
-					for(Token a: mondo.getKeys()) temp.add(a.toString());
+					for(Token a: mondo.getPlayerkeys()) temp.add(a.toString());
 					String[] temp2= new String[temp.size()];
 					temp2=temp.toArray(temp2);
 					Menu elenco_chiavi = new Menu(temp2);
@@ -251,14 +260,16 @@ public class Main {
 			
 					if(scelta_chiavi-1>=0&&scelta_chiavi<=temp.size()){
 						
-						Token key=mondo.getKeys().get(scelta_chiavi-1);
+						Token key=mondo.getPlayerkeys().get(scelta_chiavi-1);
 						luogo_corrente.setKey(key);
-						mondo.getKeys().remove(key);
+						mondo.getPlayerkeys().remove(key);
+						peso_totale -= key.getWeight();
+						num_totale -= 1;
 						System.out.println("La chiave scelta è stata depositata");
 						mondo.setDepositata(true);
 
 					}
-				}else if(mondo.getKeys().isEmpty()) System.out.println(CANT_PUT_KEY2);
+				}else if(mondo.getPlayerkeys().isEmpty()) System.out.println(CANT_PUT_KEY2);
 				else System.out.println(CANT_PUT_KEY1);
 					
 				
@@ -268,7 +279,7 @@ public class Main {
 			
 			case 3:{
 				
-				Save save = new Save(mondo,luogo_corrente);
+				Save save = new Save(mondo, luogo_corrente, peso_totale, num_totale);
 				LeggiInput.terminaRiga();
 				File fgame = new File(LeggiInput.riga(SAVE_LOCATION));
 				if(fgame.exists()) {
