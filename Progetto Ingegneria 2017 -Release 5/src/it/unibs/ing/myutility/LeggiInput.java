@@ -7,7 +7,7 @@ public class LeggiInput {
 
 	private static Scanner in = new Scanner(System.in);
 	
-	private final static String ERRORE_FORMATO = "Attenzione: il dato inserito non è nel formato corretto.";
+	private final static String ERRORE_FORMATO = "Attenzione: il dato inserito non ï¿½ nel formato corretto.";
 
 	/**
 	 * Questo metodo permette di leggere una stringa senza spazi
@@ -76,6 +76,7 @@ public class LeggiInput {
 		     catch (InputMismatchException e)
 		      {
 		       System.out.println(ERRORE_FORMATO);
+		       LeggiInput.terminaRiga();
 		      }
 		    } while (!opEseguita);
 		   return input;
@@ -125,6 +126,7 @@ public class LeggiInput {
 		     catch (InputMismatchException e)
 		      {
 		       System.out.println(ERRORE_FORMATO);
+		       LeggiInput.terminaRiga();
 		      }
 		    } while (!opEseguita);
 		   return input;

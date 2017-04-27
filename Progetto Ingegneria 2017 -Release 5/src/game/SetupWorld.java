@@ -66,7 +66,7 @@ public class SetupWorld {
 	
 	
 	boolean putTrialsGrounds(String[] array){                                       //Decide in modo random una prova da mettere nei luoghi definiti dall'array 
-		
+		try{
 		for(int i=0;i<array.length;i++){
 			int h1=Integer.parseInt(array[i].substring(0, 1));
 			int w1=Integer.parseInt(array[i].substring(1, 2));
@@ -81,7 +81,11 @@ public class SetupWorld {
 				return false;
 			}
 		}
-		
+		}
+		catch(IllegalArgumentException e){
+			System.out.println(INCORRECT_STRING3);
+			return false;
+		}
 		return true;
 	}
 	
@@ -93,10 +97,17 @@ public class SetupWorld {
 			int points=Integer.parseInt(temp);
 			String temp2=array[i].substring(temp.indexOf("-")+1);
 			
+			boolean exists=false;
 			for(Trial a:mondo.getTrials()) {
-				if (a.getName().equals(temp2)) System.out.println("Questa prova esiste già");
-				else mondo.getTrials().add(new Trial(points, temp2));
+				if (a.getName().equals(temp2)) {
+					System.out.println("Questa prova esiste giï¿½");
+					exists=true;
+					break;
+				}
+				
+				
 			}
+			if(!exists) mondo.getTrials().add(new Trial(points, temp2));
 		
 		}
 
@@ -124,7 +135,7 @@ public class SetupWorld {
 				Ground gtemp;
 				Token key=null;
 				
-				for(Token a:mondo.getKeys()) {
+				for(Token a:mondo.getKeytypes()) {
 					if (a.getName().equals(temp)) key=a;
 					else {
 						System.out.println("Questa chiave non esiste");
@@ -170,7 +181,7 @@ public class SetupWorld {
 				Token key=null;
 				
 				
-				for(Token a:mondo.getKeys()) {
+				for(Token a:mondo.getKeytypes()) {
 					if (a.getName().equals(temp)) key=a;
 					else {
 						System.out.println("Questa chiave non esiste");
@@ -213,18 +224,24 @@ public class SetupWorld {
 		for(String s: keys){
 			int value= Integer.parseInt(s.substring(0, s.indexOf("-")));
 			String name= s.substring(s.indexOf("-")+1);
-			for(Token b: mondo.getKeys()) 
+			
+			boolean exists=false;
+			for(Token b: mondo.getKeytypes()){ 
 				if(b.getName().equals(name)) {
-				System.out.println("Questa chiave esiste già");
+				System.out.println("Questa chiave esiste giï¿½");
+				exists=true;
+				break;
 			}
-				else mondo.getKeys().add(new Token(value, name));
+				
+			}
+			if(!exists) mondo.getKeytypes().add(new Token(value, name));
 		}
 		
 		
 	}
 
 	
-	HashMap<Ground, ArrayList<Passage>> keepTrack(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilità del goal
+	HashMap<Ground, ArrayList<Passage>> keepTrack(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilitï¿½ del goal
 		HashMap<Ground, ArrayList<Passage>> map = new HashMap<Ground, ArrayList<Passage>>();
 		for(Ground g: mondo.getGrounds()){
 			ArrayList<Passage> passages= new ArrayList<Passage>();
@@ -243,7 +260,7 @@ public class SetupWorld {
 	
 	ArrayList<Token> invalidKeysWeight(int max_weight){                    //Restituisce un arraylist contenente le chiavi che non rispettano il vincolo di peso massimo
 		ArrayList<Token> temp= new ArrayList<Token>();
-		for(Token a: mondo.getKeys())
+		for(Token a: mondo.getKeytypes())
 			if(a.getWeight()>=max_weight) temp.add(a);
 		return temp;
 		

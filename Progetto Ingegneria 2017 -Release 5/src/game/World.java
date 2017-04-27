@@ -12,7 +12,8 @@ public class World implements Serializable{
 	private static final long serialVersionUID = 2L;
 	private ArrayList<Ground> grounds;
 	private ArrayList<Passage> passages; 
-	private ArrayList<Token> keys;
+	private ArrayList<Token> keytypes;
+	private ArrayList<Token> playerkeys;
 	private ArrayList<Trial> trials;
 	private boolean depositata;
 	private boolean prova_fatta;
@@ -29,7 +30,8 @@ public class World implements Serializable{
 
 		grounds= new ArrayList<Ground>();
 		passages= new ArrayList<Passage>();
-		keys= new ArrayList<Token>();
+		keytypes= new ArrayList<Token>();
+		playerkeys= new ArrayList<Token>();
 		trials= new ArrayList<Trial>();
 		depositata=true;
 		prova_fatta=false;
@@ -76,7 +78,7 @@ public class World implements Serializable{
 		}
 		
 
-	}
+	}//Fine costruttore
 	
 	
 	
@@ -107,8 +109,16 @@ public class World implements Serializable{
 		 return null;
 	}
 	
-	Token searchKey(String name){
-		for(Token t:keys){
+	Token searchKeyTypes(String name){
+		for(Token t:keytypes){
+			if(t.getName().equalsIgnoreCase(name));
+			return t;
+		}
+		 return null;
+	}
+	
+	Token searchPlayerKeys(String name){
+		for(Token t:playerkeys){
 			if(t.getName().equalsIgnoreCase(name));
 			return t;
 		}
@@ -136,13 +146,6 @@ public class World implements Serializable{
 
 	public ArrayList<Passage> getPassages() {
 		return passages;
-	}
-
-
-
-
-	public ArrayList<Token> getKeys() {
-		return keys;
 	}
 
 
@@ -225,13 +228,6 @@ public class World implements Serializable{
 
 
 
-	public void setKeys(ArrayList<Token> keys) {
-		this.keys = keys;
-	}
-
-
-
-
 	public void setTrials(ArrayList<Trial> trials) {
 		this.trials = trials;
 	}
@@ -290,6 +286,34 @@ public class World implements Serializable{
 
 	public void setPunteggio_max_prova(int punteggio_max_prova) {
 		this.punteggio_max_prova = punteggio_max_prova;
+	}
+
+
+
+
+	public ArrayList<Token> getKeytypes() {
+		return keytypes;
+	}
+
+
+
+
+	public ArrayList<Token> getPlayerkeys() {
+		return playerkeys;
+	}
+
+
+
+
+	public void setKeytypes(ArrayList<Token> keytypes) {
+		this.keytypes = keytypes;
+	}
+
+
+
+
+	public void setPlayerkeys(ArrayList<Token> playerkeys) {
+		this.playerkeys = playerkeys;
 	}
 	
 

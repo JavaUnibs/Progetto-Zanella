@@ -25,15 +25,15 @@ public class InterfaceSetupWorld {
 	private final String OK_MODIFY="Modifica effettuata";
 	private final String NO_KEY="Non esistono chiavi con il nome inserito";
 	private final String NO_TRIAL="Non esistono chiavi con il nome inserito";
-	private final String NEGATIVE_VALUE="Il valore inserito non è valido";
+	private final String NEGATIVE_VALUE="Il valore inserito non ï¿½ valido";
 	private final String ADDREMOVEKEY="Vuoi aggiungere o rimuovere una chiave?";
 	private final String ADDREMOVETRIAL="Vuoi aggiungere o rimuovere una prova?";
 	private final String KEY_ADDED="Chiave aggiunta";
 	private final String TRIAL_ADDED="Prova aggiunta";
 	private final String KEY_REMOVED="Chiave rimossa";
 	private final String TRIAL_REMOVED="Prova rimossa";
-	private final String EXISTS_KEY="Esiste già una chiave con lo stesso nome";
-	private final String EXISTS_TRIAL="Esiste già una prova con lo stesso nome";
+	private final String EXISTS_KEY="Esiste giï¿½ una chiave con lo stesso nome";
+	private final String EXISTS_TRIAL="Esiste giï¿½ una prova con lo stesso nome";
 	
 	private final String LIMIT="Inserire il nuovo limite superiore";
 	private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
@@ -46,7 +46,7 @@ public class InterfaceSetupWorld {
 	
 	public void initialize(){
 		String start="Questo mondo ha i seguenti parametri: \n";
-		String tipi_chiavi="Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeys().toString();
+		String tipi_chiavi="Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeytypes().toString();
 		String peso_max_chiave="Limite superiore del peso di una chiave: "+setup.getMondo().getPeso_max_chiave()+"\n";
 		String num_max_chiavi="Numero massimo di chiavi trasportabili: "+setup.getMondo().getNumero_max_trasportabile()+"\n";
 		String peso_max_trasp="Peso massimo trasportabile: "+setup.getMondo().getPeso_max_trasportabile()+"\n";
@@ -67,10 +67,10 @@ public class InterfaceSetupWorld {
 			switch(scelta){
 			
 			case 1:{                                                                //modifica dei pesi delle chiavi
-				System.out.println("Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeys().toString());
+				System.out.println("Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeytypes().toString());
 				LeggiInput.terminaRiga();
 				String name=LeggiInput.riga(INSERT_NAME_KEY);
-				Token key=setup.getMondo().searchKey(name);
+				Token key=setup.getMondo().searchKeyTypes(name);
 				if(key==null) {
 					System.out.println(NO_KEY);
 					break;
@@ -92,10 +92,10 @@ public class InterfaceSetupWorld {
 			break;
 			
 			case 2:{																	//modifica dei tipi di chiave
-			System.out.println("Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeys().toString());
+			System.out.println("Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeytypes().toString());
 			System.out.println(ADDREMOVEKEY);
 			Menu sottomenu= new Menu(menu_addremove);
-			ArrayList<Token> keys= setup.getMondo().getKeys();
+			ArrayList<Token> keys= setup.getMondo().getKeytypes();
 			
 			int scelta_2=sottomenu.stampaSottoMenu();
 				switch(scelta_2){
@@ -142,7 +142,7 @@ public class InterfaceSetupWorld {
 				case 2:{															//rimozione
 					LeggiInput.terminaRiga();
 					String name= LeggiInput.riga(INSERT_NAME_KEY);
-					Token key=setup.getMondo().searchKey(name);
+					Token key=setup.getMondo().searchKeyTypes(name);
 					
 					if(key==null){
 						System.out.println(NO_KEY);
@@ -222,11 +222,20 @@ public class InterfaceSetupWorld {
 			break;
 			
 			case 6:{
+				
+				if(setup.getMondo().getTrials().isEmpty()) {
+					System.out.println("Questo mondo non utilizza prove");
+					break;
+				}
+				
 				System.out.println("Tipi di prove con relativi punteggi: \n"+setup.getMondo().getTrials().toString());
 				System.out.println(ADDREMOVETRIAL);
 				Menu sottomenu= new Menu(menu_addremove);
 				int scelta2= sottomenu.stampaSottoMenu();
 				ArrayList<Trial> trials=setup.getMondo().getTrials();
+				
+				//----------
+				
 				
 				switch(scelta2){
 				
@@ -259,7 +268,7 @@ public class InterfaceSetupWorld {
 							trial.getQuiz().put(question, answer);
 							end=LeggiInput.doppiaScelta(CONTINUE);
 
-						}while(!end);
+						}while(end);
 					
 						
 					}
@@ -305,6 +314,12 @@ public class InterfaceSetupWorld {
 			}
 			
 			case 7:{
+				
+				if(setup.getMondo().getTrials().isEmpty()) {
+					System.out.println("Questo mondo non utilizza prove");
+					break;
+				}
+				
 				System.out.println("Tipi di prove con relativi punteggi: \n"+setup.getMondo().getTrials().toString());
 				LeggiInput.terminaRiga();
 				String name=LeggiInput.riga(INSERT_NAME_TRIAL);
@@ -331,6 +346,12 @@ public class InterfaceSetupWorld {
 			
 			
 			case 8:{
+				
+				if(setup.getMondo().getTrials().isEmpty()) {
+					System.out.println("Questo mondo non utilizza prove");
+					break;
+				}
+				
 				System.out.println("Limite superiore del valore di una prova: "+setup.getMondo().getPunteggio_max_prova()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(limit<0) {

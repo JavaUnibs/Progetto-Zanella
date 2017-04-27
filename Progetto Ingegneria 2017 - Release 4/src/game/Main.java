@@ -12,21 +12,21 @@ public class Main {
 	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
 	static final String MSG_OK_FILE="File caricato correttamente";
 	static final String MSG_NO_FILE="File non caricato correttamente";
-	static final String FILE_EXISTS="Esiste già un file con lo stesso nome";
+	static final String FILE_EXISTS="Esiste giï¿½ un file con lo stesso nome";
 	static final String NO_GROUND= "Sei ai confini del mondo";
-	static final String CLOSED_PASSAGE="Questo passaggio è murato";
+	static final String CLOSED_PASSAGE="Questo passaggio ï¿½ murato";
 	static final String KEY_PRESENT="E' presente una chiave di: ";
 	static final String KEY_NEEDED="Questo passaggio necessita di una chiave di:";
 	static final String NO_KEY="Non possiedi la chiave giusta. Prova un'altra direzione";
 	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
-	static final String CURRENT_GROUND="Il luogo corrente è: ";
+	static final String CURRENT_GROUND="Il luogo corrente ï¿½: ";
 	static final String GET_KEY="Vuoi raccogliere la chiave?";
 	static final String PUT_KEY="Vuoi depositare una chiave?";
 	static final String TRIAL="E' presente una prova di: ";
 	static final String TRIAL2=" Vuoi effettuarla?";
-	static final String POINTS="Il punteggio corrente è ";
+	static final String POINTS="Il punteggio corrente ï¿½ ";
 	static final String WEIGHT="Peso o numero massimo di chiavi trasportabili ecceduti";
-	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'è già una chiave)";
+	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'ï¿½ giï¿½ una chiave)";
 	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave";
 	static final String GOT_KEY="Hai raccolto la chiave";
 	static final String END="Sei arrivato";
@@ -43,7 +43,7 @@ public class Main {
 	static final String[] PASSAGGI_APERTI={"000-010","010-110","010-020","020-120","220-221","221-222"};
 	static final String[] LUOGHI_CHIAVE={"020-Alluminio"};
 	static final String[] PASSAGGI_CHIAVE={"120-220-Alluminio"};
-	static final String[] LUOGHI_PROVE={"220-Qual è la formula chimica dell'acqua?-H2O-Scienza"};
+	static final String[] LUOGHI_PROVE={"220-Qual ï¿½ la formula chimica dell'acqua?-H2O-Scienza"};
 	
 	
 	
@@ -55,6 +55,7 @@ public class Main {
 		int peso_max=50;
 		int numero_max=5;
 		int punteggio_max=100;
+		int peso_totale=0;
 		
 		Menu elenco = new Menu(MENU_PRINCIPALE);
 		Menu elenco_dir= new Menu(MENU_DIREZIONI);
@@ -146,7 +147,7 @@ public class Main {
 					}
 					//-------------------------------------------------------------------------------------------------------Recupero chiavi
 					
-					int peso_totale=0;
+					
 					int num_totale=mondo.getKeys().size();
 					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
 					
@@ -180,7 +181,7 @@ public class Main {
 							Token key=mondo.getKeys().get(scelta_chiavi-1);
 							luogo_corrente.setKey(key);
 							mondo.getKeys().remove(key);
-							System.out.println("La chiave scelta è stata depositata");
+							System.out.println("La chiave scelta ï¿½ stata depositata");
 							mondo.setDepositata(true);
 
 						}

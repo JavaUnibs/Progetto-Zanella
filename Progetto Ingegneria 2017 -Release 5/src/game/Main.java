@@ -12,21 +12,21 @@ public class Main {
 	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
 	static final String MSG_OK_FILE="File caricato correttamente";
 	static final String MSG_NO_FILE="File non caricato correttamente";
-	static final String FILE_EXISTS="Esiste già un file con lo stesso nome";
+	static final String FILE_EXISTS="Esiste giï¿½ un file con lo stesso nome";
 	static final String NO_GROUND= "Sei ai confini del mondo";
-	static final String CLOSED_PASSAGE="Questo passaggio è murato";
+	static final String CLOSED_PASSAGE="Questo passaggio ï¿½ murato";
 	static final String KEY_PRESENT="E' presente una chiave di: ";
 	static final String KEY_NEEDED="Questo passaggio necessita di una chiave di:";
 	static final String NO_KEY="Non possiedi la chiave giusta. Prova un'altra direzione";
 	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
-	static final String CURRENT_GROUND="Il luogo corrente è: ";
+	static final String CURRENT_GROUND="Il luogo corrente ï¿½: ";
 	static final String GET_KEY="Vuoi raccogliere la chiave?";
 	static final String PUT_KEY="Vuoi depositare una chiave?";
 	static final String TRIAL="E' presente una prova di: ";
 	static final String TRIAL2=" Vuoi effettuarla?";
-	static final String POINTS="Il punteggio corrente è ";
+	static final String POINTS="Il punteggio corrente ï¿½ ";
 	static final String WEIGHT="Peso o numero massimo di chiavi trasportabili ecceduti";
-	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'è già una chiave)";
+	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'ï¿½ giï¿½ una chiave)";
 	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave";
 	static final String GOT_KEY="Hai raccolto la chiave";
 	static final String END="Sei arrivato";
@@ -74,7 +74,7 @@ public class Main {
 	static final String[] LUOGHI_CHIAVE_NG={"110-Alluminio", "100-Bronzo"};
 	static final String[] PASSAGGI_CHIAVE_NG={"120-220-Alluminio","220-221-Bronzo"};
 	static final String[] PROVE_NG={"50-Scienza"};
-	static final String[] QUIZ1_NG={"Scienza","Qual è la formula chimica dell'acqua?-H2O", "Di che metallo è fatto il bronzo oltre al rame?-Stagno"};
+	static final String[] QUIZ1_NG={"Scienza","Qual ï¿½ la formula chimica dell'acqua?-H2O", "Di che metallo ï¿½ fatto il bronzo oltre al rame?-Stagno"};
 	static final String[] LUOGHI_PROVE_NG={"020","010"};
 	
 	static final String[] MONDI={"Fancy World", "Fancy World NG"};
@@ -87,7 +87,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		int scelta;
-
+		int peso_totale=0;
 		
 		Menu elenco = new Menu(MENU_PRINCIPALE);
 		Menu elenco_dir= new Menu(MENU_DIREZIONI);
@@ -146,7 +146,7 @@ public class Main {
 			int num_mondo=LeggiInput.intero(CHOOSE_WORLD);
 			try{
 				nome_mondo=MONDI[num_mondo];
-			}catch(StringIndexOutOfBoundsException e){
+			}catch(ArrayIndexOutOfBoundsException e){
 				System.out.println(NO_WORLD);
 				return;
 			}
@@ -222,16 +222,16 @@ public class Main {
 					}
 					//-------------------------------------------------------------------------------------------------------Recupero chiavi
 					
-					int peso_totale=0;
-					int num_totale=mondo.getKeys().size();
-					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
+					
+					int num_totale=mondo.getPlayerkeys().size();
+					for(Token a: mondo.getPlayerkeys()) peso_totale=peso_totale+a.getWeight();
 					
 					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()&&peso_totale<=mondo.getPeso_max_trasportabile()&&num_totale<=mondo.getNumero_max_trasportabile()) {
 						Token key=luogo_corrente.getKey();
 						
 						System.out.println(KEY_PRESENT+key);
 						if(LeggiInput.doppiaScelta(GET_KEY)){
-							mondo.getKeys().add(key);
+							mondo.getPlayerkeys().add(key);
 							luogo_corrente.setKey(null);
 							System.out.println(GOT_KEY);
 						}
@@ -239,12 +239,12 @@ public class Main {
 					
 					//-------------------------------------------------------------------------------------------------------Deposito chiavi
 					
-					else if(!mondo.getKeys().isEmpty()&&!luogo_corrente.isEnd()&&!luogo_corrente.isStart()&&luogo_corrente.getKey()==null&&
+					else if(!mondo.getPlayerkeys().isEmpty()&&!luogo_corrente.isEnd()&&!luogo_corrente.isStart()&&luogo_corrente.getKey()==null&&
 							LeggiInput.doppiaScelta(PUT_KEY)
 							){
 						
 						ArrayList<String> temp= new ArrayList<String>();
-						for(Token a: mondo.getKeys()) temp.add(a.toString());
+						for(Token a: mondo.getPlayerkeys()) temp.add(a.toString());
 						String[] temp2= new String[temp.size()];
 						temp2=temp.toArray(temp2);
 						Menu elenco_chiavi = new Menu(temp2);
@@ -253,10 +253,10 @@ public class Main {
 				
 						if(scelta_chiavi-1>=0&&scelta_chiavi<=temp.size()){
 							
-							Token key=mondo.getKeys().get(scelta_chiavi-1);
+							Token key=mondo.getPlayerkeys().get(scelta_chiavi-1);
 							luogo_corrente.setKey(key);
-							mondo.getKeys().remove(key);
-							System.out.println("La chiave scelta è stata depositata");
+							mondo.getPlayerkeys().remove(key);
+							System.out.println("La chiave scelta ï¿½ stata depositata");
 							mondo.setDepositata(true);
 
 						}
@@ -334,7 +334,7 @@ public class Main {
 							if(ptemp.getKey()!=null){
 								System.out.println(KEY_NEEDED+ptemp.getKey());
 								
-								if(mondo.getKeys().contains(ptemp.getKey())){
+								if(mondo.getPlayerkeys().contains(ptemp.getKey())){
 									System.out.println(YES_KEY);
 									ptemp.setOpen(true);
 									ptemp.setKey(null);
