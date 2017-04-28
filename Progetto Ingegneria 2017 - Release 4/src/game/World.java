@@ -100,7 +100,11 @@ public class World implements Serializable{
 		return null;
 	}
 	
-	
+	int totWeight(){
+		int weight=0;
+		for(Token key: keys) weight=weight+key.getWeight();
+		return weight;
+	}
 	
 	boolean openPassages(String[] array){                     //apre i passaggi voluti partendo da un array di stringhe 
 

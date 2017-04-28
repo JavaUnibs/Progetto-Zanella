@@ -64,6 +64,11 @@ public class World implements Serializable{
 	}
 	
 	
+	int totWeight(){
+		int weight=0;
+		for(Token key: keys) weight=weight+key.getWeight();
+		return weight;
+	}
 	
 	
 	Ground searchGround(int h, int w, int d){

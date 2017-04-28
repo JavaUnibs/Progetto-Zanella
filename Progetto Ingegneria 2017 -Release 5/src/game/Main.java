@@ -87,8 +87,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		int scelta;
-		int peso_totale=0;
-		int num_totale=0;
+		int peso_totale;
+		int num_totale;
 		
 		Menu elenco = new Menu(MENU_PRINCIPALE);
 		Menu elenco_dir= new Menu(MENU_DIREZIONI);
@@ -225,7 +225,7 @@ public class Main {
 					
 					
 					num_totale=mondo.getPlayerkeys().size();
-					for(Token a: mondo.getPlayerkeys()) peso_totale=peso_totale+a.getWeight();
+					peso_totale=mondo.totWeight();
 					
 					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()) {
 						Token key=luogo_corrente.getKey();

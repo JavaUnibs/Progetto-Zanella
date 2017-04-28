@@ -133,6 +133,12 @@ public class World implements Serializable{
 		else this.points=this.points-points;
 		if(this.points<0) this.points=0;
 	}
+	
+	int totWeight(){
+		int weight=0;
+		for(Token key: playerkeys) weight=weight+key.getWeight();
+		return weight;
+	}
 
 
 

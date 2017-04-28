@@ -48,8 +48,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		int scelta;
-		int peso_totale = 0;
-		int num_totale = 0;
+		int peso_totale;
+		int num_totale;
 		int peso_max = 50;
 		int numero_max = 5;
 		
@@ -122,7 +122,8 @@ public class Main {
 			System.out.println(CURRENT_GROUND+luogo_corrente.getName());
 			
 			num_totale=mondo.getKeys().size();
-			for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
+			peso_totale=mondo.totWeight();
+			
 			
 			scelta=elenco.stampaMenu();
 		
@@ -146,7 +147,7 @@ public class Main {
 					
 					
 					num_totale=mondo.getKeys().size();
-					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
+					peso_totale=mondo.totWeight();
 					
 					
 					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()) {

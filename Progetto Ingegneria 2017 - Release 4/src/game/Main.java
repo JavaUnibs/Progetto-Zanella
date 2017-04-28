@@ -55,8 +55,8 @@ public class Main {
 		int peso_max=50;
 		int numero_max=5;
 		int punteggio_max=100;
-		int peso_totale=0;
-		int num_totale=0;
+		int peso_totale;
+		int num_totale;
 		
 		Menu elenco = new Menu(MENU_PRINCIPALE);
 		Menu elenco_dir= new Menu(MENU_DIREZIONI);
@@ -150,7 +150,7 @@ public class Main {
 					
 					
 					num_totale=mondo.getKeys().size();
-					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
+					peso_totale=mondo.totWeight();
 					
 					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()) {
 						Token key=luogo_corrente.getKey();
