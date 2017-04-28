@@ -12,10 +12,15 @@ public class Main {
 	static final String LUOGO_CORR="Il luogo corrente è: ";
 	static final String END="Sei arrivato";
 	static final String NO_OPZ="Opzione non definita";
-	static final int ALTEZZA = 2, LARGHEZZA = 2, PROFONDITA = 3;
-	static final int START_H = 0, START_W=0, START_D=0;
-	static final int END_H = 1, END_W=1, END_D=2;
-	static final String[] PASSAGGI_APERTI={"000-010","010-110","110-111","111-112"};
+	static final int ALTEZZA = 3, LARGHEZZA = 4, PROFONDITA = 4;
+	static final int START_H = 1, START_W = 1, START_D = 0;
+	static final int END_H = 0, END_W = 0, END_D = 2;
+	static final String[] PASSAGGI_APERTI={"000-010","030-130","020-120","010-110","100-110","100-200","110-210",
+			"210-220","220-230","230-130","200-201","201-101","111-101","001-101","001-011","011-021","021-121",
+			"121-131","131-031","111-211","211-221","221-231","202-102","112-102","112-212","112-122",
+			"122-222","222-232","232-132","132-133","122-022","022-032","022-012","203-103","203-213","213-223",
+			"223-233","223-123","123-023","023-033","033-133","200-201","120-020","020-010","020-030","102-002",
+			"002-012","032-132","003-103","003-013","013-113","123-113","123-133","011-012"};
 	
 	
 	

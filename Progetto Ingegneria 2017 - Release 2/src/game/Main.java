@@ -22,19 +22,19 @@ public class Main {
 	static final String GOT_KEY="Hai raccolto la chiave";
 	static final String END="Sei arrivato";
 	static final String NO_OPZ="Opzione non definita";
-	static final int ALTEZZA = 4, LARGHEZZA = 4, PROFONDITA = 3;
-	static final int START_H = 0, START_W = 2, START_D = 0;
-	static final int END_H = 3, END_W = 1, END_D = 2;
-	static final String[] PASSAGGI_APERTI={"310-210","320-220","320-330","330-230","200-100","220-120","230-130",
-			"100-110","100-000","110-010","120-130","130-030","010-020","020-030","301-311","311-321","321-331",
-			"321-221","201-101","211-221","221-231","231-131","101-001","111-121","121-131","121-021","302-312",
-			"302-202","202-102","212-222","212-112","222-232","232-132","102-002","112-122","122-132","132-032",
-			"002-012","012-022"};
-	static final String[] LUOGHI_CHIAVE={"301-Acciaio","111-Acciaio","300-Oro","331-Piombo","000-Ferro","010-Rame","112-Bronzo",
-			"332-Stagno","201-Alluminio","130-Argento","011-Platino"};
-	static final String[] PASSAGGI_CHIAVE={"210-211-Rame","110-210-Ferro","021-031-Piombo","001-011-Acciaio",
-			"312-322-Oro","022-032-Platino","200-300-Alluminio","032-031-Argento","332-232-Bronzo","322-222-Stagno",
-			"211-201-Ferro","131-031-Piombo"};
+	static final int ALTEZZA = 3, LARGHEZZA = 4, PROFONDITA = 4;
+	static final int START_H = 1, START_W = 1, START_D = 0;
+	static final int END_H = 0, END_W = 0, END_D = 2;
+	static final String[] PASSAGGI_APERTI={"000-010","030-130","020-120","010-110","100-110","100-200","110-210",
+			"210-220","220-230","230-130","200-201","201-101","111-101","001-101","001-011","011-021","021-121",
+			"121-131","131-031","111-211","211-221","221-231","202-102","112-102","112-212","112-122",
+			"122-222","222-232","232-132","132-133","122-022","022-032","022-012","203-103","203-213","213-223",
+			"223-233","223-123","123-023","023-033","033-133"};
+	static final String[] LUOGHI_CHIAVE={"100-Acciaio","120-Oro","000-Piombo","231-Ferro","111-Rame","212-Bronzo",
+			"232-Stagno","022-Alluminio","233-Argento","003-Platino","023-Argento"};
+	static final String[] PASSAGGI_CHIAVE={"200-201-Acciaio","120-020-Ferro","020-010-Piombo","020-030-Acciaio",
+			"102-002-Oro","002-012-Platino","032-132-Alluminio","003-103-Argento","003-013-Bronzo","013-113-Stagno",
+			"123-113-Stagno","123-133-Stagno","011-012-Rame"};
 	
 	
 	
