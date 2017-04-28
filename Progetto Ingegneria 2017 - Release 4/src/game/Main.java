@@ -56,6 +56,7 @@ public class Main {
 		int numero_max=5;
 		int punteggio_max=100;
 		int peso_totale=0;
+		int num_totale=0;
 		
 		Menu elenco = new Menu(MENU_PRINCIPALE);
 		Menu elenco_dir= new Menu(MENU_DIREZIONI);
@@ -148,20 +149,21 @@ public class Main {
 					//-------------------------------------------------------------------------------------------------------Recupero chiavi
 					
 					
-					int num_totale=mondo.getKeys().size();
+					num_totale=mondo.getKeys().size();
 					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
 					
-					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()&&peso_totale<=peso_max&&num_totale<=numero_max) {
+					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()) {
 						Token key=luogo_corrente.getKey();
 						
-						System.out.println(KEY_PRESENT+key);
-						if(LeggiInput.doppiaScelta(GET_KEY)){
-							mondo.getKeys().add(key);
-							luogo_corrente.setKey(null);
-							System.out.println(GOT_KEY);
-						}
-					}else if(!(peso_totale<=peso_max&&num_totale<=numero_max)) System.out.println(WEIGHT);
-					
+						System.out.println(KEY_PRESENT + key);
+						if(peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max){
+							if(LeggiInput.doppiaScelta(GET_KEY)){
+								mondo.getKeys().add(key);
+								luogo_corrente.setKey(null);
+								System.out.println(GOT_KEY);
+							}
+						}else System.out.println(WEIGHT);
+					}
 					//-------------------------------------------------------------------------------------------------------Deposito chiavi
 					
 					else if(!mondo.getKeys().isEmpty()&&!luogo_corrente.isEnd()&&!luogo_corrente.isStart()&&luogo_corrente.getKey()==null&&

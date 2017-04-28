@@ -76,8 +76,6 @@ public class Main {
 				 save = (Save)SalvataggioFile.caricaOggetto(fgame);
 				 mondo = save.getMondo();
 				 luogo_corrente = save.getLuogo_corrente();
-				 peso_totale = save.getPeso_corrente();
-				 num_totale = save.getNumero_attuale();
 			   }
 			  catch (ClassCastException e)
 			   {
@@ -122,6 +120,10 @@ public class Main {
 
 		do {
 			System.out.println(CURRENT_GROUND+luogo_corrente.getName());
+			
+			num_totale=mondo.getKeys().size();
+			for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
+			
 			scelta=elenco.stampaMenu();
 		
 			switch(scelta){
@@ -143,17 +145,17 @@ public class Main {
 					
 					
 					
+					num_totale=mondo.getKeys().size();
+					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
 					
 					
-					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()&&peso_totale<=peso_max&&num_totale<=numero_max) {
+					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()) {
 						Token key=luogo_corrente.getKey();
 						
-						System.out.println(KEY_PRESENT + key + " con peso " + key.getWeight());
+						System.out.println(KEY_PRESENT + key);
 						if(peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max){
 							if(LeggiInput.doppiaScelta(GET_KEY)){
 								mondo.getKeys().add(key);
-								num_totale=mondo.getKeys().size();
-								peso_totale=peso_totale + key.getWeight();
 								luogo_corrente.setKey(null);
 								System.out.println(GOT_KEY);
 							}
@@ -260,8 +262,6 @@ public class Main {
 						Token key=mondo.getKeys().get(scelta_chiavi-1);
 						luogo_corrente.setKey(key);
 						mondo.getKeys().remove(key);
-						peso_totale -= key.getWeight();
-						num_totale -= 1;
 						System.out.println("La chiave scelta è stata depositata");
 						mondo.setDepositata(true);
 
@@ -276,7 +276,7 @@ public class Main {
 			
 			case 3:{
 				
-				Save save = new Save(mondo, luogo_corrente, peso_totale, num_totale);
+				Save save = new Save(mondo, luogo_corrente);
 				LeggiInput.terminaRiga();
 				File fgame = new File(LeggiInput.riga(SAVE_LOCATION));
 				if(fgame.exists()) {
