@@ -49,7 +49,7 @@ public class Main {
 		
 		int scelta;
 		int peso_totale = 0;
-		int num_totale=0;
+		int num_totale = 0;
 		int peso_max = 50;
 		int numero_max = 5;
 		
@@ -76,6 +76,8 @@ public class Main {
 				 save = (Save)SalvataggioFile.caricaOggetto(fgame);
 				 mondo = save.getMondo();
 				 luogo_corrente = save.getLuogo_corrente();
+				 peso_totale = save.getPeso_corrente();
+				 num_totale = save.getNumero_attuale();
 			   }
 			  catch (ClassCastException e)
 			   {
@@ -139,9 +141,10 @@ public class Main {
 						return;
 					}
 					
-					num_totale=mondo.getKeys().size();
-					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
-
+					
+					
+					
+					
 					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()&&peso_totale<=peso_max&&num_totale<=numero_max) {
 						Token key=luogo_corrente.getKey();
 						
@@ -273,7 +276,7 @@ public class Main {
 			
 			case 3:{
 				
-				Save save = new Save(mondo, luogo_corrente);
+				Save save = new Save(mondo, luogo_corrente, peso_totale, num_totale);
 				LeggiInput.terminaRiga();
 				File fgame = new File(LeggiInput.riga(SAVE_LOCATION));
 				if(fgame.exists()) {
