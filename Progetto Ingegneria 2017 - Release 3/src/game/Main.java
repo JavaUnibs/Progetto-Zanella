@@ -49,7 +49,7 @@ public class Main {
 		
 		int scelta;
 		int peso_totale = 0;
-		int num_totale = 0;
+		int num_totale=0;
 		int peso_max = 50;
 		int numero_max = 5;
 		
@@ -76,8 +76,6 @@ public class Main {
 				 save = (Save)SalvataggioFile.caricaOggetto(fgame);
 				 mondo = save.getMondo();
 				 luogo_corrente = save.getLuogo_corrente();
-				 peso_totale = save.getPeso_corrente();
-				 num_totale = save.getNumero_attuale();
 			   }
 			  catch (ClassCastException e)
 			   {
@@ -141,18 +139,17 @@ public class Main {
 						return;
 					}
 					
-					
-					
-					
-					
+					num_totale=mondo.getKeys().size();
+					for(Token a: mondo.getKeys()) peso_totale=peso_totale+a.getWeight();
+
 					if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()&&peso_totale<=peso_max&&num_totale<=numero_max) {
 						Token key=luogo_corrente.getKey();
 						
 						System.out.println(KEY_PRESENT + key + " con peso " + key.getWeight());
 						if(peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max){
 							if(LeggiInput.doppiaScelta(GET_KEY)){
-								mondo.getPlayerkeys().add(key);
-								num_totale=mondo.getPlayerkeys().size();
+								mondo.getKeys().add(key);
+								num_totale=mondo.getKeys().size();
 								peso_totale=peso_totale + key.getWeight();
 								luogo_corrente.setKey(null);
 								System.out.println(GOT_KEY);
@@ -215,7 +212,7 @@ public class Main {
 							if(ptemp.getKey()!=null){
 								System.out.println(KEY_NEEDED + ptemp.getKey());
 								
-								if(mondo.getPlayerkeys().contains(ptemp.getKey())){
+								if(mondo.getKeys().contains(ptemp.getKey())){
 									System.out.println(YES_KEY);
 									ptemp.setOpen(true);
 									ptemp.setKey(null);
@@ -245,10 +242,10 @@ public class Main {
 			
 			case 2:{
 				
-				if(!mondo.getPlayerkeys().isEmpty()&&!luogo_corrente.isEnd()&&!luogo_corrente.isStart()&&luogo_corrente.getKey()==null){
+				if(!mondo.getKeys().isEmpty()&&!luogo_corrente.isEnd()&&!luogo_corrente.isStart()&&luogo_corrente.getKey()==null){
 					
 					ArrayList<String> temp= new ArrayList<String>();
-					for(Token a: mondo.getPlayerkeys()) temp.add(a.toString());
+					for(Token a: mondo.getKeys()) temp.add(a.toString());
 					String[] temp2= new String[temp.size()];
 					temp2=temp.toArray(temp2);
 					Menu elenco_chiavi = new Menu(temp2);
@@ -257,16 +254,16 @@ public class Main {
 			
 					if(scelta_chiavi-1>=0&&scelta_chiavi<=temp.size()){
 						
-						Token key=mondo.getPlayerkeys().get(scelta_chiavi-1);
+						Token key=mondo.getKeys().get(scelta_chiavi-1);
 						luogo_corrente.setKey(key);
-						mondo.getPlayerkeys().remove(key);
+						mondo.getKeys().remove(key);
 						peso_totale -= key.getWeight();
 						num_totale -= 1;
 						System.out.println("La chiave scelta è stata depositata");
 						mondo.setDepositata(true);
 
 					}
-				}else if(mondo.getPlayerkeys().isEmpty()) System.out.println(CANT_PUT_KEY2);
+				}else if(mondo.getKeys().isEmpty()) System.out.println(CANT_PUT_KEY2);
 				else System.out.println(CANT_PUT_KEY1);
 					
 				
@@ -276,7 +273,7 @@ public class Main {
 			
 			case 3:{
 				
-				Save save = new Save(mondo, luogo_corrente, peso_totale, num_totale);
+				Save save = new Save(mondo, luogo_corrente);
 				LeggiInput.terminaRiga();
 				File fgame = new File(LeggiInput.riga(SAVE_LOCATION));
 				if(fgame.exists()) {
