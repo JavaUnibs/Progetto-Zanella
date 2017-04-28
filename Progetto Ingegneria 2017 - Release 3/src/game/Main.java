@@ -237,9 +237,6 @@ public class Main {
 							else if(ptemp.getKey()==null) System.out.println(CLOSED_PASSAGE);
 					}
 					}
-					System.out.println("Peso trasportato = " + peso_totale + 
-							"\nNumero chiavi possedute = " + num_totale); //ATTENZIONE
-					
 				}while(scelta_dir>0);
 				
 			}
