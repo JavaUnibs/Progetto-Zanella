@@ -135,12 +135,19 @@ public class SetupWorld {
 				Ground gtemp;
 				Token key=null;
 				
+				boolean exists=false;
 				for(Token a:mondo.getKeytypes()) {
-					if (a.getName().equals(temp)) key=a;
-					else {
-						System.out.println("Questa chiave non esiste");
-						return false;
+					if (a.getName().equals(temp)) {
+						key=a;
+						exists=true;
+						break;
 					}
+					
+				}
+				
+				if(!exists) {
+					System.out.println("Questa chiave non esiste");
+					return false;
 				}
 				
 				
@@ -181,12 +188,19 @@ public class SetupWorld {
 				Token key=null;
 				
 				
+				boolean exists=false;
 				for(Token a:mondo.getKeytypes()) {
-					if (a.getName().equals(temp)) key=a;
-					else {
-						System.out.println("Questa chiave non esiste");
-						return false;
+					if (a.getName().equals(temp)) {
+						key=a;
+						exists=true;
+						break;
 					}
+					
+				}
+				
+				if(!exists) {
+					System.out.println("Questa chiave non esiste");
+					return false;
 				}
 
 
