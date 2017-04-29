@@ -226,7 +226,7 @@ public class Main {
 					
 					if(luogo_corrente.isEnd()) {
 						System.out.println(END);
-						if(mondo.getPoints()<mondo.getPunteggio_finale()) System.out.println(INSUFF_POINTS);
+						if(!mondo.getTrials().isEmpty() && mondo.getPoints()<mondo.getPunteggio_finale()) System.out.println(INSUFF_POINTS);
 						else return;
 					}
 					//-------------------------------------------------------------------------------------------------------Recupero chiavi

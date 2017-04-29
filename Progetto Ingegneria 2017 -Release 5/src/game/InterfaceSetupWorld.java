@@ -370,6 +370,12 @@ public class InterfaceSetupWorld {
 			break;
 			
 			case 9:{
+				
+				if(setup.getMondo().getTrials().isEmpty()) {
+					System.out.println("Questo mondo non utilizza prove");
+					break;
+				}
+				
 				System.out.println("Punti iniziali assegnati: "+setup.getMondo().getPoints()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(limit<0) {
@@ -385,6 +391,12 @@ public class InterfaceSetupWorld {
 			
 			
 			case 10:{
+				
+				if(setup.getMondo().getTrials().isEmpty()) {
+					System.out.println("Questo mondo non utilizza prove");
+					break;
+				}
+				
 				System.out.println("Punti da raggiungere per vincere: "+setup.getMondo().getPunteggio_finale()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(limit<0) {
