@@ -10,14 +10,14 @@ public class Main {
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Deposita una chiave"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
 	static final String NO_GROUND= "Sei ai confini del mondo";
-	static final String CLOSED_PASSAGE="Questo passaggio è murato";
+	static final String CLOSED_PASSAGE="Questo passaggio ï¿½ murato";
 	static final String KEY_PRESENT="E' presente una chiave di: ";
 	static final String KEY_NEEDED="Questo passaggio necessita di una chiave di:";
 	static final String NO_KEY="Non possiedi la chiave giusta. Prova un'altra direzione";
 	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
-	static final String CURRENT_GROUND="Il luogo corrente è: ";
+	static final String CURRENT_GROUND="Il luogo corrente ï¿½: ";
 	static final String GET_KEY="Vuoi raccogliere la chiave?";
-	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'è già una chiave)";
+	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'ï¿½ giï¿½ una chiave)";
 	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave";
 	static final String GOT_KEY="Hai raccolto la chiave";
 	static final String END="Sei arrivato";
@@ -26,7 +26,7 @@ public class Main {
 	static final int START_H = 1, START_W = 1, START_D = 0;
 	static final int END_H = 0, END_W = 0, END_D = 2;
 	static final String[] PASSAGGI_APERTI={"000-010","030-130","020-120","010-110","100-110","100-200","110-210",
-			"210-220","220-230","230-130","200-201","201-101","111-101","001-101","001-011","011-021","021-121",
+			"210-220","220-230","230-130","201-101","111-101","001-101","001-011","011-021","021-121",
 			"121-131","131-031","111-211","211-221","221-231","202-102","112-102","112-212","112-122",
 			"122-222","222-232","232-132","132-133","122-022","022-032","022-012","203-103","203-213","213-223",
 			"223-233","223-123","123-023","023-033","033-133"};
@@ -198,7 +198,7 @@ public class Main {
 						Token key=mondo.getKeys().get(scelta_chiavi-1);
 						luogo_corrente.setKey(key);
 						mondo.getKeys().remove(key);
-						System.out.println("La chiave scelta è stata depositata");
+						System.out.println("La chiave scelta ï¿½ stata depositata");
 						depositata=true;
 
 					}
