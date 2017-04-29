@@ -9,33 +9,39 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
+	static final String START_MSG="Benvenuto nel Castello del Mago Romolo!\n L'obiettivo del gioco è farti strada attraverso le sue stanze e raggiungere il suo studio,"
+									+ "ovvero la stanza ";
+	static final String START_MSG2= "Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi\n e aprire dei passaggi, dando prova della tua memoria."
+									+ "Inoltre il mago non riceve gente incolta: dovrai dimostrare la tua conoscenza attraverso dei quiz e ottenre abbastanza punti.\n"
+									+ "Buona Fortuna!";
 	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
 	static final String MSG_OK_FILE="File caricato correttamente";
 	static final String MSG_NO_FILE="File non caricato correttamente";
-	static final String FILE_EXISTS="Esiste giï¿½ un file con lo stesso nome";
-	static final String NO_GROUND= "Sei ai confini del mondo";
-	static final String CLOSED_PASSAGE="Questo passaggio ï¿½ murato";
+	static final String FILE_EXISTS="Esiste già un file con lo stesso nome";
+	static final String NO_GROUND= "Ti trovi davanti ad una finestra, non puoi andare oltre.";
+	static final String CLOSED_PASSAGE="C'è un muro, non puoi andare oltre.";
 	static final String KEY_PRESENT="E' presente una chiave di: ";
 	static final String KEY_NEEDED="Questo passaggio necessita di una chiave di:";
 	static final String NO_KEY="Non possiedi la chiave giusta. Prova un'altra direzione";
 	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
-	static final String CURRENT_GROUND="Il luogo corrente ï¿½: ";
+	static final String CURRENT_GROUND="La stanza corrente è: ";
 	static final String GET_KEY="Vuoi raccogliere la chiave?";
 	static final String PUT_KEY="Vuoi depositare una chiave?";
 	static final String TRIAL="E' presente una prova di: ";
 	static final String TRIAL2=" Vuoi effettuarla?";
-	static final String POINTS="Il punteggio corrente ï¿½ ";
+	static final String POINTS="Il punteggio corrente è ";
 	static final String WEIGHT="Peso o numero massimo di chiavi trasportabili ecceduti";
-	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'ï¿½ giï¿½ una chiave)";
-	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave";
-	static final String GOT_KEY="Hai raccolto la chiave";
-	static final String END="Sei arrivato";
+	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra stanza (Sei nella stanza iniziale o c'è già un'altra chiave.)";
+	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave.";
+	static final String GOT_KEY="Hai raccolto la chiave.";
+	static final String END="Sei arrivato allo studio! Il Mago Romolo ti osserva e proclama: \n";
 	static final String LOAD_LOCATION="Immettere il percorso assoluto del file da caricare";
 	static final String SAVE_LOCATION="Immettere il percorso assoluto del file da salvare";
 	static final String NO_OPZ="Opzione non definita";
-	static final String WRONG="Risposta errata";
-	static final String RIGHT="Risposta corretta";
-	static final String INSUFF_POINTS="Punti insufficienti per finire il gioco";
+	static final String WRONG="Risposta errata!";
+	static final String RIGHT="Risposta corretta!";
+	static final String INSUFF_POINTS="\"Non hai superato abbastaza prove: ritorna più tardi.\"";
+	static final String ENOUGH_POINTS="\"Vedo che hai superato abbastanza prove. Accomodati.\" Hai vinto!";
 	static final String LOADING="Vuoi caricare una sessione precedente?";
 	static final int ALTEZZA = 3, LARGHEZZA = 3, PROFONDITA = 3;
 	static final int START_H = 2, START_W=0, START_D=0;
@@ -124,6 +130,8 @@ public class Main {
 		
 		}
 		
+		System.out.println(START_MSG+mondo.searchGround(END_H, END_W, END_D).getName());
+		System.out.println(START_MSG2);
         //-------------------------------------------------------------------------------------------------Inizio gioco
 		do {
 			System.out.println(CURRENT_GROUND+luogo_corrente.getName());
@@ -146,7 +154,10 @@ public class Main {
 					if(luogo_corrente.isEnd()) {
 						System.out.println(END);
 						if(mondo.getPoints()<punteggio_max) System.out.println(INSUFF_POINTS);
-						else return;
+						else {
+							System.out.println(ENOUGH_POINTS);
+							return;
+						}
 					}
 					//-------------------------------------------------------------------------------------------------------Recupero chiavi
 					
