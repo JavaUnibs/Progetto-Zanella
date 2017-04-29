@@ -38,12 +38,14 @@ public class Main {
 	static final String INSUFF_POINTS="Punti insufficienti per finire il gioco";
 	static final String LOADING="Vuoi caricare una sessione precedente?";
 	static final int ALTEZZA = 3, LARGHEZZA = 3, PROFONDITA = 3;
-	static final int START_H = 0, START_W=0, START_D=0;
-	static final int END_H = 2, END_W=2, END_D=2;
-	static final String[] PASSAGGI_APERTI={"000-010","010-110","010-020","020-120","220-221","221-222"};
-	static final String[] LUOGHI_CHIAVE={"020-Alluminio"};
-	static final String[] PASSAGGI_CHIAVE={"120-220-Alluminio"};
-	static final String[] LUOGHI_PROVE={"220-Qual ï¿½ la formula chimica dell'acqua?-H2O-Scienza"};
+	static final int START_H = 2, START_W=0, START_D=0;
+	static final int END_H = 1, END_W=2, END_D=2;
+	static final String[] PASSAGGI_APERTI={"000-100","100-200","200-210","210-220","220-120","020-021","021-121","121-221","221-211","011-001","202-212","212-112",
+											"022-122"};
+	static final String[] LUOGHI_CHIAVE={"220-Alluminio","000-Bronzo","001-Piombo","011-Oro","121-Platino","112-Rame","002-Stagno","012-Alluminio"};
+	static final String[] PASSAGGI_CHIAVE={"120-020-Bronzo","021-011-Alluminio","101-201-Oro","201-211-Oro","201-202-Platino","112-012-Rame","002-012-Alluminio"};
+	static final String[] LUOGHI_PROVE={"100-Qual è la formula chimica dell'acqua?-H2O-Scienza","221-In che anno inizio la seconda guerra mondiale?-1939-Storia", 
+										"011-Quale popolo costruì il Partenone?-Greci-Arte","212-Come si chiama una reazione chimica che produce calore?-Esotermica-Scienza",};
 	
 	
 	
@@ -52,8 +54,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		int scelta;
-		int peso_max=50;
-		int numero_max=5;
+		int peso_max=30;
+		int numero_max=3;
 		int punteggio_max=100;
 		int peso_totale;
 		int num_totale;

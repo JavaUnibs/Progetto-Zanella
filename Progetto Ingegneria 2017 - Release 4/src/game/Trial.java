@@ -5,7 +5,7 @@ import java.io.Serializable;
 public enum Trial implements Serializable{
 	
 	
-	Storia(5), Scienza(10), Arte(20);
+	Storia(30), Scienza(10), Arte(20);
 	
 	private static final long serialVersionUID = 2L;
 	
