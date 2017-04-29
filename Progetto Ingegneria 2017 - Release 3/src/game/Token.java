@@ -20,4 +20,8 @@ public enum Token implements Serializable{
 	public int getWeight() {
 		return weight;
 	}
+	
+	public String toString(){
+		return this.name() + "(" + this.weight + ")";
+	}
 }
