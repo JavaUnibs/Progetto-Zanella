@@ -239,13 +239,14 @@ public class Main {
 						Token key=luogo_corrente.getKey();
 						
 						System.out.println(KEY_PRESENT + key);
-						if(peso_totale + key.getWeight() <= mondo.getPeso_max_trasportabile() && num_totale + 1 <= mondo.getNumero_max_trasportabile()){
-							if(LeggiInput.doppiaScelta(GET_KEY)){
+						if(LeggiInput.doppiaScelta(GET_KEY)){   //LeggiInput.doppiaScelta(GET_KEY)
+							if(peso_totale + key.getWeight() <= mondo.getPeso_max_trasportabile() && num_totale + 1 <= mondo.getNumero_max_trasportabile()){											//peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max
 								mondo.getPlayerkeys().add(key);
 								luogo_corrente.setKey(null);
 								System.out.println(GOT_KEY);
 							}
-						}else System.out.println(WEIGHT);
+							else System.out.println(WEIGHT);
+						}
 					}
 					
 					//-------------------------------------------------------------------------------------------------------Deposito chiavi

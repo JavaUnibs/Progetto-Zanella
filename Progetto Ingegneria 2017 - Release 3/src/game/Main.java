@@ -154,13 +154,14 @@ public class Main {
 						Token key=luogo_corrente.getKey();
 						
 						System.out.println(KEY_PRESENT + key);
-						if(peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max){
-							if(LeggiInput.doppiaScelta(GET_KEY)){
+						if(LeggiInput.doppiaScelta(GET_KEY)){   //LeggiInput.doppiaScelta(GET_KEY)
+							if(peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max){											//peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max
 								mondo.getKeys().add(key);
 								luogo_corrente.setKey(null);
 								System.out.println(GOT_KEY);
 							}
-						}else System.out.println(WEIGHT);
+							else System.out.println(WEIGHT);
+						}
 					}
 
 					scelta_dir=elenco_dir.stampaMenu(); 

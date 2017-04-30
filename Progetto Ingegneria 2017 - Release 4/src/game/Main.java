@@ -12,8 +12,8 @@ public class Main {
 	static final String START_MSG="Benvenuto nel Castello del Mago Romolo! L'obiettivo del gioco è farti strada\nattraverso le sue stanze e raggiungere il suo studio, "
 									+ "ovvero la  ";
 	static final String START_MSG2= "Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi\ne aprire dei passaggi, dando prova della tua memoria. "
-									+ "Inoltre il mago\nnon riceve gente incolta: dovrai dimostrare la tua conoscenza attraverso dei quiz e ottenre abbastanza punti.\n"
-									+ "Buona Fortuna!";
+									+ "Inoltre il mago\nnon riceve gente incolta: dovrai dimostrare \nla tua conoscenza attraverso dei quiz e ottenere abbastanza punti.\n"
+									+ "\nBuona Fortuna!\n";
 	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
 	static final String MSG_OK_FILE="File caricato correttamente";
 	static final String MSG_NO_FILE="File non caricato correttamente";
@@ -169,13 +169,14 @@ public class Main {
 						Token key=luogo_corrente.getKey();
 						
 						System.out.println(KEY_PRESENT + key);
-						if(peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max){
-							if(LeggiInput.doppiaScelta(GET_KEY)){
+						if(LeggiInput.doppiaScelta(GET_KEY)){   //LeggiInput.doppiaScelta(GET_KEY)
+							if(peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max){											//peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max
 								mondo.getKeys().add(key);
 								luogo_corrente.setKey(null);
 								System.out.println(GOT_KEY);
 							}
-						}else System.out.println(WEIGHT);
+							else System.out.println(WEIGHT);
+						}
 					}
 					//-------------------------------------------------------------------------------------------------------Deposito chiavi
 					
