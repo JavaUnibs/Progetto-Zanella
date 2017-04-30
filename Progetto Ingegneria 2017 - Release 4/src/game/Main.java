@@ -9,10 +9,10 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	static final String START_MSG="Benvenuto nel Castello del Mago Romolo!\n L'obiettivo del gioco è farti strada attraverso le sue stanze e raggiungere il suo studio,"
-									+ "ovvero la stanza ";
-	static final String START_MSG2= "Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi\n e aprire dei passaggi, dando prova della tua memoria."
-									+ "Inoltre il mago non riceve gente incolta: dovrai dimostrare la tua conoscenza attraverso dei quiz e ottenre abbastanza punti.\n"
+	static final String START_MSG="Benvenuto nel Castello del Mago Romolo! L'obiettivo del gioco è farti strada\nattraverso le sue stanze e raggiungere il suo studio, "
+									+ "ovvero la  ";
+	static final String START_MSG2= "Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi\ne aprire dei passaggi, dando prova della tua memoria. "
+									+ "Inoltre il mago\nnon riceve gente incolta: dovrai dimostrare la tua conoscenza attraverso dei quiz e ottenre abbastanza punti.\n"
 									+ "Buona Fortuna!";
 	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
 	static final String MSG_OK_FILE="File caricato correttamente";

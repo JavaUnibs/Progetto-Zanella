@@ -105,7 +105,7 @@ public class InterfaceSetupWorld {
 					LeggiInput.terminaRiga();
 					String name= LeggiInput.riga(INSERT_NAME_KEY);
 					
-					for(Token t: keys) if(t.getName().equals(name)){
+					for(Token t: keys) if(t.getName().equalsIgnoreCase(name)){
 						System.out.println(EXISTS_KEY);
 						exists=true;
 						
@@ -245,7 +245,7 @@ public class InterfaceSetupWorld {
 					LeggiInput.terminaRiga();
 					String name=LeggiInput.riga(INSERT_NAME_TRIAL);
 					for(Trial t: trials) {
-						if(t.getName().equals(name)) exists=true;
+						if(t.getName().equalsIgnoreCase(name)) exists=true;
 						System.out.println(EXISTS_TRIAL);
 					}
 					

@@ -287,7 +287,7 @@ public class World implements Serializable{
 		else quiz=quiz_storia;
 		
 	
-		if(quiz.get(domanda).equals(risposta)) return true;
+		if(quiz.get(domanda).equalsIgnoreCase(risposta)) return true;
 		return false;
 	}
 	

@@ -99,7 +99,7 @@ public class SetupWorld {
 			
 			boolean exists=false;
 			for(Trial a:mondo.getTrials()) {
-				if (a.getName().equals(temp2)) {
+				if (a.getName().equalsIgnoreCase(temp2)) {
 					System.out.println("Questa prova esiste gi�");
 					exists=true;
 					break;
@@ -116,7 +116,7 @@ public class SetupWorld {
 	void addQA(String[] qa){ //Aggiunge alla prova scelta (primo slot array)  le domande e risposte definite dall'array (sintassi domanda-risposta)
 		String name=qa[0];
 		for(Trial a: mondo.getTrials()){
-			if (a.getName().equals(name)){
+			if (a.getName().equalsIgnoreCase(name)){
 				for(int i=1;i<qa.length;i++){
 					a.getQuiz().put(qa[i].substring(0, qa[i].indexOf("-")), qa[i].substring(qa[i].indexOf("-")+1));
 				}
@@ -137,7 +137,7 @@ public class SetupWorld {
 				
 				boolean exists=false;
 				for(Token a:mondo.getKeytypes()) {
-					if (a.getName().equals(temp)) {
+					if (a.getName().equalsIgnoreCase(temp)) {
 						key=a;
 						exists=true;
 						break;
@@ -190,7 +190,7 @@ public class SetupWorld {
 				
 				boolean exists=false;
 				for(Token a:mondo.getKeytypes()) {
-					if (a.getName().equals(temp)) {
+					if (a.getName().equalsIgnoreCase(temp)) {
 						key=a;
 						exists=true;
 						break;
@@ -241,7 +241,7 @@ public class SetupWorld {
 			
 			boolean exists=false;
 			for(Token b: mondo.getKeytypes()){ 
-				if(b.getName().equals(name)) {
+				if(b.getName().equalsIgnoreCase(name)) {
 				System.out.println("Questa chiave esiste gi�");
 				exists=true;
 				break;
