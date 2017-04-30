@@ -52,9 +52,9 @@ public class Main {
 	static final int PESO_MAX_TRAS_FW=50;
 	static final int NUM_MAX_TRAS_FW=5;
 	static final int PESO_MAX_CHIAVE_FW=25;
-	static final int PUNTI_FIN_FW=100;
-	static final int PUNTI_MAX_PROVA_FW=50;
-	static final int PUNTI_INIZIALI_FW=10;
+	static final int PUNTI_FIN_FW=0;
+	static final int PUNTI_MAX_PROVA_FW=0;
+	static final int PUNTI_INIZIALI_FW=0;
 	
 	static final int PESO_MAX_TRAS_NG=100;
 	static final int NUM_MAX_TRAS_NG=5;

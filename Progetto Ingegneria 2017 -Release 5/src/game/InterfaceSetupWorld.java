@@ -26,6 +26,7 @@ public class InterfaceSetupWorld {
 	private final String NO_KEY="Non esistono chiavi con il nome inserito";
 	private final String NO_TRIAL="Non esistono chiavi con il nome inserito";
 	private final String NEGATIVE_VALUE="Il valore inserito non � valido";
+	private final String OVER_THE_LIMIT="Il valore inserito è maggiore del limite superiore del peso di una chiave";
 	private final String ADDREMOVEKEY="Vuoi aggiungere o rimuovere una chiave?";
 	private final String ADDREMOVETRIAL="Vuoi aggiungere o rimuovere una prova?";
 	private final String KEY_ADDED="Chiave aggiunta";
@@ -81,6 +82,10 @@ public class InterfaceSetupWorld {
 						System.out.println(NEGATIVE_VALUE);
 						break;
 					}
+					else if (weight > setup.getMondo().getPeso_max_chiave()){
+						System.out.println(OVER_THE_LIMIT);
+						break;
+					}
 					else{
 						key.setWeight(weight);
 						System.out.println(OK_MODIFY);
@@ -114,6 +119,10 @@ public class InterfaceSetupWorld {
 					int weight=LeggiInput.intero(INSERT_WEIGHT_KEY);
 					if(weight<0) {
 						System.out.println(NEGATIVE_VALUE);
+						break;
+					}
+					else if (weight > setup.getMondo().getPeso_max_chiave()){
+						System.out.println(OVER_THE_LIMIT);
 						break;
 					}
 					else {
