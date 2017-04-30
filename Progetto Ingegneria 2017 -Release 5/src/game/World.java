@@ -103,7 +103,7 @@ public class World implements Serializable{
 	
 	Trial searchTrial(String name){
 		for(Trial t:trials){
-			if(t.getName().equalsIgnoreCase(name));
+			if(t.getName().equalsIgnoreCase(name))
 			return t;
 		}
 		 return null;
@@ -111,7 +111,7 @@ public class World implements Serializable{
 	
 	Token searchKeyTypes(String name){
 		for(Token t:keytypes){
-			if(t.getName().equalsIgnoreCase(name));
+			if(t.getName().equalsIgnoreCase(name))
 			return t;
 		}
 		 return null;
@@ -119,7 +119,7 @@ public class World implements Serializable{
 	
 	Token searchPlayerKeys(String name){
 		for(Token t:playerkeys){
-			if(t.getName().equalsIgnoreCase(name));
+			if(t.getName().equalsIgnoreCase(name))
 			return t;
 		}
 		 return null;

@@ -171,6 +171,7 @@ public class InterfaceSetupWorld {
 				}
 			
 			}
+			break;
 			
 			case 3:{                                           								//limite superiore del peso di una chiave
 				System.out.println("Limite superiore del peso di una chiave: "+setup.getMondo().getPeso_max_chiave()+"\n");
