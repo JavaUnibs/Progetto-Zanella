@@ -49,7 +49,7 @@ public class Main {
 	static final String[] PASSAGGI_APERTI={"000-100","100-200","200-210","210-220","220-120","020-021","021-121","121-221","221-211","011-001","202-212","212-112",
 											"022-122"};
 	static final String[] LUOGHI_CHIAVE={"220-Alluminio","000-Bronzo","001-Piombo","011-Oro","121-Platino","112-Rame","002-Stagno","012-Alluminio"};
-	static final String[] PASSAGGI_CHIAVE={"120-020-Bronzo","021-011-Alluminio","101-201-Oro","201-211-Oro","201-202-Platino","112-012-Rame","002-012-Alluminio"};
+	static final String[] PASSAGGI_CHIAVE={"120-020-Bronzo","021-011-Alluminio","101-201-Oro","201-211-Oro","201-202-Platino","112-012-Rame","002-012-Alluminio","012-022-Stagno"};
 	static final String[] LUOGHI_PROVE={"100-Qual è la formula chimica dell'acqua?-H2O-Scienza","221-In che anno inizio la seconda guerra mondiale?-1939-Storia", 
 										"011-Quale popolo costruì il Partenone?-Greci-Arte","212-Come si chiama una reazione chimica che produce calore?-Esotermica-Scienza",};
 	
