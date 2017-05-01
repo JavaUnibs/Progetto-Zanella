@@ -27,6 +27,7 @@ public class InterfaceSetupWorld {
 	private final String NO_TRIAL="Non esistono chiavi con il nome inserito";
 	private final String NEGATIVE_VALUE="Il valore inserito non ï¿½ valido";
 	private final String OVER_THE_LIMIT="Il valore inserito Ã¨ maggiore del limite superiore del peso di una chiave";
+	private final String OVER_THE_LIMIT_TRIAL="Il valore inserito è maggiore del limite superiore del punteggio di una prova";
 	private final String ADDREMOVEKEY="Vuoi aggiungere o rimuovere una chiave?";
 	private final String ADDREMOVETRIAL="Vuoi aggiungere o rimuovere una prova?";
 	private final String KEY_ADDED="Chiave aggiunta";
@@ -266,6 +267,11 @@ public class InterfaceSetupWorld {
 						System.out.println(NEGATIVE_VALUE);
 						break;
 					}
+					
+					else if (points > setup.getMondo().getPunteggio_max_prova()){
+						System.out.println(OVER_THE_LIMIT_TRIAL);
+						break;
+					}
 					else{
 						
 						Trial trial= new Trial(points, name);
@@ -342,6 +348,10 @@ public class InterfaceSetupWorld {
 					int points=Integer.parseInt(LeggiInput.riga(INSERT_POINTS_TRIAL));
 					if(points<0) {
 						System.out.println(NEGATIVE_VALUE);
+						break;
+					}
+					else if (points > setup.getMondo().getPunteggio_max_prova()){
+						System.out.println(OVER_THE_LIMIT_TRIAL);
 						break;
 					}
 					else{
