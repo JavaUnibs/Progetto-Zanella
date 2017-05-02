@@ -46,8 +46,8 @@ public class Main {
 	static final int END_H_FW = 0, END_W_FW=0, END_D_FW=2;
 	
 	static final int ALTEZZA_NG = 3, LARGHEZZA_NG = 3, PROFONDITA_NG = 3;
-	static final int START_H_NG = 0, START_W_NG=0, START_D_NG=0;
-	static final int END_H_NG = 2, END_W_NG=2, END_D_NG=1;
+	static final int START_H_NG = 2, START_W_NG=0, START_D_NG=0;
+	static final int END_H_NG = 1, END_W_NG=2, END_D_NG=2;
 	
 	static final int PESO_MAX_TRAS_FW=50;
 	static final int NUM_MAX_TRAS_FW=5;
@@ -77,13 +77,20 @@ public class Main {
 			"102-002-Oro","002-012-Platino","032-132-Alluminio","003-103-Argento","003-013-Bronzo","013-113-Stagno",
 			"123-113-Stagno","123-133-Stagno","011-012-Rame"};
 	
-	static final String[] PASSAGGI_APERTI_NG={"000-010","010-020","020-120","120-110","110-100"};
-	static final String[] CHIAVI_NG={"30-Alluminio","25-Bronzo"};
-	static final String[] LUOGHI_CHIAVE_NG={"110-Alluminio", "100-Bronzo"};
+	static final String[] PASSAGGI_APERTI_NG={"000-100","100-200","200-210","210-220","220-120","020-021","021-121","121-221","221-211","011-001","202-212","212-112",
+	"022-122"};
+	static final String[] CHIAVI_NG={"5-Rame","20-Ferro","25-Acciaio","30-Piombo","20-Alluminio","15-Bronzo","40-Argento","10-Stagno",
+			"30-Oro","20-Platino"};
+	static final String[] LUOGHI_CHIAVE_NG={"220-Alluminio","000-Bronzo","001-Piombo","011-Oro","121-Platino","112-Rame","002-Stagno","012-Alluminio"};
 	static final String[] PASSAGGI_CHIAVE_NG={"120-220-Alluminio","220-221-Bronzo"};
-	static final String[] PROVE_NG={"50-Scienza"};
-	static final String[] QUIZ1_NG={"Scienza","Qual ï¿½ la formula chimica dell'acqua?-H2O", "Di che metallo ï¿½ fatto il bronzo oltre al rame?-Stagno"};
-	static final String[] LUOGHI_PROVE_NG={"020","010"};
+	static final String[] PROVE_NG={"10-Scienza","20-Storia","30-Arte"};
+	static final String[] QUIZ1_NG={"Scienza","Qual è la formula chimica dell'acqua?-H2O", "Di che metallo è fatto il bronzo oltre al rame?-Stagno",
+									"In che modo è chiamata una reazione chimica che produce calore?-Esotermica","Quale pianeta ha degli anelli?-Saturno"};
+	static final String[] QUIZ2_NG={"Storia","In che anno inizio la WWII?-1939","Qual'è il nome del condottiero romano che attraversò il Rubicone?-Giulio Cesare",
+									"Come si chiama il primo uomo sbarcato sulla Luna?-Neil Armstrong"};
+	static final String[] QUIZ3_NG={"Arte","Quale popolo costruì il Partenone?-Greci","Un famoso quadro del pittore romantico tedesco Caspar David Friedrich-Viandante sul mare di nebbia",
+									"Chi dipinse la Gioconda?-Leonardo Da Vinci","Come si chiama il movimento artistico dell'Ottocento che dava grande risalto ai colori?-Impressionismo"};
+	static final String[] LUOGHI_PROVE_NG={"100","221","011","212"};
 	
 	static final String[] MONDI={"Fancy World", "Fancy World NG"};
 	
