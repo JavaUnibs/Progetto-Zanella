@@ -30,7 +30,7 @@ public class World implements Serializable{
 			for(int w=0;w<width;w++){
 				for(int d=0;d<depth;d++){
 					
-					grounds.add(new Ground(h, w, d, "Ground "+""+h+""+w+""+d));
+					grounds.add(new Ground(h, w, d, "Sala "+""+h+""+w+""+d));
 				}
 			}
 		}

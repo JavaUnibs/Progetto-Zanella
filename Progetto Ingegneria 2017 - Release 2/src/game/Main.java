@@ -9,18 +9,22 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Deposita una chiave"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	static final String NO_GROUND= "Sei ai confini del mondo";
-	static final String CLOSED_PASSAGE="Questo passaggio ï¿½ murato";
+	static final String START_MSG="Benvenuto nel Labirinto di Minosse. L'obiettivo del gioco è farti strada\nattraverso le sue stanze e raggiungere la sala del tesoro, "
+			+ "ovvero la  ";
+	static final String START_MSG2= "Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi\ne aprire dei passaggi tra i vari saloni. "
+			+ "\nBuona Fortuna!\n";
+	static final String NO_GROUND= "Sei ai confini del labirinto, non puoi andare oltre.";
+	static final String CLOSED_PASSAGE="Questo passaggio è murato, non puoi andare oltre";
 	static final String KEY_PRESENT="E' presente una chiave di: ";
 	static final String KEY_NEEDED="Questo passaggio necessita di una chiave di:";
 	static final String NO_KEY="Non possiedi la chiave giusta. Prova un'altra direzione";
 	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
-	static final String CURRENT_GROUND="Il luogo corrente ï¿½: ";
+	static final String CURRENT_GROUND="La sala corrente è: ";
 	static final String GET_KEY="Vuoi raccogliere la chiave?";
-	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'ï¿½ giï¿½ una chiave)";
+	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei nel luogo iniziale, finale o c'è già una chiave)";
 	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave";
 	static final String GOT_KEY="Hai raccolto la chiave";
-	static final String END="Sei arrivato";
+	static final String END="Sei finalmente arrivato alla sala del tesoro! Hai vinto il gioco!";
 	static final String NO_OPZ="Opzione non definita";
 	static final int ALTEZZA = 3, LARGHEZZA = 4, PROFONDITA = 4;
 	static final int START_H = 1, START_W = 1, START_D = 0;
@@ -60,7 +64,8 @@ public class Main {
 		if(!mondo.putKeyGrounds(LUOGHI_CHIAVE)) return;
 		if(!mondo.putKeyPassages(PASSAGGI_CHIAVE)) return;
 
-		
+		System.out.println(START_MSG+mondo.searchGround(END_H, END_W, END_D).getName());
+		System.out.println(START_MSG2);
 
 		do {
 			System.out.println(CURRENT_GROUND+luogo_corrente.getName());

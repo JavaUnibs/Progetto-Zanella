@@ -7,10 +7,13 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	static final String NO_LUOGO= "Sei ai confini del mondo";
-	static final String PASSAGGIO_CHIUSO="Questo passaggio è murato";
-	static final String LUOGO_CORR="Il luogo corrente è: ";
-	static final String END="Sei arrivato";
+	static final String START_MSG="Benvenuto nel Labirinto di Minosse. L'obiettivo del gioco è farti strada\nattraverso le sue stanze e raggiungere la sala del tesoro, "
+			+ "ovvero la  ";
+	static final String START_MSG2= "\nBuona Fortuna!\n";
+	static final String NO_GROUND= "Sei ai confini del labirinto, non puoi andare oltre.";
+	static final String CLOSED_PASSAGE="Questo passaggio è murato, non puoi andare oltre";
+	static final String CURRENT_GROUND="La sala corrente è: ";
+	static final String END="Sei finalmente arrivato alla sala del tesoro! Hai vinto il gioco!";
 	static final String NO_OPZ="Opzione non definita";
 	static final int ALTEZZA = 3, LARGHEZZA = 4, PROFONDITA = 4;
 	static final int START_H = 1, START_W = 1, START_D = 0;
@@ -44,7 +47,9 @@ public class Main {
 		if(!mondo.openPassages(PASSAGGI_APERTI)) return;
 
 		
-
+		System.out.println(START_MSG+mondo.searchGround(END_H, END_W, END_D).getName());
+		System.out.println(START_MSG2);
+		
 		do {
 			
 			scelta=elenco.stampaMenu();
@@ -59,7 +64,7 @@ public class Main {
 				do {
 					
 					Ground luogo_prossimo=luogo_corrente;
-					System.out.println(LUOGO_CORR+luogo_corrente.getName());
+					System.out.println(CURRENT_GROUND+luogo_corrente.getName());
 					
 					if(luogo_corrente.isEnd()) {
 						System.out.println(END);
@@ -109,14 +114,14 @@ public class Main {
 					}
 					
 					
-					if(luogo_prossimo==null) System.out.println(NO_LUOGO);
+					if(luogo_prossimo==null) System.out.println(NO_GROUND);
 					else if(luogo_prossimo==luogo_corrente);
 					else {
 						
 						Passage ptemp=mondo.searchPassage(luogo_corrente, luogo_prossimo);
 						if(ptemp==null) System.out.println("Passaggio nullo ---- Incongruenza");
 						else if(ptemp.isOpen()) luogo_corrente=luogo_prossimo;
-						else System.out.println(PASSAGGIO_CHIUSO);
+						else System.out.println(CLOSED_PASSAGE);
 					}
 					
 					
