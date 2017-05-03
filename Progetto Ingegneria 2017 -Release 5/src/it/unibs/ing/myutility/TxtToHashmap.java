@@ -45,10 +45,10 @@ public class TxtToHashmap {
 		        }
 		    }
 			
-			for (String key : map.keySet())
-		    {
-		        System.out.println(key + ":" + map.get(key));
-		    }
+			//for (String key : map.keySet())
+		    //{
+		    //    System.out.println(key + ":" + map.get(key));
+		    // }
 		    reader.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
