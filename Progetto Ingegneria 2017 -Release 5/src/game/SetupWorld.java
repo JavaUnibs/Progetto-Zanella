@@ -255,7 +255,7 @@ public class SetupWorld {
 	}
 
 	
-	HashMap<Ground, ArrayList<Passage>> keepTrack(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilitï¿½ del goal
+	HashMap<Ground, ArrayList<Passage>> keepTrackKeys(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilitï¿½ del goal
 		HashMap<Ground, ArrayList<Passage>> map = new HashMap<Ground, ArrayList<Passage>>();
 		for(Ground g: mondo.getGrounds()){
 			ArrayList<Passage> passages= new ArrayList<Passage>();
@@ -270,6 +270,12 @@ public class SetupWorld {
 		
 		return map;
 		
+	}
+	
+	ArrayList<Ground> keepTrackTrials(){													//tiene traccia dei luoghi in cui c'è una prova
+		ArrayList<Ground> grounds=new ArrayList<Ground>();
+		for (Ground g: mondo.getGrounds()) if(g.getTrial()!=null) grounds.add(g);
+		return grounds;
 	}
 	
 	ArrayList<Token> invalidKeysWeight(int max_weight){                    //Restituisce un arraylist contenente le chiavi che non rispettano il vincolo di peso massimo

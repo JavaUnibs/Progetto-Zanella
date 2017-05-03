@@ -25,6 +25,8 @@ public class InterfaceSetupWorld {
 	private final String OK_MODIFY="Modifica effettuata";
 	private final String NO_KEY="Non esistono chiavi con il nome inserito";
 	private final String NO_TRIAL="Non esistono chiavi con il nome inserito";
+	private final String NO_TRIALS="Questo mondo non utilizza prove";
+	private final String NO_KEYS="Questo mondo non utilizza chiavi";
 	private final String NEGATIVE_VALUE="Il valore inserito non ï¿½ valido";
 	private final String OVER_THE_LIMIT="Il valore inserito Ã¨ maggiore del limite superiore del peso di una chiave";
 	private final String OVER_THE_LIMIT_TRIAL="Il valore inserito è maggiore del limite superiore del punteggio di una prova";
@@ -47,6 +49,14 @@ public class InterfaceSetupWorld {
 	}
 	
 	public void initialize(){
+		
+		boolean emptyTrials=setup.getMondo().getTrials().isEmpty();
+		boolean emptyKeys=setup.getMondo().getKeytypes().isEmpty();
+		
+		HashMap<Ground, ArrayList<Passage>> keyMap=setup.keepTrackKeys();
+		Set<Ground> groundSet= keyMap.keySet();
+		ArrayList<Ground> trialSet=setup.keepTrackTrials();
+		
 		String start="Questo mondo ha i seguenti parametri: \n";
 		String tipi_chiavi="Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeytypes().toString();
 		String peso_max_chiave="Limite superiore del peso di una chiave: "+setup.getMondo().getPeso_max_chiave()+"\n";
@@ -68,7 +78,13 @@ public class InterfaceSetupWorld {
 			
 			switch(scelta){
 			
-			case 1:{                                                                //modifica dei pesi delle chiavi
+			case 1:{         
+				
+				if(emptyKeys) {
+					System.out.println(NO_KEYS);
+					break;
+				}			
+																													//modifica dei pesi delle chiavi
 				System.out.println("Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeytypes().toString());
 				LeggiInput.terminaRiga();
 				String name=LeggiInput.riga(INSERT_NAME_KEY);
@@ -97,7 +113,13 @@ public class InterfaceSetupWorld {
 			}
 			break;
 			
-			case 2:{																	//modifica dei tipi di chiave
+			case 2:{	
+				
+			if(emptyKeys) {
+					System.out.println(NO_KEYS);
+					break;
+			}		
+																													//modifica dei tipi di chiave
 			System.out.println("Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeytypes().toString());
 			System.out.println(ADDREMOVEKEY);
 			Menu sottomenu= new Menu(menu_addremove);
@@ -130,14 +152,11 @@ public class InterfaceSetupWorld {
 					
 						keys.add(new Token(weight, name));              							//usando la disposizione del mondo di default mette un tipo di chiave random
 																									//nei luoghi e nei passaggi del mondo che avevano in comune lo stesso tipo di chiave
-						HashMap<Ground, ArrayList<Passage>> map=setup.keepTrack();
-						Set<Ground> grounds= map.keySet();
-						
-						for(Ground g: grounds){
+						for(Ground g: groundSet){
 							int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
-							Token key=keys.get(rnd);
-							g.setKey(key);
-							for(Passage p: map.get(g)) p.setKey(key);
+							Token tempkey=keys.get(rnd);
+							g.setKey(tempkey);
+							for(Passage p: keyMap.get(g)) p.setKey(tempkey);						//non c'è il controllo dell'array list vuoto perchè è appena stata aggiunta una chiave
 					
 						}
 						System.out.println(KEY_ADDED);
@@ -159,14 +178,15 @@ public class InterfaceSetupWorld {
 						break;
 					}else keys.remove(key);
 					
-					HashMap<Ground, ArrayList<Passage>> map=setup.keepTrack();						//come prima
-					Set<Ground> grounds= map.keySet();
+					Token tempkey=null;
 					
-					for(Ground g: grounds){
-						int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
-						Token tempkey=keys.get(rnd);
+					for(Ground g: groundSet){
+						if(!keys.isEmpty()){
+							int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
+							tempkey=keys.get(rnd);
+						}
 						g.setKey(tempkey);
-						for(Passage p: map.get(g)) p.setKey(tempkey);
+						for(Passage p: keyMap.get(g)) p.setKey(tempkey);
 				
 					}
 					
@@ -183,7 +203,13 @@ public class InterfaceSetupWorld {
 			}
 			break;
 			
-			case 3:{                                           								//limite superiore del peso di una chiave
+			case 3:{                  
+				
+				if(emptyKeys) {
+					System.out.println(NO_KEYS);
+					break;
+				}	
+																												//limite superiore del peso di una chiave
 				System.out.println("Limite superiore del peso di una chiave: "+setup.getMondo().getPeso_max_chiave()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(limit<0) {
@@ -204,7 +230,11 @@ public class InterfaceSetupWorld {
 			break;
 			
 			case 4:{
-																								//numero max di chiavi trasportabili
+				
+				if(emptyKeys) {
+					System.out.println(NO_KEYS);
+					break;
+				}																								//numero max di chiavi trasportabili
 				System.out.println("Numero massimo di chiavi trasportabili: "+setup.getMondo().getNumero_max_trasportabile()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(limit<0) {
@@ -219,6 +249,11 @@ public class InterfaceSetupWorld {
 			break;
 			
 			case 5:{
+				
+				if(emptyKeys) {
+					System.out.println(NO_KEYS);
+					break;
+				}																											
 				System.out.println("Peso massimo trasportabile: "+setup.getMondo().getPeso_max_trasportabile()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(limit<0) {
@@ -234,8 +269,8 @@ public class InterfaceSetupWorld {
 			
 			case 6:{
 				
-				if(setup.getMondo().getTrials().isEmpty()) {
-					System.out.println("Questo mondo non utilizza prove");
+				if(emptyTrials) {
+					System.out.println(NO_TRIALS);
 					break;
 				}
 				
@@ -289,11 +324,11 @@ public class InterfaceSetupWorld {
 						
 					}
 					
-					for(Ground g: setup.getMondo().getGrounds()) {                          //mette una nuova prova scelta a random nei luoghi in cui c'erano prima
-						if(g.getTrial()!=null) {
+					for(Ground g: trialSet) {                          //mette una nuova prova scelta a random nei luoghi in cui c'erano prima
+						
 							int rnd=RandomValues.ranIntLimite(0, trials.size()-1);
 							g.setTrial(trials.get(rnd));
-						}
+						
 					}
 					
 					System.out.println(TRIAL_ADDED);
@@ -312,11 +347,17 @@ public class InterfaceSetupWorld {
 						break;
 					}else trials.remove(trial);
 					
-					for(Ground g: setup.getMondo().getGrounds()) {
-						if(g.getTrial()!=null) {
-							int rnd=RandomValues.ranIntLimite(0, trials.size()-1);
-							g.setTrial(trials.get(rnd));
-						}
+					Trial tempTrial=null;
+					
+					for(Ground g: trialSet) {
+						
+							if(!trials.isEmpty()){
+								int rnd=RandomValues.ranIntLimite(0, trials.size()-1);
+								tempTrial=trials.get(rnd);
+							}
+							g.setTrial(tempTrial);
+							
+						
 					}
 					
 					System.out.println(TRIAL_REMOVED);
@@ -331,8 +372,8 @@ public class InterfaceSetupWorld {
 			
 			case 7:{
 				
-				if(setup.getMondo().getTrials().isEmpty()) {
-					System.out.println("Questo mondo non utilizza prove");
+				if(emptyTrials) {
+					System.out.println(NO_TRIALS);
 					break;
 				}
 				
@@ -367,8 +408,8 @@ public class InterfaceSetupWorld {
 			
 			case 8:{
 				
-				if(setup.getMondo().getTrials().isEmpty()) {
-					System.out.println("Questo mondo non utilizza prove");
+				if(emptyTrials) {
+					System.out.println(NO_TRIALS);
 					break;
 				}
 				
@@ -391,8 +432,8 @@ public class InterfaceSetupWorld {
 			
 			case 9:{
 				
-				if(setup.getMondo().getTrials().isEmpty()) {
-					System.out.println("Questo mondo non utilizza prove");
+				if(emptyTrials) {
+					System.out.println(NO_TRIALS);
 					break;
 				}
 				
@@ -412,8 +453,8 @@ public class InterfaceSetupWorld {
 			
 			case 10:{
 				
-				if(setup.getMondo().getTrials().isEmpty()) {
-					System.out.println("Questo mondo non utilizza prove");
+				if(emptyTrials) {
+					System.out.println(NO_TRIALS);
 					break;
 				}
 				
