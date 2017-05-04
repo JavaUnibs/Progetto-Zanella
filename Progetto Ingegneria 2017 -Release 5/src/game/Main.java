@@ -129,9 +129,8 @@ public class Main {
 			
 			
 			SetupWorld setup=new SetupWorld(values);
-			
+			setup.initialize();
 			mondo= setup.getMondo();
-	
 			luogo_corrente=mondo.searchGround(convertValues(values, "START_H"), convertValues(values, "START_W"), convertValues(values, "START_D"));
 			luogo_corrente.setStart(true);
 			mondo.searchGround(convertValues(values, "END_H"), convertValues(values, "END_W"), convertValues(values, "END_D")).setEnd(true);

@@ -62,13 +62,13 @@ PROVE
 10-Scienza,20-Storia,30-Arte
 $
 QUIZ1
-Scienza,Qual Ã¨ la formula chimica dell'acqua?-H2O, Di che metallo Ã¨ fatto il bronzo oltre al rame?-Stagno, In che modo Ã¨ chiamata una reazione chimica che produce calore?-Esotermica,Quale pianeta ha degli anelli?-Saturno
+Scienza,Qual è la formula chimica dell'acqua?-H2O, Di che metallo è fatto il bronzo oltre al rame?-Stagno, In che modo è chiamata una reazione chimica che produce calore?-Esotermica,Quale pianeta ha degli anelli?-Saturno
 $
 QUIZ2
-Storia,In che anno inizio la WWII?-1939,Qual Ã¨ il nome del condottiero romano che attraversÃ² il Rubicone?-Giulio Cesare,Come si chiama il primo uomo sbarcato sulla Luna?-Neil Armstrong
+Storia,In che anno inizio la WWII?-1939,Qual è il nome del condottiero romano che attraversò il Rubicone?-Giulio Cesare,Come si chiama il primo uomo sbarcato sulla Luna?-Neil Armstrong
 $
 QUIZ3
-Arte,Quale popolo costruÃ¬ il Partenone?-Greci,Un famoso quadro del pittore romantico tedesco Caspar David Friedrich-Viandante sul mare di nebbia,Chi dipinse la Gioconda?-Leonardo Da Vinci,Come si chiama il movimento artistico dell'Ottocento che dava grande risalto ai colori?-Impressionismo
+Arte,Quale popolo costruì il Partenone?-Greci,Un famoso quadro del pittore romantico tedesco Caspar David Friedrich-Viandante sul mare di nebbia,Chi dipinse la Gioconda?-Leonardo Da Vinci,Come si chiama il movimento artistico dell'Ottocento che dava grande risalto ai colori?-Impressionismo
 $
 LUOGHI_PROVE
 100,221,011,212
