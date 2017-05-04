@@ -1,7 +1,10 @@
 package game;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import it.unibs.ing.myutility.*;
 
 public class Main {	
@@ -84,11 +87,11 @@ public class Main {
 	static final String[] LUOGHI_CHIAVE_NG={"220-Alluminio","000-Bronzo","001-Piombo","011-Oro","121-Platino","112-Rame","002-Stagno","012-Alluminio"};
 	static final String[] PASSAGGI_CHIAVE_NG={"120-220-Alluminio","220-221-Bronzo"};
 	static final String[] PROVE_NG={"10-Scienza","20-Storia","30-Arte"};
-	static final String[] QUIZ1_NG={"Scienza","Qual è la formula chimica dell'acqua?-H2O", "Di che metallo è fatto il bronzo oltre al rame?-Stagno",
-									"In che modo è chiamata una reazione chimica che produce calore?-Esotermica","Quale pianeta ha degli anelli?-Saturno"};
-	static final String[] QUIZ2_NG={"Storia","In che anno inizio la WWII?-1939","Qual'è il nome del condottiero romano che attraversò il Rubicone?-Giulio Cesare",
+	static final String[] QUIZ1_NG={"Scienza","Qual ï¿½ la formula chimica dell'acqua?-H2O", "Di che metallo ï¿½ fatto il bronzo oltre al rame?-Stagno",
+									"In che modo ï¿½ chiamata una reazione chimica che produce calore?-Esotermica","Quale pianeta ha degli anelli?-Saturno"};
+	static final String[] QUIZ2_NG={"Storia","In che anno inizio la WWII?-1939","Qual'ï¿½ il nome del condottiero romano che attraversï¿½ il Rubicone?-Giulio Cesare",
 									"Come si chiama il primo uomo sbarcato sulla Luna?-Neil Armstrong"};
-	static final String[] QUIZ3_NG={"Arte","Quale popolo costruì il Partenone?-Greci","Un famoso quadro del pittore romantico tedesco Caspar David Friedrich-Viandante sul mare di nebbia",
+	static final String[] QUIZ3_NG={"Arte","Quale popolo costruï¿½ il Partenone?-Greci","Un famoso quadro del pittore romantico tedesco Caspar David Friedrich-Viandante sul mare di nebbia",
 									"Chi dipinse la Gioconda?-Leonardo Da Vinci","Come si chiama il movimento artistico dell'Ottocento che dava grande risalto ai colori?-Impressionismo"};
 	static final String[] LUOGHI_PROVE_NG={"100","221","011","212"};
 	
@@ -101,6 +104,18 @@ public class Main {
 			
 	public static void main(String[] args) {
 		
+		HashMap<String, String> common_string;
+		HashMap<String, String> local_string;
+		
+		try {
+			common_string=new TxtToHashmap("COMMON_STRINGS.txt").convertToString();
+			
+		} catch (IOException e1) {
+			System.out.println("Errore nel caricamento file di stringhe comuni");
+			return;
+		}
+		
+		
 		int scelta;
 		int peso_totale;
 		int num_totale;
@@ -111,10 +126,10 @@ public class Main {
 		Ground luogo_corrente = null;
 		
 		//---------------------------------------------------------------------------------------------Scelta di caricamento
-		if(LeggiInput.doppiaScelta(LOADING)){
+		if(LeggiInput.doppiaScelta(common_string.get("LOADING"))){
 			
 			LeggiInput.terminaRiga();
-			String percorso= LeggiInput.riga(LOAD_LOCATION);
+			String percorso= LeggiInput.riga(common_string.get("LOAD_LOCATION"));
 			File fgame = new File(percorso);
 			
 			
@@ -129,16 +144,17 @@ public class Main {
 				 save = (Save)SalvataggioFile.caricaOggetto(fgame);
 				 mondo = save.getMondo();
 				 luogo_corrente = save.getLuogo_corrente();
+				 local_string=save.getLocalString();
 			   }
 			  catch (ClassCastException e)
 			   {
-				 System.out.println(MSG_NO_CAST);
+				 System.out.println(common_string.get("MSG_NO_CAST"));
 				}
 			   finally
 				{
 			      if ( (mondo != null) && (luogo_corrente != null) )
 				    {
-					 System.out.println(MSG_OK_FILE);
+					 System.out.println(common_string.get("MSG_OK_FILE"));
 					 caricamentoRiuscito = true;
 					 }
 				  }
@@ -147,7 +163,7 @@ public class Main {
 				
 			if (!caricamentoRiuscito)
 			   {
-				System.out.println(MSG_NO_FILE);
+				System.out.println(common_string.get("MSG_NO_FILE"));
                 return;
 			    }
 			

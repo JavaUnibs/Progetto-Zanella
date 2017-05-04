@@ -23,7 +23,7 @@ public class TxtToHashmap {
 	 * ....
 	 * ritorna un HashMap con elementi che hanno come chiave la KEY e valore VALORE
 	 */
-	public HashMap convertToString() throws IOException
+	public HashMap<String, String> convertToString() throws IOException
 	{
 	    HashMap<String, String> map = new HashMap<String, String>();
 
@@ -71,7 +71,7 @@ public class TxtToHashmap {
 	 * 
 	 * Restituisce un HashMap<String, String[]> 
 	 */
-	public HashMap convertToArray() throws IOException
+	public HashMap<String, String[]> convertToArray() throws IOException
 	{
 	    HashMap<String, String[]> map = new HashMap<String, String[]>();
 	    String[] list;
