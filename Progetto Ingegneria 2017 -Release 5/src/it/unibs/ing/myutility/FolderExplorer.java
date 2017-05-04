@@ -10,9 +10,28 @@ public class FolderExplorer {
 		return System.getProperty("user.dir");
 	}
 	
-	public static ArrayList<String> listFiles(){
+	public static ArrayList<String> listFileNames(){
 		File directory= new File(getCurrentDirectory());
 		return new ArrayList<String>(Arrays.asList(directory.list()));
+		
+	}
+	
+	public static ArrayList<File> listFiles(){
+		File directory= new File(getCurrentDirectory());
+		return new ArrayList<File>(Arrays.asList(directory.listFiles()));
+		
+	}
+	
+	public static ArrayList<File> listFiles(String path){
+		File directory= new File(getCurrentDirectory()+"\\"+path);
+		return new ArrayList<File>(Arrays.asList(directory.listFiles()));
+		
+	}
+	
+	public static ArrayList<String> listFileNames(String path){
+		File directory= new File(getCurrentDirectory()+"\\"+path);
+		return new ArrayList<String>(Arrays.asList(directory.list()));
+		
 	}
 	
 	

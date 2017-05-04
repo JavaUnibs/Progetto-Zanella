@@ -34,7 +34,7 @@ public class TxtToHashmap {
 			
 			while ((line = reader.readLine()) != null)
 		    {
-		        String[] parts = (line.replaceAll("\"", "")).split("=", 2);
+		        String[] parts = (line.split("=", 2)); //tolto replaceAll
 		        if (parts.length >= 2)
 		        {
 		            String key = parts[0];

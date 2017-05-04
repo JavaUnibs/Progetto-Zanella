@@ -18,6 +18,7 @@ public class World implements Serializable{
 	private boolean depositata;
 	private boolean prova_fatta;
 	private Integer points;
+	private String nome_luoghi;
 	private int peso_max_trasportabile;
 	private int numero_max_trasportabile;
 	private int peso_max_chiave;
@@ -26,7 +27,7 @@ public class World implements Serializable{
 	
 	
 	
-	World(int height, int width, int depth, int peso_max_trasportabile, int numero_max_trasportabile, int peso_max_chiave, int punteggio_finale, int punteggio_max_prova, int points){
+	World(int height, int width, int depth, int peso_max_trasportabile, int numero_max_trasportabile, int peso_max_chiave, int punteggio_finale, int punteggio_max_prova, int points, String nome_luoghi){
 
 		grounds= new ArrayList<Ground>();
 		passages= new ArrayList<Passage>();
@@ -42,12 +43,13 @@ public class World implements Serializable{
 		this.punteggio_finale=punteggio_finale;
 		this.punteggio_max_prova=punteggio_max_prova;
 		this.points=points;
+		this.nome_luoghi=nome_luoghi;
 		
 		for(int h=0;h<height;h++){                                             //genera tutti luoghi combinando le max coordinate
 			for(int w=0;w<width;w++){
 				for(int d=0;d<depth;d++){
 					
-					grounds.add(new Ground(h, w, d, "Ground "+""+h+""+w+""+d));
+					grounds.add(new Ground(h, w, d, nome_luoghi+" "+h+""+w+""+d));
 				}
 			}
 		}
