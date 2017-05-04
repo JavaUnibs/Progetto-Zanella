@@ -12,43 +12,6 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	static final String START_MSG="Benvenuto nel Castello del Mago Romolo! L'obiettivo del gioco è farti strada\nattraverso le sue stanze e raggiungere il suo studio, "
-			+ "ovvero la  ";
-	static final String START_MSG2= "Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi\ne aprire dei passaggi, dando prova della tua memoria. "
-			+ "Inoltre il mago\nnon riceve gente incolta: dovrai dimostrare \nla tua conoscenza attraverso dei quiz e ottenere abbastanza punti.\n"
-			+ "\nBuona Fortuna!\n";
-	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
-	static final String MSG_OK_FILE="File caricato correttamente";
-	static final String MSG_NO_FILE="File non caricato correttamente";
-	static final String FILE_EXISTS="Esiste giï¿½ un file con lo stesso nome";
-	static final String NO_GROUND= "Sei ai confini del mondo";
-	static final String CLOSED_PASSAGE="Questo passaggio ï¿½ murato";
-	static final String KEY_PRESENT="E' presente una chiave di: ";
-	static final String KEY_NEEDED="Questo passaggio necessita di una chiave di:";
-	static final String NO_KEY="Non possiedi la chiave giusta. Prova un'altra direzione";
-	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
-	static final String CURRENT_GROUND="Il luogo corrente ï¿½: ";
-	static final String GET_KEY="Vuoi raccogliere la chiave?";
-	static final String PUT_KEY="Vuoi depositare una chiave?";
-	static final String TRIAL="E' presente una prova di: ";
-	static final String TRIAL2=" Vuoi effettuarla?";
-	static final String POINTS="Il punteggio corrente ï¿½ ";
-	static final String WEIGHT="Peso o numero massimo di chiavi trasportabili ecceduti";
-	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei in Start/End o c'ï¿½ giï¿½ una chiave)";
-	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave";
-	static final String GOT_KEY="Hai raccolto la chiave";
-	static final String END="Sei arrivato";
-	static final String LOAD_LOCATION="Immettere il percorso assoluto del file da caricare";
-	static final String SAVE_LOCATION="Immettere il percorso assoluto del file da salvare";
-	static final String NO_OPZ="Opzione non definita";
-	static final String WRONG="Risposta errata";
-	static final String RIGHT="Risposta corretta";
-	static final String INSUFF_POINTS="Punti insufficienti per finire il gioco";
-	static final String ENOUGH_POINTS="\"Vedo che hai superato abbastanza prove. Accomodati.\" Hai vinto!";
-	static final String LOADING="Vuoi caricare una sessione precedente?";
-	static final String CHOOSE_WORLD="Scegli uno dei mondi disponibili";
-	static final String NO_WORLD="Il mondo selezionato non esiste";
-	static final String MODIFY_WORLD="Vuoi modificare i parametri del mondo scelto?";
 	
 	static final int ALTEZZA_FW = 3, LARGHEZZA_FW = 4, PROFONDITA_FW = 4;
 	static final int START_H_FW = 1, START_W_FW=1, START_D_FW=0;
