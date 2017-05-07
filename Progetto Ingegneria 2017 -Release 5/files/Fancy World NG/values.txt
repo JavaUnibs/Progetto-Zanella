@@ -21,7 +21,7 @@ END_H
 $
 END_W
 2
-$ 
+$
 END_D
 2
 $
@@ -72,3 +72,4 @@ Arte,Quale popolo costruì il Partenone?-Greci,Un famoso quadro del pittore roman
 $
 LUOGHI_PROVE
 100,221,011,212
+\n

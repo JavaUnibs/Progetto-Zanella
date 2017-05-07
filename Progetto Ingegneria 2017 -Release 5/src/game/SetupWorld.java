@@ -1,13 +1,9 @@
 package game;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import it.unibs.ing.myutility.RandomValues;
-import it.unibs.ing.myutility.TxtToHashmap;
 
 public class SetupWorld {
 	
@@ -24,15 +20,23 @@ public class SetupWorld {
 	
 	SetupWorld(HashMap<String,String[]> map){
 		values=map;
+		int punteggio_finale, punteggio_max_prova, points;
 		int height= Integer.parseInt(values.get("ALTEZZA")[0]);
 		int width= Integer.parseInt(values.get("LARGHEZZA")[0]);
 		int depth= Integer.parseInt(values.get("PROFONDITA")[0]);
 		int peso_max_trasportabile=Integer.parseInt(values.get("PESO_MAX_TRAS")[0]);
 		int numero_max_trasportabile=Integer.parseInt(values.get("NUM_MAX_TRAS")[0]);
 		int peso_max_chiave=Integer.parseInt(values.get("PESO_MAX_CHIAVE")[0]);
-		int punteggio_finale =Integer.parseInt(values.get("PUNTI_FIN")[0]);
-		int punteggio_max_prova =Integer.parseInt(values.get("PUNTI_MAX_PROVA")[0]);
-		int points=Integer.parseInt(values.get("PUNTI_INIZIALI")[0]);
+		if(!(values.get("PROVE")[0]).equals("0")){
+			punteggio_finale =Integer.parseInt(values.get("PUNTI_FIN")[0]);
+			punteggio_max_prova =Integer.parseInt(values.get("PUNTI_MAX_PROVA")[0]);
+			points=Integer.parseInt(values.get("PUNTI_INIZIALI")[0]);
+		}
+		else{
+			punteggio_finale = 0;
+			punteggio_max_prova = 0;
+			points = 0;
+		}
 		String nome_luoghi=values.get("NOME_LUOGHI")[0];
 		mondo=new World(height, width, depth, peso_max_trasportabile, numero_max_trasportabile, peso_max_chiave, punteggio_finale, punteggio_max_prova, points, nome_luoghi);
 		
@@ -324,20 +328,24 @@ public class SetupWorld {
 	
 	public void initialize(){
 		openPassages(values.get("PASSAGGI_APERTI"));
-		if(values.get("CHIAVI")!=null) addKeys(values.get("CHIAVI"));
-		if(values.get("LUOGHI_CHIAVE")!=null) putKeyGrounds(values.get("LUOGHI_CHIAVE"));
-		if(values.get("PASSAGGI_CHIAVE")!=null) putKeyPassages(values.get("PASSAGGI_CHIAVE"));
-		if(values.get("PROVE")!=null) addTrials(values.get("PROVE"));
-		int i=1;
-		do{
-			if(values.get("QUIZ"+i)!=null) addQA(values.get("QUIZ"+i));
-			else break;
-			i++;
-			
-		}while(true);
-		
-		if(values.get("LUOGHI_PROVE")!=null) putTrialsGrounds((values.get("LUOGHI_PROVE")));
-		
+		if(values.get("CHIAVI")!=null) 
+			addKeys(values.get("CHIAVI"));
+		if(values.get("LUOGHI_CHIAVE")!=null) 
+			putKeyGrounds(values.get("LUOGHI_CHIAVE"));
+		if(values.get("PASSAGGI_CHIAVE")!=null) 
+			putKeyPassages(values.get("PASSAGGI_CHIAVE"));
+		if(!(values.get("PROVE")[0].equals("0"))){
+			if(values.get("PROVE")!=null) 
+				addTrials(values.get("PROVE"));
+			int i=1;
+			do{
+				if(values.get("QUIZ"+i)!=null) 
+					addQA(values.get("QUIZ"+i));
+				else break;
+				i++;
+			}while(true);
+			if(values.get("LUOGHI_PROVE")!=null) putTrialsGrounds((values.get("LUOGHI_PROVE")));
+		}
 	}
 	
 	

@@ -10,6 +10,3 @@ LOADING=Vuoi caricare una sessione precedente?
 CHOOSE_WORLD=Scegli uno dei mondi disponibili
 NO_WORLD=Il mondo selezionato non esiste
 MODIFY_WORLD=Vuoi modificare i parametri del mondo scelto?
-
-
-

@@ -3,9 +3,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class TxtToHashmap {
@@ -89,9 +86,11 @@ public class TxtToHashmap {
 				String tmp;
 				
 				while(!(tmp=reader.readLine()).equals("$"))
-				{
+				{	
+					if(tmp.equals("\\n")){
+				        break;
+					}
 					value = value+tmp; 
-					
 				}
 				String values = value.replaceAll("\"", "");
 				

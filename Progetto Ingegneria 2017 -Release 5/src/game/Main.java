@@ -12,32 +12,7 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	
-	static final int ALTEZZA_FW = 3, LARGHEZZA_FW = 4, PROFONDITA_FW = 4;
-	static final int START_H_FW = 1, START_W_FW=1, START_D_FW=0;
-	static final int END_H_FW = 0, END_W_FW=0, END_D_FW=2;
 
-	static final int PESO_MAX_TRAS_FW=50;
-	static final int NUM_MAX_TRAS_FW=5;
-	static final int PESO_MAX_CHIAVE_FW=25;
-	static final int PUNTI_FIN_FW=0;
-	static final int PUNTI_MAX_PROVA_FW=0;
-	static final int PUNTI_INIZIALI_FW=0;
-	
-
-	static final String[] PASSAGGI_APERTI_FW={"000-010","030-130","010-110","100-110","100-200","110-210",
-			"210-220","220-230","230-130","201-101","111-101","001-101","001-011","011-021","021-121",
-			"121-131","131-031","111-211","211-221","221-231","202-102","112-102","112-212","112-122",
-			"122-222","222-232","232-132","132-133","122-022","022-032","022-012","203-103","203-213","213-223",
-			"223-233","223-123","123-023","023-033","033-133"};
-	static final String[] CHIAVI_FW={"5-Rame","10-Ferro","15-Acciaio","15-Piombo","10-Alluminio","15-Bronzo","15-Argento","5-Stagno",
-			"25-Oro","25-Platino"};
-	static final String[] LUOGHI_CHIAVE_FW={"100-Acciaio","120-Oro","000-Piombo","231-Ferro","111-Rame","212-Bronzo",
-			"232-Stagno","022-Alluminio","233-Argento","003-Platino","023-Argento"};
-	static final String[] PASSAGGI_CHIAVE_FW={"200-201-Acciaio","120-020-Ferro","020-010-Piombo","020-030-Acciaio",
-			"102-002-Oro","002-012-Platino","032-132-Alluminio","003-103-Argento","003-013-Bronzo","013-113-Stagno",
-			"123-113-Stagno","123-133-Stagno","011-012-Rame"};
-		
 	public static void main(String[] args) {
 		
 		HashMap<String, String> common_string=null;
@@ -54,7 +29,6 @@ public class Main {
 		int scelta;
 		int peso_totale;
 		int num_totale;
-
 		World mondo = null;
 		Ground luogo_corrente = null;
 		
@@ -106,7 +80,7 @@ public class Main {
 			
 			File nome_mondo;
 			ArrayList<File> fileList= FolderExplorer.listFiles("files");
-			for(File s: fileList) if(!s.isDirectory()) fileList.remove(s);
+			for(int i=0;i<fileList.size();i++) if(!fileList.get(i).isDirectory()) fileList.remove(fileList.get(i));
 			
 			for(int y=0;y<fileList.size();y++){
 				System.out.println(y+") "+fileList.get(y).getName()+"\n");
@@ -119,7 +93,31 @@ public class Main {
 				System.out.println(common_string.get("NO_WORLD"));
 				return;
 			}
-			
+			switch(num_mondo){
+			case 0:{
+				try {
+					local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\local_string.txt").convertToString();
+					values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\values.txt").convertToArray();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+				SetupWorld setup=new SetupWorld(values);
+				setup.initialize();
+				mondo= setup.getMondo();
+				luogo_corrente=mondo.searchGround(convertValues(values, "START_H"), convertValues(values, "START_W"), convertValues(values, "START_D"));
+				luogo_corrente.setStart(true);
+				mondo.searchGround(convertValues(values, "END_H"), convertValues(values, "END_W"), convertValues(values, "END_D")).setEnd(true);
+					
+		
+				if(LeggiInput.doppiaScelta(common_string.get("MODIFY_WORLD"))){
+				
+						InterfaceSetupWorld gui= new InterfaceSetupWorld(setup);
+						gui.initialize();
+				}
+			}break;
+			case 1:{
 			try {
 				local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\local_string.txt").convertToString();
 				values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\values.txt").convertToArray();
@@ -141,13 +139,14 @@ public class Main {
 					InterfaceSetupWorld gui= new InterfaceSetupWorld(setup);
 					gui.initialize();
 			}
-			
+			}break;
+			}	
 		}
 		
 		
         //-------------------------------------------------------------------------------------------------Inizio gioco
-		System.out.println(local_string.get("START_MSG")+mondo.searchGround(convertValues(values, "END_H"), convertValues(values, "END_W"), convertValues(values, "END_D")).getName());
-		System.out.println(local_string.get("START_MSG2"));
+		System.out.println(local_string.get("START_MSG")+mondo.searchGround(convertValues(values, "END_H"), convertValues(values, "END_W"), convertValues(values, "END_D")).getName()+".");
+		System.out.println(local_string.get("START_MSG2")+"\n"+local_string.get("START_MSG3")+"\n"+local_string.get("START_MSG4"));
 		
 		Menu elenco = new Menu(MENU_PRINCIPALE);
 		Menu elenco_dir= new Menu(MENU_DIREZIONI);
@@ -174,8 +173,16 @@ public class Main {
 					
 					if(luogo_corrente.isEnd()) {
 						System.out.println(local_string.get("END"));
-						if(!mondo.getTrials().isEmpty() && mondo.getPoints()<mondo.getPunteggio_finale()) System.out.println(local_string.get("INSUFF_POINTS"));
-						else if(!mondo.getTrials().isEmpty() && mondo.getPoints()>=mondo.getPunteggio_finale()) System.out.println(local_string.get("ENOUGH_POINTS"));
+						if(mondo.getTrials().isEmpty()) 
+							return;
+						else {
+							if(!mondo.getTrials().isEmpty() && mondo.getPoints()<mondo.getPunteggio_finale()) 
+								System.out.println(local_string.get("INSUFF_POINTS"));
+							else if(!mondo.getTrials().isEmpty() && mondo.getPoints()>=mondo.getPunteggio_finale()) {
+									System.out.println(local_string.get("ENOUGH_POINTS"));
+									return;
+							}
+						}
 					}
 					//-------------------------------------------------------------------------------------------------------Recupero chiavi
 					

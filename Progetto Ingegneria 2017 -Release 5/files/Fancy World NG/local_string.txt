@@ -1,5 +1,8 @@
-﻿START_MSG=Benvenuto nel Castello del Mago Romolo! L'obiettivo del gioco è farti strada\nattraverso le sue stanze e raggiungere il suo studio, ovvero la  
-START_MSG2=Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi\ne aprire dei passaggi, dando prova della tua memoria. Inoltre il mago\nnon riceve gente incolta: dovrai dimostrare \nla tua conoscenza attraverso dei quiz e ottenere abbastanza punti.\nBuona Fortuna!\n
+﻿START_MSG0=Benvenuto nel gioco!Vuoi caricare una sessione precedente?
+START_MSG=Benvenuto nel Castello del Mago Romolo! L'obiettivo del gioco è farti strada attraverso le sue stanze e raggiungere il suo studio, ovvero la 
+START_MSG2=Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi e aprire dei passaggi, dando prova della tua memoria.
+START_MSG3=Inoltre il mago non riceve gente incolta: dovrai dimostrare la tua conoscenza attraverso dei quiz e ottenere abbastanza punti.
+START_MSG4=Buona Fortuna!
 NO_GROUND=Ti trovi davanti ad una finestra, non puoi andare oltre.
 CLOSED_PASSAGE=C'è un muro, non puoi andare oltre.
 KEY_PRESENT=E' presente una chiave di: 
