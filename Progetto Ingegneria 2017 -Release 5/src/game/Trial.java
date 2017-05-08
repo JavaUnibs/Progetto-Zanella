@@ -55,13 +55,13 @@ public class Trial implements Serializable{
 	
 	boolean getAnswer(String domanda, String risposta){
 		
-		if(quiz.get(domanda).equals(risposta)) return true;
+		if(quiz.get(domanda).equalsIgnoreCase(risposta)) return true;
 		return false;
 	}
 
 	@Override
 	public String toString() {
-		return "Nome: "+name+" Punti: "+points+"\n";
+		return name+" Punti: "+points+"\n";
 	}
 	
 	

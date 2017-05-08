@@ -20,23 +20,15 @@ public class SetupWorld {
 	
 	SetupWorld(HashMap<String,String[]> map){
 		values=map;
-		int punteggio_finale, punteggio_max_prova, points;
 		int height= Integer.parseInt(values.get("ALTEZZA")[0]);
 		int width= Integer.parseInt(values.get("LARGHEZZA")[0]);
 		int depth= Integer.parseInt(values.get("PROFONDITA")[0]);
 		int peso_max_trasportabile=Integer.parseInt(values.get("PESO_MAX_TRAS")[0]);
 		int numero_max_trasportabile=Integer.parseInt(values.get("NUM_MAX_TRAS")[0]);
 		int peso_max_chiave=Integer.parseInt(values.get("PESO_MAX_CHIAVE")[0]);
-		if(!(values.get("PROVE")[0]).equals("0")){
-			punteggio_finale =Integer.parseInt(values.get("PUNTI_FIN")[0]);
-			punteggio_max_prova =Integer.parseInt(values.get("PUNTI_MAX_PROVA")[0]);
-			points=Integer.parseInt(values.get("PUNTI_INIZIALI")[0]);
-		}
-		else{
-			punteggio_finale = 0;
-			punteggio_max_prova = 0;
-			points = 0;
-		}
+		int	punteggio_finale =Integer.parseInt(values.get("PUNTI_FIN")[0]);
+		int	punteggio_max_prova =Integer.parseInt(values.get("PUNTI_MAX_PROVA")[0]);
+		int	points=Integer.parseInt(values.get("PUNTI_INIZIALI")[0]);
 		String nome_luoghi=values.get("NOME_LUOGHI")[0];
 		mondo=new World(height, width, depth, peso_max_trasportabile, numero_max_trasportabile, peso_max_chiave, punteggio_finale, punteggio_max_prova, points, nome_luoghi);
 		
@@ -116,7 +108,7 @@ public class SetupWorld {
 
 			String temp=array[i].substring(0, array[i].indexOf("-"));
 			int points=Integer.parseInt(temp);
-			String temp2=array[i].substring(temp.indexOf("-")+1);
+			String temp2=array[i].substring(array[i].indexOf("-")+1);
 			
 			boolean exists=false;
 			for(Trial a:mondo.getTrials()) {
@@ -293,7 +285,7 @@ public class SetupWorld {
 		
 	}
 	
-	ArrayList<Ground> keepTrackTrials(){													//tiene traccia dei luoghi in cui c'è una prova
+	ArrayList<Ground> keepTrackTrials(){													//tiene traccia dei luoghi in cui c'ï¿½ una prova
 		ArrayList<Ground> grounds=new ArrayList<Ground>();
 		for (Ground g: mondo.getGrounds()) if(g.getTrial()!=null) grounds.add(g);
 		return grounds;
@@ -334,8 +326,7 @@ public class SetupWorld {
 			putKeyGrounds(values.get("LUOGHI_CHIAVE"));
 		if(values.get("PASSAGGI_CHIAVE")!=null) 
 			putKeyPassages(values.get("PASSAGGI_CHIAVE"));
-		if(!(values.get("PROVE")[0].equals("0"))){
-			if(values.get("PROVE")!=null) 
+		if(values.get("PROVE")!=null) 
 				addTrials(values.get("PROVE"));
 			int i=1;
 			do{
@@ -345,7 +336,7 @@ public class SetupWorld {
 				i++;
 			}while(true);
 			if(values.get("LUOGHI_PROVE")!=null) putTrialsGrounds((values.get("LUOGHI_PROVE")));
-		}
+		
 	}
 	
 	

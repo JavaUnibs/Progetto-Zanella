@@ -96,8 +96,8 @@ public class Main {
 				System.out.println(common_string.get("NO_WORLD"));
 				return;
 			}
-			switch(num_mondo){
-			case 0:{
+			
+			
 				try {
 					local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\local_string.txt").convertToString();
 					values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\values.txt").convertToArray();
@@ -119,31 +119,7 @@ public class Main {
 						InterfaceSetupWorld gui= new InterfaceSetupWorld(setup);
 						gui.initialize();
 				}
-			}break;
-			case 1:{
-			try {
-				local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\local_string.txt").convertToString();
-				values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\values.txt").convertToArray();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			
-			SetupWorld setup=new SetupWorld(values);
-			setup.initialize();
-			mondo= setup.getMondo();
-			luogo_corrente=mondo.searchGround(convertValues(values, "START_H"), convertValues(values, "START_W"), convertValues(values, "START_D"));
-			luogo_corrente.setStart(true);
-			mondo.searchGround(convertValues(values, "END_H"), convertValues(values, "END_W"), convertValues(values, "END_D")).setEnd(true);
-				
-	
-			if(LeggiInput.doppiaScelta(common_string.get("MODIFY_WORLD"))){
-			
-					InterfaceSetupWorld gui= new InterfaceSetupWorld(setup);
-					gui.initialize();
-			}
-			}break;
-			}	
+
 		}
 		
 		

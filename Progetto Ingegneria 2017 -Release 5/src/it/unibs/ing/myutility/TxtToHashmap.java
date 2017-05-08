@@ -31,7 +31,7 @@ public class TxtToHashmap {
 			
 			while ((line = reader.readLine()) != null)
 		    {
-		        String[] parts = (line.split("=", 2)); //tolto replaceAll
+		        String[] parts = (line.replaceAll("\"", "").split("=", 2)); //tolto replaceAll
 		        if (parts.length >= 2)
 		        {
 		            String key = parts[0];
@@ -87,9 +87,6 @@ public class TxtToHashmap {
 				
 				while(!(tmp=reader.readLine()).equals("$"))
 				{	
-					if(tmp.equals("\\n")){
-				        break;
-					}
 					value = value+tmp; 
 				}
 				String values = value.replaceAll("\"", "");
