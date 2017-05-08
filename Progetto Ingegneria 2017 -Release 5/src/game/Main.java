@@ -12,7 +12,10 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-
+	/**
+	 * Prova
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		HashMap<String, String> common_string=null;
