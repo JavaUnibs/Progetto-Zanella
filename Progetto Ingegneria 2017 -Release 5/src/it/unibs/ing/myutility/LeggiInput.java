@@ -7,7 +7,7 @@ public class LeggiInput {
 
 	private static Scanner in = new Scanner(System.in);
 	
-	private final static String ERRORE_FORMATO = "Attenzione: il dato inserito non � nel formato corretto.";
+	private final static String ERRORE_FORMATO = "Attenzione: il dato inserito non è nel formato corretto.";
 
 	/**
 	 * Questo metodo permette di leggere una stringa senza spazi

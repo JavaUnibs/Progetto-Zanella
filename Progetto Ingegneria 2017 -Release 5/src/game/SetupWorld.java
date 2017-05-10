@@ -113,7 +113,7 @@ public class SetupWorld {
 			boolean exists=false;
 			for(Trial a:mondo.getTrials()) {
 				if (a.getName().equalsIgnoreCase(temp2)) {
-					System.out.println("Questa prova esiste gi�");
+					System.out.println("Questa prova esiste già");
 					exists=true;
 					break;
 				}
@@ -255,7 +255,7 @@ public class SetupWorld {
 			boolean exists=false;
 			for(Token b: mondo.getKeytypes()){ 
 				if(b.getName().equalsIgnoreCase(name)) {
-				System.out.println("Questa chiave esiste gi�");
+				System.out.println("Questa chiave esiste già");
 				exists=true;
 				break;
 			}

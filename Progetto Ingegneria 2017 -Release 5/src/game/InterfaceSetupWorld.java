@@ -27,17 +27,17 @@ public class InterfaceSetupWorld {
 	private final String NO_TRIAL="Non esistono chiavi con il nome inserito";
 	private final String NO_TRIALS="Questo mondo non utilizza prove";
 	private final String NO_KEYS="Questo mondo non utilizza chiavi";
-	private final String NEGATIVE_VALUE="Il valore inserito non ï¿½ valido";
+	private final String NEGATIVE_VALUE="Il valore inserito non Ã¨ valido";
 	private final String OVER_THE_LIMIT="Il valore inserito Ã¨ maggiore del limite superiore del peso di una chiave";
-	private final String OVER_THE_LIMIT_TRIAL="Il valore inserito è maggiore del limite superiore del punteggio di una prova";
+	private final String OVER_THE_LIMIT_TRIAL="Il valore inserito Ã¨ maggiore del limite superiore del punteggio di una prova";
 	private final String ADDREMOVEKEY="Vuoi aggiungere o rimuovere una chiave?";
 	private final String ADDREMOVETRIAL="Vuoi aggiungere o rimuovere una prova?";
 	private final String KEY_ADDED="Chiave aggiunta";
 	private final String TRIAL_ADDED="Prova aggiunta";
 	private final String KEY_REMOVED="Chiave rimossa";
 	private final String TRIAL_REMOVED="Prova rimossa";
-	private final String EXISTS_KEY="Esiste giï¿½ una chiave con lo stesso nome";
-	private final String EXISTS_TRIAL="Esiste giï¿½ una prova con lo stesso nome";
+	private final String EXISTS_KEY="Esiste giÃ  una chiave con lo stesso nome";
+	private final String EXISTS_TRIAL="Esiste giÃ  una prova con lo stesso nome";
 	
 	private final String LIMIT="Inserire il nuovo limite superiore";
 	private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
@@ -156,7 +156,7 @@ public class InterfaceSetupWorld {
 							int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
 							Token tempkey=keys.get(rnd);
 							g.setKey(tempkey);
-							for(Passage p: keyMap.get(g)) p.setKey(tempkey);						//non c'è il controllo dell'array list vuoto perchè è appena stata aggiunta una chiave
+							for(Passage p: keyMap.get(g)) p.setKey(tempkey);						//non c'ï¿½ il controllo dell'array list vuoto perchï¿½ ï¿½ appena stata aggiunta una chiave
 					
 						}
 						System.out.println(KEY_ADDED);
