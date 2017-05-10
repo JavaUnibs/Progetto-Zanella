@@ -92,7 +92,7 @@ public class Main {
 			int num_mondo=LeggiInput.intero(common_string.get("CHOOSE_WORLD"));
 			try{
 				nome_mondo=fileList.get(num_mondo);
-			}catch(ArrayIndexOutOfBoundsException e){
+			}catch(IndexOutOfBoundsException e){
 				System.out.println(common_string.get("NO_WORLD"));
 				return;
 			}
