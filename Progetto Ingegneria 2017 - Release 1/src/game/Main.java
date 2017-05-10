@@ -7,12 +7,12 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	static final String START_MSG="Benvenuto nel Labirinto di Minosse. L'obiettivo del gioco è farti strada\nattraverso le sue stanze e raggiungere la sala del tesoro, "
+	static final String START_MSG="Benvenuto nel Labirinto di Minosse. L'obiettivo del gioco Ã¨ farti strada\nattraverso le sue stanze e raggiungere la sala del tesoro, "
 			+ "ovvero la  ";
 	static final String START_MSG2= "\nBuona Fortuna!\n";
 	static final String NO_GROUND= "Sei ai confini del labirinto, non puoi andare oltre.";
-	static final String CLOSED_PASSAGE="Questo passaggio è murato, non puoi andare oltre";
-	static final String CURRENT_GROUND="La sala corrente è: ";
+	static final String CLOSED_PASSAGE="Questo passaggio Ã¨ murato, non puoi andare oltre";
+	static final String CURRENT_GROUND="La sala corrente Ã¨: ";
 	static final String END="Sei finalmente arrivato alla sala del tesoro! Hai vinto il gioco!";
 	static final String NO_OPZ="Opzione non definita";
 	static final int ALTEZZA = 3, LARGHEZZA = 4, PROFONDITA = 4;

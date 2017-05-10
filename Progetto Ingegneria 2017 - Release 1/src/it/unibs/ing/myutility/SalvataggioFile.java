@@ -17,10 +17,10 @@ import java.io.ObjectOutputStream;
  *
  */
 public class SalvataggioFile {
-	private final static String FILE_NON_SCRITTO = "Il processo di scrittura del file non è riuscito.";
-	private final static String FILE_NON_LETTO = "Il processo di lettura del file non è riuscito.";
-	private final static String FILE_NON_TROVATO = "Il file non è stato trovato.";
-	private final static String FILE_NON_CHIUSO = "Il processo di chiusura del file non è riuscito.";
+	private final static String FILE_NON_SCRITTO = "Il processo di scrittura del file non Ã¨ riuscito.";
+	private final static String FILE_NON_LETTO = "Il processo di lettura del file non Ã¨ riuscito.";
+	private final static String FILE_NON_TROVATO = "Il file non Ã¨ stato trovato.";
+	private final static String FILE_NON_CHIUSO = "Il processo di chiusura del file non Ã¨ riuscito.";
 	
 /**
  * Salva l'oggetto selezionato e quelli ad esso correlato in uno specifico file.
