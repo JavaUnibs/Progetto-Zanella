@@ -9,7 +9,7 @@ public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	static final String START_MSG="Benvenuto nel Castello del Mago Romolo! L'obiettivo del gioco è farti strada\nattraverso le sue stanze e raggiungere il suo studio, "
+	static final String START_MSG="Benvenuto nel Castello del Mago Romolo! L'obiettivo del gioco Ã¨ farti strada\nattraverso le sue stanze e raggiungere il suo studio, "
 									+ "ovvero la  ";
 	static final String START_MSG2= "Per riuscirci dovrai raccogliere chiavi di vari metalli e pesi\ne aprire dei passaggi, dando prova della tua memoria. "
 									+ "Inoltre il mago\nnon riceve gente incolta: dovrai dimostrare \nla tua conoscenza attraverso dei quiz e ottenere abbastanza punti.\n"
@@ -17,21 +17,21 @@ public class Main {
 	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
 	static final String MSG_OK_FILE="File caricato correttamente";
 	static final String MSG_NO_FILE="File non caricato correttamente";
-	static final String FILE_EXISTS="Esiste già un file con lo stesso nome";
+	static final String FILE_EXISTS="Esiste giÃ  un file con lo stesso nome";
 	static final String NO_GROUND= "Ti trovi davanti ad una finestra, non puoi andare oltre.";
-	static final String CLOSED_PASSAGE="C'è un muro, non puoi andare oltre.";
+	static final String CLOSED_PASSAGE="C'Ã¨ un muro, non puoi andare oltre.";
 	static final String KEY_PRESENT="E' presente una chiave di: ";
 	static final String KEY_NEEDED="Questo passaggio necessita di una chiave di:";
 	static final String NO_KEY="Non possiedi la chiave giusta. Prova un'altra direzione";
 	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
-	static final String CURRENT_GROUND="La stanza corrente è: ";
+	static final String CURRENT_GROUND="La stanza corrente Ã¨: ";
 	static final String GET_KEY="Vuoi raccogliere la chiave?";
 	static final String PUT_KEY="Vuoi depositare una chiave?";
 	static final String TRIAL="E' presente una prova di: ";
 	static final String TRIAL2=" Vuoi effettuarla?";
-	static final String POINTS="Il punteggio corrente è ";
+	static final String POINTS="Il punteggio corrente Ã¨ ";
 	static final String WEIGHT="Peso o numero massimo di chiavi trasportabili ecceduti";
-	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra stanza (Sei nella stanza iniziale o c'è già un'altra chiave.)";
+	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra stanza (Sei nella stanza iniziale o c'Ã¨ giÃ  un'altra chiave.)";
 	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave.";
 	static final String GOT_KEY="Hai raccolto la chiave.";
 	static final String END="Sei arrivato allo studio! Il Mago Romolo ti osserva e proclama: \n";
@@ -40,7 +40,7 @@ public class Main {
 	static final String NO_OPZ="Opzione non definita";
 	static final String WRONG="Risposta errata!";
 	static final String RIGHT="Risposta corretta!";
-	static final String INSUFF_POINTS="\"Non hai superato abbastaza prove: ritorna più tardi.\"";
+	static final String INSUFF_POINTS="\"Non hai superato abbastaza prove: ritorna piÃ¹ tardi.\"";
 	static final String ENOUGH_POINTS="\"Vedo che hai superato abbastanza prove. Accomodati.\" Hai vinto!";
 	static final String LOADING="Vuoi caricare una sessione precedente?";
 	static final int ALTEZZA = 3, LARGHEZZA = 3, PROFONDITA = 3;
@@ -50,10 +50,10 @@ public class Main {
 											"022-122"};
 	static final String[] LUOGHI_CHIAVE={"220-Alluminio","000-Bronzo","001-Piombo","011-Oro","121-Platino","112-Rame","002-Stagno","012-Alluminio"};
 	static final String[] PASSAGGI_CHIAVE={"120-020-Bronzo","021-011-Alluminio","101-201-Oro","201-211-Oro","201-202-Platino","112-012-Rame","002-012-Alluminio","012-022-Stagno"};
-	static final String[] LUOGHI_PROVE={"100-Qual è la formula chimica dell'acqua?-H2O-Scienza","221-In che anno inizio la seconda guerra mondiale?-1939-Storia", 
-										"011-Quale popolo costruì il Partenone?-Greci-Arte","212-Come si chiama una reazione chimica che produce calore?-Esotermica-Scienza",
-										"100-Di che metallo è fatto il bronzo oltre al rame?-Stagno-Scienza", "100-Quale pianeta ha degli anelli?-Saturno-Scienza",
-										"221-Qual'è il nome del condottiero romano che attraversò il Rubicone?-Giulio Cesare-Storia", "221-Come si chiama il primo uomo sbarcato sulla Luna?-Neil Armstrong-Storia",
+	static final String[] LUOGHI_PROVE={"100-Qual Ã¨ la formula chimica dell'acqua?-H2O-Scienza","221-In che anno inizio la seconda guerra mondiale?-1939-Storia", 
+										"011-Quale popolo costruÃ¬ il Partenone?-Greci-Arte","212-Come si chiama una reazione chimica che produce calore?-Esotermica-Scienza",
+										"100-Di che metallo Ã¨ fatto il bronzo oltre al rame?-Stagno-Scienza", "100-Quale pianeta ha degli anelli?-Saturno-Scienza",
+										"221-Qual'Ã¨ il nome del condottiero romano che attraversÃ² il Rubicone?-Giulio Cesare-Storia", "221-Come si chiama il primo uomo sbarcato sulla Luna?-Neil Armstrong-Storia",
 										"011-Un famoso quadro del pittore romantico tedesco Caspar David Friedrich-Viandante sul mare di nebbia-Arte","011-Chi dipinse la Gioconda?-Leonardo Da Vinci-Arte",
 										"011-Come si chiama il movimento artistico dell'Ottocento che dava grande risalto ai colori?-Impressionismo-Arte"};
 	
@@ -201,7 +201,7 @@ public class Main {
 							Token key=mondo.getKeys().get(scelta_chiavi-1);
 							luogo_corrente.setKey(key);
 							mondo.getKeys().remove(key);
-							System.out.println("La chiave scelta ï¿½ stata depositata");
+							System.out.println("La chiave scelta Ã¨ stata depositata");
 							mondo.setDepositata(true);
 
 						}
