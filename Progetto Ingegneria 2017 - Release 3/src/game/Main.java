@@ -25,7 +25,7 @@ public class Main {
 	static final String YES_KEY="Possiedi la chiave giusta, il passaggio si apre.";
 	static final String CURRENT_GROUND="La sala corrente è: ";
 	static final String GET_KEY="Vuoi raccogliere la chiave?";
-	static final String WEIGHT="La chiave non può essere raccolta perch� o il peso massimo o il numero massimo di chiavi trasportabili ecceduti";
+	static final String WEIGHT="La chiave non può essere raccolta perché o il peso massimo o il numero massimo di chiavi trasportabili ecceduti";
 	static final String CANT_PUT_KEY1="Non puoi depositare chiavi, prima muoviti in un'altra direzione (Sei nel luogo iniziale, finale o c'è già una chiave)";
 	static final String CANT_PUT_KEY2="Non possiedi alcuna chiave";
 	static final String GOT_KEY="Hai raccolto la chiave";

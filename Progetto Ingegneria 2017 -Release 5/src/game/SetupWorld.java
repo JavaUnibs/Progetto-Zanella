@@ -268,7 +268,7 @@ public class SetupWorld {
 	}
 
 	
-	HashMap<Ground, ArrayList<Passage>> keepTrackKeys(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilit� del goal
+	HashMap<Ground, ArrayList<Passage>> keepTrackKeys(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilità del goal
 		HashMap<Ground, ArrayList<Passage>> map = new HashMap<Ground, ArrayList<Passage>>();
 		for(Ground g: mondo.getGrounds()){
 			ArrayList<Passage> passages= new ArrayList<Passage>();
@@ -285,7 +285,7 @@ public class SetupWorld {
 		
 	}
 	
-	ArrayList<Ground> keepTrackTrials(){													//tiene traccia dei luoghi in cui c'� una prova
+	ArrayList<Ground> keepTrackTrials(){													//tiene traccia dei luoghi in cui c'è una prova
 		ArrayList<Ground> grounds=new ArrayList<Ground>();
 		for (Ground g: mondo.getGrounds()) if(g.getTrial()!=null) grounds.add(g);
 		return grounds;
