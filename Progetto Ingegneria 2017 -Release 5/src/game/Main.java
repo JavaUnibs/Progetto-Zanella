@@ -55,6 +55,7 @@ public class Main {
 				 mondo = save.getMondo();
 				 luogo_corrente = save.getLuogo_corrente();
 				 local_string=save.getLocalString();
+				 values=save.getValues();
 			   }
 			  catch (ClassCastException e)
 			   {
@@ -312,14 +313,14 @@ public class Main {
 			
 			case 2:{
 				
-				Save save = new Save(mondo,luogo_corrente, local_string);
+				Save save = new Save(mondo,luogo_corrente, local_string, values);
 				LeggiInput.terminaRiga();
 				File fgame = new File(LeggiInput.riga(common_string.get("SAVE_LOCATION")));
 				if(fgame.exists()) {
 					System.out.println(common_string.get("FILE_EXISTS")); 
-					break;
+					if(!LeggiInput.doppiaScelta(common_string.get("OVERWRITE")))
+						break;
 				}
-				else
 		        SalvataggioFile.salvaOggetto(fgame, save);	
 			}
 			break;

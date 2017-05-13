@@ -9,12 +9,13 @@ public class Save implements Serializable{
 	private World mondo;
 	private Ground luogo_corrente;
 	private HashMap<String, String> local_string;
+	private HashMap<String, String[]> values;
 	
-	Save(World mondo, Ground luogo, HashMap<String, String> map){
+	Save(World mondo, Ground luogo, HashMap<String, String> map, HashMap<String, String[]> map1){
 		this.mondo=mondo;
 		luogo_corrente=luogo;
 		local_string=map;
-		
+		values=map1;
 	}
 
 	public World getMondo() {
@@ -29,6 +30,8 @@ public class Save implements Serializable{
 		return local_string;
 	}
 	
-	
+	public HashMap<String, String[]> getValues(){
+		return values;
+	}
 
 }

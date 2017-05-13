@@ -24,7 +24,7 @@ public class InterfaceSetupWorld {
 	private final String INSERT_WEIGHT_KEY="Inserire il peso della chiave";
 	private final String OK_MODIFY="Modifica effettuata";
 	private final String NO_KEY="Non esistono chiavi con il nome inserito";
-	private final String NO_TRIAL="Non esistono chiavi con il nome inserito";
+	private final String NO_TRIAL="Non esistono prove con il nome inserito";
 	private final String NO_TRIALS="Questo mondo non utilizza prove";
 	private final String NO_KEYS="Questo mondo non utilizza chiavi";
 	private final String NEGATIVE_VALUE="Il valore inserito non è valido";
@@ -39,7 +39,7 @@ public class InterfaceSetupWorld {
 	private final String EXISTS_KEY="Esiste già una chiave con lo stesso nome";
 	private final String EXISTS_TRIAL="Esiste già una prova con lo stesso nome";
 	
-	private final String LIMIT="Inserire il nuovo limite superiore";
+	private final String LIMIT="Inserire il nuovo limite";
 	private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
 	private final String MODIFY_OK="Modifica effettuata";
 	
@@ -291,8 +291,10 @@ public class InterfaceSetupWorld {
 					LeggiInput.terminaRiga();
 					String name=LeggiInput.riga(INSERT_NAME_TRIAL);
 					for(Trial t: trials) {
-						if(t.getName().equalsIgnoreCase(name)) exists=true;
-						System.out.println(EXISTS_TRIAL);
+						if(t.getName().equalsIgnoreCase(name)) {
+							exists=true;
+							System.out.println(EXISTS_TRIAL);
+						}
 					}
 					
 					if(exists) break;
@@ -368,7 +370,7 @@ public class InterfaceSetupWorld {
 				default: break;
 				}
 				
-			}
+			}break;
 			
 			case 7:{
 				
