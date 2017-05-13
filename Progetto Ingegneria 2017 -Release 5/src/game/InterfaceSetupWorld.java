@@ -156,7 +156,10 @@ public class InterfaceSetupWorld {
 							int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
 							Token tempkey=keys.get(rnd);
 							g.setKey(tempkey);
-							for(Passage p: keyMap.get(g)) p.setKey(tempkey);						//non c'è il controllo dell'array list vuoto perché è appena stata aggiunta una chiave
+							for(Passage p: keyMap.get(g)) {
+								p.setKey(tempkey);
+								p.setOpen(false);							//non c'è il controllo dell'array list vuoto perché è appena stata aggiunta una chiave
+							}
 					
 						}
 						System.out.println(KEY_ADDED);
@@ -186,7 +189,10 @@ public class InterfaceSetupWorld {
 							tempkey=keys.get(rnd);
 						}
 						g.setKey(tempkey);
-						for(Passage p: keyMap.get(g)) p.setKey(tempkey);
+						for(Passage p: keyMap.get(g)) {
+							p.setKey(tempkey);
+							p.setOpen(true);
+						}
 				
 					}
 					
