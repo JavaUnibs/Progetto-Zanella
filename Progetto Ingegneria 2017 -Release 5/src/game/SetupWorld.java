@@ -268,17 +268,21 @@ public class SetupWorld {
 	}
 
 	
-	HashMap<Ground, ArrayList<Passage>> keepTrackKeys(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilità del goal
-		HashMap<Ground, ArrayList<Passage>> map = new HashMap<Ground, ArrayList<Passage>>();
-		for(Ground g: mondo.getGrounds()){
+	HashMap<ArrayList<Ground>, ArrayList<Passage>> keepTrackKeys(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilità del goal
+		HashMap<ArrayList<Ground>, ArrayList<Passage>> map = new HashMap<ArrayList<Ground>, ArrayList<Passage>>();
+		for(Token t: mondo.getKeytypes()){
+			ArrayList<Ground> grounds= new ArrayList<Ground>();
 			ArrayList<Passage> passages= new ArrayList<Passage>();
-			Token key = g.getKey();
-			if(key!=null){
-				for(Passage p:mondo.getPassages())
-					if(p.getKey()!=null && p.getKey().equals(key)) 
-						passages.add(p);
-					map.put(g, passages);
-				}
+			
+			for(Ground g: mondo.getGrounds()){
+				if(g.getKey()==t) grounds.add(g);
+			}
+			
+			for(Passage p:mondo.getPassages()){
+				if(p.getKey()==t) passages.add(p);
+			}
+			
+			map.put(grounds, passages);
 			
 		}
 		

@@ -53,8 +53,8 @@ public class InterfaceSetupWorld {
 		boolean emptyTrials=setup.getMondo().getTrials().isEmpty();
 		boolean emptyKeys=setup.getMondo().getKeytypes().isEmpty();
 		
-		HashMap<Ground, ArrayList<Passage>> keyMap=setup.keepTrackKeys();
-		Set<Ground> groundSet= keyMap.keySet();
+		HashMap<ArrayList<Ground>, ArrayList<Passage>> keyMap=setup.keepTrackKeys();
+		Set<ArrayList<Ground>> groundSet = keyMap.keySet();
 		ArrayList<Ground> trialSet=setup.keepTrackTrials();
 		
 		String start="Questo mondo ha i seguenti parametri: \n";
@@ -151,11 +151,11 @@ public class InterfaceSetupWorld {
 					else {
 						keys.add(new Token(weight, name));              							//usando la disposizione del mondo di default mette un tipo di chiave random
 																									//nei luoghi e nei passaggi del mondo che avevano in comune lo stesso tipo di chiave
-						for(Ground g: groundSet){
+						for(ArrayList<Ground> array: groundSet){
 							int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
 							Token tempkey=keys.get(rnd);
-							g.setKey(tempkey);
-							for(Passage p: keyMap.get(g)) {
+							for(Ground g: array) g.setKey(tempkey);
+							for(Passage p: keyMap.get(array)) {
 								p.setOpen(false);
 								p.setKey(tempkey);							//non c'è il controllo dell'array list vuoto perché è appena stata aggiunta una chiave
 							}
@@ -182,13 +182,13 @@ public class InterfaceSetupWorld {
 					
 					Token tempkey=null;
 					
-					for(Ground g: groundSet){
+					for(ArrayList<Ground> array: groundSet){
 						if(!keys.isEmpty()){
 							int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
 							tempkey=keys.get(rnd);
 						}
-						g.setKey(tempkey);
-						for(Passage p: keyMap.get(g)) {
+						for(Ground g: array) g.setKey(tempkey);
+						for(Passage p: keyMap.get(array)) {
 							if(keys.isEmpty())
 								p.setOpen(true);
 							p.setKey(tempkey);
