@@ -149,7 +149,6 @@ public class InterfaceSetupWorld {
 						break;
 					}
 					else {
-					
 						keys.add(new Token(weight, name));              							//usando la disposizione del mondo di default mette un tipo di chiave random
 																									//nei luoghi e nei passaggi del mondo che avevano in comune lo stesso tipo di chiave
 						for(Ground g: groundSet){
@@ -157,8 +156,8 @@ public class InterfaceSetupWorld {
 							Token tempkey=keys.get(rnd);
 							g.setKey(tempkey);
 							for(Passage p: keyMap.get(g)) {
-								p.setKey(tempkey);
-								p.setOpen(false);							//non c'è il controllo dell'array list vuoto perché è appena stata aggiunta una chiave
+								p.setOpen(false);
+								p.setKey(tempkey);							//non c'è il controllo dell'array list vuoto perché è appena stata aggiunta una chiave
 							}
 					
 						}
@@ -190,8 +189,9 @@ public class InterfaceSetupWorld {
 						}
 						g.setKey(tempkey);
 						for(Passage p: keyMap.get(g)) {
+							if(keys.isEmpty())
+								p.setOpen(true);
 							p.setKey(tempkey);
-							p.setOpen(true);
 						}
 				
 					}

@@ -272,12 +272,13 @@ public class SetupWorld {
 		HashMap<Ground, ArrayList<Passage>> map = new HashMap<Ground, ArrayList<Passage>>();
 		for(Ground g: mondo.getGrounds()){
 			ArrayList<Passage> passages= new ArrayList<Passage>();
-			Token key=g.getKey();
+			Token key = g.getKey();
 			if(key!=null){
 				for(Passage p:mondo.getPassages())
-					if(p.getKey()==key) passages.add(p);
+					if(p.getKey()!=null && p.getKey().equals(key)) 
+						passages.add(p);
 					map.put(g, passages);
-			}
+				}
 			
 		}
 		
@@ -299,7 +300,7 @@ public class SetupWorld {
 		
 	}
 	
-	ArrayList<Trial> invalidTrialPoints(int max_points){                   //Restituisce un arraylist contenente le chiavi che non rispettano il vincolo di peso massimo
+	ArrayList<Trial> invalidTrialPoints(int max_points){                   //Restituisce un arraylist contenente le prove che non rispettano il vincolo di punteggio massimo
 		ArrayList<Trial> temp= new ArrayList<Trial>();
 		for(Trial a: mondo.getTrials())
 			if(a.getPoints()>=max_points) temp.add(a);
