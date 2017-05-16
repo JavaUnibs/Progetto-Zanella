@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import it.unibs.ing.myutility.*;
 
@@ -83,16 +84,24 @@ public class Main {
 		else{
 			
 			File nome_mondo;
-			ArrayList<File> fileList= FolderExplorer.listFiles("files");
-			for(int i=0;i<fileList.size();i++) if(!fileList.get(i).isDirectory()) fileList.remove(fileList.get(i));
+			Iterator<File> fileList = FolderExplorer.listFiles("files").iterator();
+			ArrayList<File> directoryList = new ArrayList<>();
+			while(fileList.hasNext()) { 
+				File file = fileList.next(); 
+				if(!file.isDirectory()) 
+					fileList.remove();
+				else {
+					directoryList.add(file);
+				}
+			}
 			
-			for(int y=0;y<fileList.size();y++){
-				System.out.println(y+") "+fileList.get(y).getName()+"\n");
+			for(int y=0;y<directoryList.size();y++){
+				System.out.println(y+") "+directoryList.get(y).getName()+"\n");
 			}
 			
 			int num_mondo=LeggiInput.intero(common_string.get("CHOOSE_WORLD"));
 			try{
-				nome_mondo=fileList.get(num_mondo);
+				nome_mondo=directoryList.get(num_mondo);
 			}catch(IndexOutOfBoundsException e){
 				System.out.println(common_string.get("NO_WORLD"));
 				return;
