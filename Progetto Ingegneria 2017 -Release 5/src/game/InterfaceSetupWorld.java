@@ -80,29 +80,15 @@ public class InterfaceSetupWorld {
 			
 			case 1:{         
 				
-				if(emptyKeys) {
-					System.out.println(NO_KEYS);
-					break;
-				}			
-																													//modifica dei pesi delle chiavi
+				if(empty(NO_KEYS, emptyKeys)) break;																								//modifica dei pesi delle chiavi
 				System.out.println("Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeytypes().toString());
 				LeggiInput.terminaRiga();
-				String name=LeggiInput.riga(INSERT_NAME_KEY);
-				Token key=setup.getMondo().searchKeyTypes(name);
-				if(key==null) {
-					System.out.println(NO_KEY);
-					break;
-				}
+				Token key=setup.getMondo().searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
+				if(noElement(key, NO_KEY)) break;
 				else {
 					int weight=Integer.parseInt(LeggiInput.riga(INSERT_WEIGHT_KEY));
-					if(weight<0) {
-						System.out.println(NEGATIVE_VALUE);
-						break;
-					}
-					else if (weight > setup.getMondo().getPeso_max_chiave()){
-						System.out.println(OVER_THE_LIMIT);
-						break;
-					}
+					if(isNegative(weight)) break;
+					else if (isOverLimit(weight, setup.getMondo().getPeso_max_chiave(), OVER_THE_LIMIT)) break;
 					else{
 						key.setWeight(weight);
 						System.out.println(OK_MODIFY);
@@ -115,11 +101,7 @@ public class InterfaceSetupWorld {
 			
 			case 2:{	
 				
-			if(emptyKeys) {
-					System.out.println(NO_KEYS);
-					break;
-			}		
-																													//modifica dei tipi di chiave
+			if(empty(NO_KEYS, emptyKeys)) break;																							//modifica dei tipi di chiave
 			System.out.println("Tipi di chiavi con relativi pesi: \n"+setup.getMondo().getKeytypes().toString());
 			System.out.println(ADDREMOVEKEY);
 			Menu sottomenu= new Menu(menu_addremove);
@@ -129,38 +111,16 @@ public class InterfaceSetupWorld {
 				switch(scelta_2){
 				
 				case 1:{  		
-					boolean exists=false;
+					
 					LeggiInput.terminaRiga();
 					String name= LeggiInput.riga(INSERT_NAME_KEY);
-					
-					for(Token t: keys) if(t.getName().equalsIgnoreCase(name)){
-						System.out.println(EXISTS_KEY);
-						exists=true;
-						
-					}
-					if(exists) break;
+					if(existsElement(setup.getMondo().searchKeyTypes(name), EXISTS_KEY)) break;
 					int weight=LeggiInput.intero(INSERT_WEIGHT_KEY);
-					if(weight<0) {
-						System.out.println(NEGATIVE_VALUE);
-						break;
-					}
-					else if (weight > setup.getMondo().getPeso_max_chiave()){
-						System.out.println(OVER_THE_LIMIT);
-						break;
-					}
+					if(isNegative(weight)) break;
+					else if (isOverLimit(weight, setup.getMondo().getPeso_max_chiave(), OVER_THE_LIMIT)) break;
 					else {
-						keys.add(new Token(weight, name));              							//usando la disposizione del mondo di default mette un tipo di chiave random
-																									//nei luoghi e nei passaggi del mondo che avevano in comune lo stesso tipo di chiave
-						for(ArrayList<Ground> array: groundSet){
-							int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
-							Token tempkey=keys.get(rnd);
-							for(Ground g: array) g.setKey(tempkey);
-							for(Passage p: keyMap.get(array)) {
-								p.setOpen(false);
-								p.setKey(tempkey);							//non c'è il controllo dell'array list vuoto perché è appena stata aggiunta una chiave
-							}
-					
-						}
+						keys.add(new Token(weight, name));              							//usando la disposizione del mondo di default mette un tipo di chiave random nei luoghi e nei passaggi del mondo che avevano in comune lo stesso tipo di chiave
+						applyKeepTrackKeys(groundSet, keys, keyMap);
 						System.out.println(KEY_ADDED);
 						
 					}
@@ -172,30 +132,10 @@ public class InterfaceSetupWorld {
 				
 				case 2:{															//rimozione
 					LeggiInput.terminaRiga();
-					String name= LeggiInput.riga(INSERT_NAME_KEY);
-					Token key=setup.getMondo().searchKeyTypes(name);
-					
-					if(key==null){
-						System.out.println(NO_KEY);
-						break;
-					}else keys.remove(key);
-					
-					Token tempkey=null;
-					
-					for(ArrayList<Ground> array: groundSet){
-						if(!keys.isEmpty()){
-							int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
-							tempkey=keys.get(rnd);
-						}
-						for(Ground g: array) g.setKey(tempkey);
-						for(Passage p: keyMap.get(array)) {
-							if(keys.isEmpty())
-								p.setOpen(true);
-							p.setKey(tempkey);
-						}
-				
-					}
-					
+					Token key=setup.getMondo().searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
+					if(noElement(key, NO_KEY)) break;
+					else keys.remove(key);
+					applyKeepTrackKeys(groundSet, keys, keyMap);
 					System.out.println(KEY_REMOVED);
 					
 					
@@ -211,17 +151,10 @@ public class InterfaceSetupWorld {
 			
 			case 3:{                  
 				
-				if(emptyKeys) {
-					System.out.println(NO_KEYS);
-					break;
-				}	
-																												//limite superiore del peso di una chiave
+				if(empty(NO_KEYS, emptyKeys)) break;																						//limite superiore del peso di una chiave
 				System.out.println("Limite superiore del peso di una chiave: "+setup.getMondo().getPeso_max_chiave()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
-				if(limit<0) {
-					System.out.println(NEGATIVE_VALUE);
-					break;
-				}
+				if(isNegative(limit)) break;
 				else{
 					setup.getMondo().setPeso_max_chiave(limit);
 					System.out.println(WARNING_LIMIT);
@@ -237,16 +170,10 @@ public class InterfaceSetupWorld {
 			
 			case 4:{
 				
-				if(emptyKeys) {
-					System.out.println(NO_KEYS);
-					break;
-				}																								//numero max di chiavi trasportabili
+				if(empty(NO_KEYS, emptyKeys)) break;																							//numero max di chiavi trasportabili
 				System.out.println("Numero massimo di chiavi trasportabili: "+setup.getMondo().getNumero_max_trasportabile()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
-				if(limit<0) {
-					System.out.println(NEGATIVE_VALUE);
-					break;
-				}
+				if(isNegative(limit)) break;
 				else {
 					setup.getMondo().setNumero_max_trasportabile(limit);
 					System.out.println(MODIFY_OK);
@@ -256,16 +183,10 @@ public class InterfaceSetupWorld {
 			
 			case 5:{
 				
-				if(emptyKeys) {
-					System.out.println(NO_KEYS);
-					break;
-				}																											
+				if(empty(NO_KEYS, emptyKeys)) break;																									
 				System.out.println("Peso massimo trasportabile: "+setup.getMondo().getPeso_max_trasportabile()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
-				if(limit<0) {
-					System.out.println(NEGATIVE_VALUE);
-					break;
-				}
+				if(isNegative(limit)) break;
 				else {
 					setup.getMondo().setPeso_max_trasportabile(limit);
 					System.out.println(MODIFY_OK);
@@ -275,11 +196,7 @@ public class InterfaceSetupWorld {
 			
 			case 6:{
 				
-				if(emptyTrials) {
-					System.out.println(NO_TRIALS);
-					break;
-				}
-				
+				if(empty(NO_TRIALS, emptyTrials)) break;
 				System.out.println("Tipi di prove con relativi punteggi: \n"+setup.getMondo().getTrials().toString());
 				System.out.println(ADDREMOVETRIAL);
 				Menu sottomenu= new Menu(menu_addremove);
@@ -293,28 +210,12 @@ public class InterfaceSetupWorld {
 				
 				case 1: {																						//aggiunta prova
 					
-					boolean exists=false;
 					LeggiInput.terminaRiga();
 					String name=LeggiInput.riga(INSERT_NAME_TRIAL);
-					for(Trial t: trials) {
-						if(t.getName().equalsIgnoreCase(name)) {
-							exists=true;
-							System.out.println(EXISTS_TRIAL);
-						}
-					}
-					
-					if(exists) break;
-					
+					if(existsElement(setup.getMondo().searchTrial(name), EXISTS_TRIAL)) break;
 					int points=LeggiInput.intero(INSERT_POINTS_TRIAL);
-					if(points<0) {
-						System.out.println(NEGATIVE_VALUE);
-						break;
-					}
-					
-					else if (points > setup.getMondo().getPunteggio_max_prova()){
-						System.out.println(OVER_THE_LIMIT_TRIAL);
-						break;
-					}
+					if(isNegative(points)) break;
+					else if (isOverLimit(points, setup.getMondo().getPunteggio_max_prova(), OVER_THE_LIMIT_TRIAL)) break;
 					else{
 						
 						Trial trial= new Trial(points, name);
@@ -331,14 +232,7 @@ public class InterfaceSetupWorld {
 					
 						
 					}
-					
-					for(Ground g: trialSet) {                          //mette una nuova prova scelta a random nei luoghi in cui c'erano prima
-						
-							int rnd=RandomValues.ranIntLimite(0, trials.size()-1);
-							g.setTrial(trials.get(rnd));
-						
-					}
-					
+					applyKeepTrackTrials(trialSet, trials);
 					System.out.println(TRIAL_ADDED);
 					
 					
@@ -349,25 +243,9 @@ public class InterfaceSetupWorld {
 					LeggiInput.terminaRiga();
 					String name=LeggiInput.riga(INSERT_NAME_TRIAL);
 					Trial trial=setup.getMondo().searchTrial(name);
-					
-					if(trial==null){
-						System.out.println(NO_TRIAL);
-						break;
-					}else trials.remove(trial);
-					
-					Trial tempTrial=null;
-					
-					for(Ground g: trialSet) {
-						
-							if(!trials.isEmpty()){
-								int rnd=RandomValues.ranIntLimite(0, trials.size()-1);
-								tempTrial=trials.get(rnd);
-							}
-							g.setTrial(tempTrial);
-							
-						
-					}
-					
+					if(noElement(trial, NO_TRIAL)) break;
+					else trials.remove(trial);
+					applyKeepTrackTrials(trialSet, trials);
 					System.out.println(TRIAL_REMOVED);
 				}
 				break;
@@ -380,29 +258,15 @@ public class InterfaceSetupWorld {
 			
 			case 7:{
 				
-				if(emptyTrials) {
-					System.out.println(NO_TRIALS);
-					break;
-				}
-				
+				if(empty(NO_TRIALS, emptyTrials)) break;
 				System.out.println("Tipi di prove con relativi punteggi: \n"+setup.getMondo().getTrials().toString());
 				LeggiInput.terminaRiga();
-				String name=LeggiInput.riga(INSERT_NAME_TRIAL);
-				Trial trial=setup.getMondo().searchTrial(name);
-				if(trial==null) {
-					System.out.println(NO_TRIAL);
-					break;
-				}
+				Trial trial=setup.getMondo().searchTrial(LeggiInput.riga(INSERT_NAME_TRIAL));
+				if(noElement(trial, NO_TRIAL)) break;
 				else {
 					int points=Integer.parseInt(LeggiInput.riga(INSERT_POINTS_TRIAL));
-					if(points<0) {
-						System.out.println(NEGATIVE_VALUE);
-						break;
-					}
-					else if (points > setup.getMondo().getPunteggio_max_prova()){
-						System.out.println(OVER_THE_LIMIT_TRIAL);
-						break;
-					}
+					if(isNegative(points)) break;
+					else if (isOverLimit(points, setup.getMondo().getPunteggio_max_prova(), OVER_THE_LIMIT_TRIAL)) break;
 					else{
 						trial.setPoints(points);
 						System.out.println(OK_MODIFY);
@@ -416,17 +280,10 @@ public class InterfaceSetupWorld {
 			
 			case 8:{
 				
-				if(emptyTrials) {
-					System.out.println(NO_TRIALS);
-					break;
-				}
-				
+				if(empty(NO_TRIALS, emptyTrials)) break;
 				System.out.println("Limite superiore del valore di una prova: "+setup.getMondo().getPunteggio_max_prova()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
-				if(limit<0) {
-					System.out.println(NEGATIVE_VALUE);
-					break;
-				}
+				if(isNegative(limit)) break;
 				else{
 					setup.getMondo().setPunteggio_max_prova(limit);
 					System.out.println(WARNING_LIMIT);
@@ -440,17 +297,10 @@ public class InterfaceSetupWorld {
 			
 			case 9:{
 				
-				if(emptyTrials) {
-					System.out.println(NO_TRIALS);
-					break;
-				}
-				
+				if(empty(NO_TRIALS, emptyTrials)) break;
 				System.out.println("Punti iniziali assegnati: "+setup.getMondo().getPoints()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
-				if(limit<0) {
-					System.out.println(NEGATIVE_VALUE);
-					break;
-				}
+				if(isNegative(limit)) break;
 				else {
 					setup.getMondo().setPoints(limit);
 					System.out.println(MODIFY_OK);
@@ -461,17 +311,10 @@ public class InterfaceSetupWorld {
 			
 			case 10:{
 				
-				if(emptyTrials) {
-					System.out.println(NO_TRIALS);
-					break;
-				}
-				
+				if(empty(NO_TRIALS, emptyTrials)) break;
 				System.out.println("Punti da raggiungere per vincere: "+setup.getMondo().getPunteggio_finale()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
-				if(limit<0) {
-					System.out.println(NEGATIVE_VALUE);
-					break;
-				}
+				if(isNegative(limit)) break;
 				else {
 					setup.getMondo().setPunteggio_finale(limit);
 					System.out.println(MODIFY_OK);
@@ -490,11 +333,77 @@ public class InterfaceSetupWorld {
 	}
 	
 	
+	boolean isNegative (int value){
+		if( value<0) {
+			System.out.println(NEGATIVE_VALUE);
+			return true;
+		}
+		return false;
+	}
 	
+	boolean isOverLimit (int value, int limit, String message){
+		if(value>limit) {
+			System.out.println(message);
+			return true;
+		}
+		return false;
+	}
 	
+	boolean empty(String message, boolean value){
+		if(value) {
+			System.out.println(message);
+		}
+		
+		return value;
+	}
 	
+	boolean noElement(Object obj, String message){
+		if(obj==null) {
+			System.out.println(message);
+			return true;
+		}
+		return false;
+	}
 	
+	void applyKeepTrackKeys(Set<ArrayList<Ground>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<Ground>, ArrayList<Passage>> keyMap){
+		Token tempkey=null;
+		for(ArrayList<Ground> array: groundSet){
+			if(!keys.isEmpty()){
+				int rnd=RandomValues.ranIntLimite(0, keys.size()-1);
+				tempkey=keys.get(rnd);
+			}
+			
+			for(Ground g: array) g.setKey(tempkey);
+			for(Passage p: keyMap.get(array)) {
+				if(keys.isEmpty()) p.setOpen(true);
+				else p.setOpen(false);
+				p.setKey(tempkey);
+			}
 	
+		}
+		
+	}
 	
+	boolean existsElement(Object obj, String message){
+		if(obj!=null) {
+			System.out.println(message);
+			return true;
+		}
+		return false;
+	}
+	
+	void applyKeepTrackTrials(ArrayList<Ground> trialSet, ArrayList<Trial> trials){
+		Trial tempTrial=null;
+		for(Ground g: trialSet) {
+			
+			if(!trials.isEmpty()){
+				int rnd=RandomValues.ranIntLimite(0, trials.size()-1);
+				tempTrial=trials.get(rnd);
+			}
+			g.setTrial(tempTrial);
+			
+		
+	}
+	}
 
 }
