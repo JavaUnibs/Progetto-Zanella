@@ -246,7 +246,7 @@ public class Main {
 							else if(ptemp.getKey()==null) System.out.println(CLOSED_PASSAGE);
 					}
 					}
-				}while(scelta_dir>0);
+				}while(scelta_dir!=0);
 				
 			}
 			break;
@@ -299,7 +299,7 @@ public class Main {
 			break;
 			}
 		
-		}while(scelta>0);
+		}while(scelta!=0);
 
 
 	}

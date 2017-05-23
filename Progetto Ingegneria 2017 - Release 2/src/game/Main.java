@@ -180,7 +180,7 @@ public class Main {
 					}
 					
 					
-				}while(scelta_dir>0);
+				}while(scelta_dir!=0);
 				
 			}
 			break;
@@ -219,7 +219,7 @@ public class Main {
 			break;
 			}
 		
-		}while(scelta>0);
+		}while(scelta!=0);
 
 
 	}
