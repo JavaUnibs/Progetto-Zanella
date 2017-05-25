@@ -26,7 +26,8 @@ public class Main {
 			try {
 				common_string=new TxtToHashmap("files\\COMMON_STRINGS.txt").convertToString();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				System.out.println("Errore nel caricamento del file delle stringhe comuni");
+				return;
 			}			
 
 		
@@ -64,7 +65,7 @@ public class Main {
 				}
 			   finally
 				{
-			      if ( (mondo != null) && (luogo_corrente != null) )
+			      if ( (mondo != null) && (luogo_corrente != null) &&(local_string!=null) &&(values!=null))
 				    {
 					 System.out.println(common_string.get("MSG_OK_FILE"));
 					 caricamentoRiuscito = true;
@@ -112,7 +113,8 @@ public class Main {
 					local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\local_string.txt").convertToString();
 					values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\values.txt").convertToArray();
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.out.println("Errore nel caricamento dei file delle stringhe locali o valori");
+					return;
 				}
 				
 				

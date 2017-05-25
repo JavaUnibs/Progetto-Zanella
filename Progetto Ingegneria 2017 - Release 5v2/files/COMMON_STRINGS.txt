@@ -1,0 +1,13 @@
+MSG_NO_CAST=Attenzione, ci sono problemi con il cast del file!
+MSG_OK_FILE=File caricato correttamente
+MSG_NO_FILE=File non caricato correttamente
+FILE_EXISTS=Esiste già un file con lo stesso nome
+LOAD_LOCATION=Immettere il percorso assoluto del file da caricare
+SAVE_LOCATION=Immettere il percorso assoluto del file da salvare
+NO_OPZ=Opzione non definita
+INSUFF_POINTS=Punti insufficienti per finire il gioco
+LOADING=Vuoi caricare una sessione precedente?
+CHOOSE_WORLD=Scegli uno dei mondi disponibili
+NO_WORLD=Il mondo selezionato non esiste
+MODIFY_WORLD=Vuoi modificare i parametri del mondo scelto?
+OVERWRITE=Vuoi sovrascriverlo?
