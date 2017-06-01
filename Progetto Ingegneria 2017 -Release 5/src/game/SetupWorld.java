@@ -323,14 +323,15 @@ public class SetupWorld {
 		this.mondo = mondo;
 	}
 	
-	public void initialize(){
-		openPassages(values.get("PASSAGGI_APERTI"));
+	public boolean initialize(){
+		boolean result=true;
+		result=result&&openPassages(values.get("PASSAGGI_APERTI"));
 		if(values.get("CHIAVI")!=null) 
 			addKeys(values.get("CHIAVI"));
 		if(values.get("LUOGHI_CHIAVE")!=null) 
-			putKeyGrounds(values.get("LUOGHI_CHIAVE"));
+			result=result&&putKeyGrounds(values.get("LUOGHI_CHIAVE"));
 		if(values.get("PASSAGGI_CHIAVE")!=null) 
-			putKeyPassages(values.get("PASSAGGI_CHIAVE"));
+			result=result&&putKeyPassages(values.get("PASSAGGI_CHIAVE"));
 		if(values.get("PROVE")!=null) 
 				addTrials(values.get("PROVE"));
 			int i=1;
@@ -340,7 +341,8 @@ public class SetupWorld {
 				else break;
 				i++;
 			}while(true);
-			if(values.get("LUOGHI_PROVE")!=null) putTrialsGrounds((values.get("LUOGHI_PROVE")));
+			if(values.get("LUOGHI_PROVE")!=null) result=result&&putTrialsGrounds((values.get("LUOGHI_PROVE")));
+			return result;
 		
 	}
 	

@@ -108,7 +108,9 @@ public class Main {
 				}
 				
 				Factory factory= SetupGame.getFactory(values, common_string, local_string);
+				if(factory==null) return;
 				mondo=factory.getWorld();
+				if(mondo==null) return;
 				luogo_corrente=mondo.getStartGround();
 				navigation=factory.getNavigation();
 				
