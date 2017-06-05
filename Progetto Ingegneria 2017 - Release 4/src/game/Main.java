@@ -18,8 +18,8 @@ public class Main {
 	static final String MSG_OK_FILE="File caricato correttamente";
 	static final String MSG_NO_FILE="File non caricato correttamente";
 	static final String FILE_EXISTS="Esiste già un file con lo stesso nome";
-	static final String NO_GROUND= "Ti trovi davanti ad una finestra, non puoi andare oltre.";
-	static final String CLOSED_PASSAGE="C'è un muro, non puoi andare oltre.";
+	static final String NO_GROUND= "Non ci sono passaggi in questa direzione.";
+	static final String CLOSED_PASSAGE="Questo passaggio è murato, non puoi andare oltre.";
 	static final String KEY_PRESENT="E' presente una chiave di: ";
 	static final String KEY_NEEDED="Questo passaggio necessita di una chiave di:";
 	static final String NO_KEY="Non possiedi la chiave giusta. Prova un'altra direzione";
