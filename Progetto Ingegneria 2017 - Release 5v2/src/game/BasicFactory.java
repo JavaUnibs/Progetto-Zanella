@@ -10,7 +10,7 @@ public class BasicFactory extends Factory{
 	private HashMap<String, String[]> values;
 	private HashMap<String, String> common_string;
 	private HashMap<String, String> local_string;
-	private BasicWorld mondo;
+	private BasicWorld world;
 	
 	BasicFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
@@ -29,10 +29,10 @@ public class BasicFactory extends Factory{
 		int end_height=Integer.parseInt(values.get("END_H")[0]);
 		int end_width=Integer.parseInt(values.get("END_W")[0]);
 		int end_depth=Integer.parseInt(values.get("END_D")[0]);
-		String nome_luoghi=values.get("NOME_LUOGHI")[0];
-		mondo=new BasicWorld(height, width, depth, nome_luoghi);
-		mondo.searchGround(start_height, start_width, start_depth).setStart(true);
-		mondo.searchGround(end_height, end_width, end_depth).setEnd(true);
+		String ground_name=values.get("NOME_LUOGHI")[0];
+		world=new BasicWorld(height, width, depth, ground_name);
+		world.searchGround(start_height, start_width, start_depth).setStart(true);
+		world.searchGround(end_height, end_width, end_depth).setEnd(true);
 		
 			if(!openPassages(values.get("PASSAGGI_APERTI"))) return null;
 		}catch(NullPointerException e){
@@ -41,12 +41,12 @@ public class BasicFactory extends Factory{
 		}
 		
 		
-		return mondo;
+		return world;
 	}
 
 	
 	public Navigation getNavigation() {
-		BasicNavigation navigation= new BasicNavigation(mondo, local_string, common_string);
+		BasicNavigation navigation= new BasicNavigation(world, local_string, common_string);
 		return navigation;
 	}
 
@@ -69,13 +69,13 @@ public class BasicFactory extends Factory{
 				int h2=Integer.parseInt(array[i].substring(4, 5));
 				int w2=Integer.parseInt(array[i].substring(5, 6));
 				int d2=Integer.parseInt(array[i].substring(6, 7));
-				BasicGround g1= mondo.searchGround(h1, w1, d1);
-				BasicGround g2= mondo.searchGround(h2, w2, d2);
+				BasicGround g1= world.searchGround(h1, w1, d1);
+				BasicGround g2= world.searchGround(h2, w2, d2);
 
 
 
 				if((g1!=null)&&(g2!=null)){
-					BasicPassage p= mondo.searchPassage(g1, g2);
+					BasicPassage p= world.searchPassage(g1, g2);
 					if (p!=null) {
 						p.setOpen(true);
 					}

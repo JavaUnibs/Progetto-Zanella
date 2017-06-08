@@ -9,82 +9,84 @@ import it.unibs.ing.myutility.Menu;
 public class MediumNavigation extends Navigation{
 
 	private static final long serialVersionUID = 2L;
-	private final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	private MediumWorld mondo;
+	private final String[] DIRECTION_MENU = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
+	private MediumWorld world;
 	private HashMap<String, String> local_string, common_string;
-	private Menu elenco_dir;
+	private Menu direction_list;
 	
-	MediumNavigation(World mondo, HashMap<String, String> local_string, HashMap<String, String> common_string){
-		elenco_dir= new Menu(MENU_DIREZIONI);
-		this.mondo=(MediumWorld) mondo;
+	MediumNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
+		direction_list= new Menu(DIRECTION_MENU);
+		this.world=(MediumWorld) world;
 		this.local_string=local_string;
 		this.common_string=common_string;
 	}
 
 	
-	public Ground navigate(Ground luogo_corr) {
-		MediumGround luogo_corrente= (MediumGround) luogo_corr;
-		MediumGround luogo_prossimo;
-		int scelta_dir;
+	public Ground navigate(Ground _current_ground) {
+		MediumGround current_ground= (MediumGround) _current_ground;
+		MediumGround next_ground;
+		int direction_choice;
 		
 		do{
-			luogo_prossimo=luogo_corrente;
+			next_ground=current_ground;
 			
-			if(luogo_corrente.isEnd()) {
+			if(current_ground.isEnd()) {
 				System.out.println(local_string.get("END"));
 				return null;	
 			}
 			//---------------------------------------------------------------------------------------------------
 			
 			
-			if(luogo_corrente.getKey()!=null&&!mondo.isDepositata()) {
-				retrieveKey(luogo_corrente);
+			if(current_ground.getKey()!=null&&!world.isDeposited()) {
+				System.out.println(local_string.get("KEY_PRESENT") + current_ground.getKey());
+				if(LeggiInput.doppiaScelta(local_string.get("GET_KEY"))) System.out.println(retrieveKey(current_ground));
+				
 			}
 			//-----------------------------------------------------------------------------------------------------
 			
-			else if(!mondo.getPlayerkeys().isEmpty()&&!luogo_corrente.isEnd()&&!luogo_corrente.isStart()&&luogo_corrente.getKey()==null&&
+			else if(!world.getPlayerkeys().isEmpty()&&!current_ground.isEnd()&&!current_ground.isStart()&&current_ground.getKey()==null&&
 					LeggiInput.doppiaScelta(local_string.get("PUT_KEY"))){
 				
-				depositKey(luogo_corrente);
+				System.out.println(depositKey(current_ground));
 
 			}
 			
 			//----------------------------------------------------------------------------------------------------------------------
 			
-			scelta_dir=elenco_dir.stampaMenu();
+			direction_choice=direction_list.stampaMenu();
 			
-			switch(scelta_dir){
+			switch(direction_choice){
 			
 			case 0:{}; break;
 			case 1: {
 				
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight()+1, luogo_corrente.getWidth(), luogo_corrente.getLevel());
+				next_ground= world.searchGround(current_ground.getHeight()+1, current_ground.getWidth(), current_ground.getLevel());
 			}
 			
 		    break;
 		    
 			case 2:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight()-1, luogo_corrente.getWidth(), luogo_corrente.getLevel());
+				next_ground= world.searchGround(current_ground.getHeight()-1, current_ground.getWidth(), current_ground.getLevel());
 				
 			}break;
 			
 			case 3:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight(), luogo_corrente.getWidth()-1, luogo_corrente.getLevel());
+				next_ground= world.searchGround(current_ground.getHeight(), current_ground.getWidth()-1, current_ground.getLevel());
 				
 			}break;
 			
 			case 4:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight(), luogo_corrente.getWidth()+1, luogo_corrente.getLevel());
+				next_ground= world.searchGround(current_ground.getHeight(), current_ground.getWidth()+1, current_ground.getLevel());
 				
 			}break;
 			
 			case 5:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight(), luogo_corrente.getWidth(), luogo_corrente.getLevel()+1);
+				next_ground= world.searchGround(current_ground.getHeight(), current_ground.getWidth(), current_ground.getLevel()+1);
 				
 			}break;
 			
 			case 6:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight(), luogo_corrente.getWidth(), luogo_corrente.getLevel()-1);
+				next_ground= world.searchGround(current_ground.getHeight(), current_ground.getWidth(), current_ground.getLevel()-1);
 				
 			}break;
 			
@@ -93,64 +95,59 @@ public class MediumNavigation extends Navigation{
 			
 			}
 			//----------------------------------------------------------------------------------------------------------
-			attemptEntry(luogo_corrente, luogo_prossimo);
+			attemptEntry(current_ground, next_ground);
 			
-		}while(scelta_dir!=0);
+		}while(direction_choice!=0);
 		
-		return luogo_corrente;
+		return current_ground;
 		
 	}
 	
 	
-	private void retrieveKey(MediumGround luogo_corrente){
-		int peso_totale=mondo.totWeight();
-		int num_totale=mondo.getPlayerkeys().size();
-		
-		Token key=luogo_corrente.getKey();
-		
-		System.out.println(local_string.get("KEY_PRESENT") + key);
-		if(LeggiInput.doppiaScelta(local_string.get("GET_KEY"))){   //LeggiInput.doppiaScelta(GET_KEY)
-			if(peso_totale + key.getWeight() <= mondo.getPeso_max_trasportabile() && num_totale + 1 <= mondo.getNumero_max_trasportabile()){											//peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max
-				mondo.getPlayerkeys().add(key);
-				luogo_corrente.setKey(null);
-				System.out.println(local_string.get("GOT_KEY"));
+	private String retrieveKey(MediumGround current_ground){
+		int total_weight=world.totWeight();
+		int total_number=world.getPlayerkeys().size();
+		Token key=current_ground.getKey();
+
+			if(total_weight + key.getWeight() <= world.getMax_transportable_keys_weight() && total_number + 1 <= world.getMax_transportable_keys_number()){											//peso_totale + key.getWeight() <= peso_max && num_totale + 1 <= numero_max
+				world.getPlayerkeys().add(key);
+				current_ground.setKey(null);
+				return local_string.get("GOT_KEY");
 			}
-			else System.out.println(local_string.get("WEIGHT"));
-		}
-		
+			else return local_string.get("WEIGHT");
 	}
 	
-	private void depositKey(MediumGround luogo_corrente){
+	private String depositKey(MediumGround current_ground){
 		ArrayList<String> temp= new ArrayList<String>();
-		for(Token a: mondo.getPlayerkeys()) temp.add(a.toString());
+		for(Token a: world.getPlayerkeys()) temp.add(a.toString());
 		String[] temp2= new String[temp.size()];
 		temp2=temp.toArray(temp2);
-		Menu elenco_chiavi = new Menu(temp2);
-		int scelta_chiavi=elenco_chiavi.stampaSottoMenu();
+		Menu key_list = new Menu(temp2);
+		int key_choice=key_list.stampaSottoMenu();
 		
 
-		if(scelta_chiavi-1>=0&&scelta_chiavi<=temp.size()){
+		if(key_choice-1>=0&&key_choice<=temp.size()){
 			
-			Token key=mondo.getPlayerkeys().get(scelta_chiavi-1);
-			luogo_corrente.setKey(key);
-			mondo.getPlayerkeys().remove(key);
-			System.out.println(local_string.get("PUT_KEY_OK"));
-			mondo.setDepositata(true);
-
-		}
+			Token key=world.getPlayerkeys().get(key_choice-1);
+			current_ground.setKey(key);
+			world.getPlayerkeys().remove(key);
+			world.setDeposited(true);
+			return local_string.get("PUT_KEY_OK");
+			
+		}else return common_string.get("NO_OPZ");
 	}
 	
-	private void attemptEntry(MediumGround luogo_corrente, MediumGround luogo_prossimo){
-		if(luogo_prossimo==null) System.out.println(local_string.get("NO_GROUND"));
-		else if(luogo_prossimo==luogo_corrente);
+	private void attemptEntry(MediumGround current_ground, MediumGround next_ground){
+		if(next_ground==null) System.out.println(local_string.get("NO_GROUND"));
+		else if(next_ground==current_ground);
 		else {
-				MediumPassage ptemp=mondo.searchPassage(luogo_corrente, luogo_prossimo);
+				MediumPassage ptemp=world.searchPassage(current_ground, next_ground);
 				if(ptemp==null) System.out.println("Passaggio nullo ---- Incongruenza");
 				else {
 					if(ptemp.getKey()!=null){
 						System.out.println(local_string.get("KEY_NEEDED")+ptemp.getKey());
 						
-						if(mondo.getPlayerkeys().contains(ptemp.getKey())){
+						if(world.getPlayerkeys().contains(ptemp.getKey())){
 							System.out.println(local_string.get("YES_KEY"));
 							ptemp.setOpen(true);
 							ptemp.setKey(null);
@@ -159,9 +156,9 @@ public class MediumNavigation extends Navigation{
 					}
 					
 					if(ptemp.isOpen()) {
-						luogo_corrente=luogo_prossimo;
-						System.out.println(local_string.get("CURRENT_GROUND")+luogo_corrente.getName());
-						mondo.setDepositata(false);
+						current_ground=next_ground;
+						System.out.println(local_string.get("CURRENT_GROUND")+current_ground.getName());
+						world.setDeposited(false);
 					}
 					else if(ptemp.getKey()==null) System.out.println(local_string.get("CLOSED_PASSAGE"));
 				}

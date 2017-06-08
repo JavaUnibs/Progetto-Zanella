@@ -34,36 +34,36 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	private final String LIMIT="Inserire il nuovo limite";
 	private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
 	private final String MODIFY_OK="Modifica effettuata";
-	private AdvancedWorld mondo;
+	private AdvancedWorld world;
 
-	ModifyAdvancedWorld(AdvancedWorld mondo){
-		this.mondo=mondo;
+	ModifyAdvancedWorld(AdvancedWorld world){
+		this.world=world;
 	}
 	public void initialize() {
 		HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keyMap=keepTrackKeys();
 		Set<ArrayList<AdvancedGround>> groundSet = keyMap.keySet();
 		ArrayList<AdvancedGround> trialSet=keepTrackTrials();
 		String start="Questo mondo ha i seguenti parametri: \n";
-		String tipi_chiavi="Tipi di chiavi con relativi pesi: \n"+mondo.getKeytypes().toString();
-		String peso_max_chiave="Limite superiore del peso di una chiave: "+mondo.getPeso_max_chiave()+"\n";
-		String num_max_chiavi="Numero massimo di chiavi trasportabili: "+mondo.getNumero_max_trasportabile()+"\n";
-		String peso_max_trasp="Peso massimo trasportabile: "+mondo.getPeso_max_trasportabile()+"\n";
-		String tipi_prove="Tipi di prove con relativi punteggi: \n"+mondo.getTrials().toString();
-		String punteggio_max_prova="Limite superiore del valore di una prova: "+mondo.getPunteggio_max_prova()+"\n";
-		String punti_start="Punti iniziali assegnati: "+mondo.getPoints()+"\n";
-		String punti_max_fin="Punti da raggiungere per vincere: "+mondo.getPunteggio_finale()+"\n";
-		String modifica="Scegli i parametri da modificare";
-		System.out.println(start+tipi_chiavi+peso_max_chiave+num_max_chiavi+peso_max_trasp+tipi_prove+punteggio_max_prova+punti_start+punti_max_fin+modifica);
+		String key_types="Tipi di chiavi con relativi pesi: \n"+world.getKeytypes().toString();
+		String max_key_weight="Limite superiore del peso di una chiave: "+world.getMax_key_weight()+"\n";
+		String max_transportable_keys_number="Numero massimo di chiavi trasportabili: "+world.getMax_transportable_keys_number()+"\n";
+		String max_transportable_keys_weight="Peso massimo trasportabile: "+world.getMax_transportable_keys_weight()+"\n";
+		String trial_types="Tipi di prove con relativi punteggi: \n"+world.getTrials().toString();
+		String max_trial_points="Limite superiore del valore di una prova: "+world.getMax_trial_points()+"\n";
+		String start_points="Punti iniziali assegnati: "+world.getPoints()+"\n";
+		String final_score="Punti da raggiungere per vincere: "+world.getFinal_score()+"\n";
+		String modify_choice="Scegli i parametri da modificare";
+		System.out.println(start+key_types+max_key_weight+max_transportable_keys_number+max_transportable_keys_weight+trial_types+max_trial_points+start_points+final_score+modify_choice);
 		
-		Menu menu_modifica= new Menu(menu);
-		int scelta;
+		Menu modify_menu= new Menu(menu);
+		int choice;
 		do{
-			scelta=menu_modifica.stampaMenu();
-			switch(scelta){
+			choice=modify_menu.stampaMenu();
+			switch(choice){
 			//--------------------------------------------------------------------
 			case 1:{         
 																												//modifica dei pesi delle chiavi
-				System.out.println("Tipi di chiavi con relativi pesi: \n"+mondo.getKeytypes().toString());
+				System.out.println("Tipi di chiavi con relativi pesi: \n"+world.getKeytypes().toString());
 				LeggiInput.terminaRiga();
 				modifyKeyWeights();
 					
@@ -72,10 +72,10 @@ public class ModifyAdvancedWorld extends ModifyWorld
 			//-----------------------------------------------------------------------------
 			case 2:{	
 			
-			System.out.println("Tipi di chiavi con relativi pesi: \n"+mondo.getKeytypes().toString());
+			System.out.println("Tipi di chiavi con relativi pesi: \n"+world.getKeytypes().toString());
 			System.out.println(ADDREMOVEKEY);
 			Menu sottomenu= new Menu(menu_addremove);
-			ArrayList<Token> keys= mondo.getKeytypes();
+			ArrayList<Token> keys= world.getKeytypes();
 			
 			int scelta_2=sottomenu.stampaSottoMenu();
 				switch(scelta_2){
@@ -102,7 +102,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 			//-----------------------------------------------------------------------------------
 			case 3:{                  
 																					
-				System.out.println("Limite superiore del peso di una chiave: "+mondo.getPeso_max_chiave()+"\n");
+				System.out.println("Limite superiore del peso di una chiave: "+world.getMax_key_weight()+"\n");
 				modifyKeyWeightLimit();
 				
 			}
@@ -110,25 +110,25 @@ public class ModifyAdvancedWorld extends ModifyWorld
 			//---------------------------------------------------------------------------------------
 			case 4:{
 																											
-				System.out.println("Numero massimo di chiavi trasportabili: "+mondo.getNumero_max_trasportabile()+"\n");
+				System.out.println("Numero massimo di chiavi trasportabili: "+world.getMax_transportable_keys_number()+"\n");
 				modifyMaxTotalKeyNumber();
 			}
 			break;
 			//---------------------------------------------------------------------------------------
 			case 5:{
 																												
-				System.out.println("Peso massimo trasportabile: "+mondo.getPeso_max_trasportabile()+"\n");
+				System.out.println("Peso massimo trasportabile: "+world.getMax_transportable_keys_weight()+"\n");
 				modifyMaxTotalKeyWeight();
 			}
 			break;
 			
 			case 6:{
 				
-				System.out.println("Tipi di prove con relativi punteggi: \n"+mondo.getTrials().toString());
+				System.out.println("Tipi di prove con relativi punteggi: \n"+world.getTrials().toString());
 				System.out.println(ADDREMOVETRIAL);
 				Menu sottomenu= new Menu(menu_addremove);
 				int scelta2= sottomenu.stampaSottoMenu();
-				ArrayList<Trial> trials=mondo.getTrials();
+				ArrayList<Trial> trials=world.getTrials();
 				
 				//----------
 				
@@ -156,7 +156,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 			
 			case 7:{
 
-				System.out.println("Tipi di prove con relativi punteggi: \n"+mondo.getTrials().toString());
+				System.out.println("Tipi di prove con relativi punteggi: \n"+world.getTrials().toString());
 				LeggiInput.terminaRiga();
 				modifyTrialPoints();
 			}
@@ -164,7 +164,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 			
 			case 8:{
 
-				System.out.println("Limite superiore del valore di una prova: "+mondo.getPunteggio_max_prova()+"\n");
+				System.out.println("Limite superiore del valore di una prova: "+world.getMax_trial_points()+"\n");
 				modifyTrialPointsLimit();
 				
 			}
@@ -172,7 +172,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 			
 			case 9:{
 				
-				System.out.println("Punti iniziali assegnati: "+mondo.getPoints()+"\n");
+				System.out.println("Punti iniziali assegnati: "+world.getPoints()+"\n");
 				modifyStartingPoints();
 			}
 			break;
@@ -180,7 +180,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 			
 			case 10:{
 				
-				System.out.println("Punti da raggiungere per vincere: "+mondo.getPunteggio_finale()+"\n");
+				System.out.println("Punti da raggiungere per vincere: "+world.getFinal_score()+"\n");
 				modifyFinalPoints();
 			}
 			break;
@@ -188,7 +188,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 			case 0: break;
 			default: break;
 		}
-		}while(scelta!=0);
+		}while(choice!=0);
 		
 		
 	}
@@ -196,13 +196,13 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	private HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keepTrackKeys(){   
 			
 			HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> map = new HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>>();
-			for(Token t: mondo.getKeytypes()){
+			for(Token t: world.getKeytypes()){
 				ArrayList<AdvancedGround> grounds= new ArrayList<AdvancedGround>();
 				ArrayList<MediumPassage> passages= new ArrayList<MediumPassage>();
-				for(AdvancedGround g: mondo.getGrounds()){
+				for(AdvancedGround g: world.getGrounds()){
 					if(g.getKey()==t) grounds.add(g);
 				}
-				for(MediumPassage p:mondo.getPassages()){
+				for(MediumPassage p:world.getPassages()){
 					if(p.getKey()==t) passages.add(p);
 				}
 				map.put(grounds, passages);
@@ -212,7 +212,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	
 	private ArrayList<AdvancedGround> keepTrackTrials(){													
 			ArrayList<AdvancedGround> grounds=new ArrayList<AdvancedGround>();
-			for (AdvancedGround g: mondo.getGrounds()) if(g.getTrial()!=null) grounds.add(g);
+			for (AdvancedGround g: world.getGrounds()) if(g.getTrial()!=null) grounds.add(g);
 			return grounds;
 		}
 
@@ -235,7 +235,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	
 	private ArrayList<Token> invalidKeysWeight(int max_weight){                    
 		ArrayList<Token> temp= new ArrayList<Token>();
-		for(Token a: mondo.getKeytypes())
+		for(Token a: world.getKeytypes())
 			if(a.getWeight()>=max_weight) temp.add(a);
 		return temp;
 		
@@ -243,7 +243,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	
 	ArrayList<Trial> invalidTrialPoints(int max_points){                   //Restituisce un arraylist contenente le prove che non rispettano il vincolo di punteggio massimo
 		ArrayList<Trial> temp= new ArrayList<Trial>();
-		for(Trial a: mondo.getTrials())
+		for(Trial a: world.getTrials())
 			if(a.getPoints()>=max_points) temp.add(a);
 		return temp;
 
@@ -251,12 +251,12 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	}
 	
 	private void modifyKeyWeights(){
-		Token key=mondo.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
+		Token key=world.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
 		if(CheckValues.noElement(key, NO_KEY)) return;
 		else {
 			int weight=Integer.parseInt(LeggiInput.riga(INSERT_WEIGHT_KEY));
 			if(CheckValues.isNegative(weight, NEGATIVE_VALUE)) return;
-			else if (CheckValues.isOverLimit(weight, mondo.getPeso_max_chiave(), OVER_THE_LIMIT)) return;
+			else if (CheckValues.isOverLimit(weight, world.getMax_key_weight(), OVER_THE_LIMIT)) return;
 			else{
 				key.setWeight(weight);
 				System.out.println(OK_MODIFY);
@@ -266,10 +266,10 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	
 	private void addKey(Set<ArrayList<AdvancedGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keyMap){
 		String name= LeggiInput.riga(INSERT_NAME_KEY);
-		if(CheckValues.existsElement(mondo.searchKeyTypes(name), EXISTS_KEY)) return;
+		if(CheckValues.existsElement(world.searchKeyTypes(name), EXISTS_KEY)) return;
 		int weight=LeggiInput.intero(INSERT_WEIGHT_KEY);
 		if(CheckValues.isNegative(weight, NEGATIVE_VALUE)) return;
-		else if (CheckValues.isOverLimit(weight, mondo.getPeso_max_chiave(), OVER_THE_LIMIT)) return;
+		else if (CheckValues.isOverLimit(weight, world.getMax_key_weight(), OVER_THE_LIMIT)) return;
 		else {
 			keys.add(new Token(weight, name));              							
 			applyKeepTrackKeys(groundSet, keys, keyMap);
@@ -278,7 +278,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	}
 	
 	private void removeKey(Set<ArrayList<AdvancedGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keyMap){
-		Token key=mondo.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
+		Token key=world.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
 		if(CheckValues.noElement(key, NO_KEY)) return;
 		else keys.remove(key);
 		applyKeepTrackKeys(groundSet, keys, keyMap);
@@ -289,7 +289,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
 		else{
-			mondo.setPeso_max_chiave(limit);
+			world.setMax_key_weight(limit);
 			System.out.println(WARNING_LIMIT);
 			ArrayList<Token> keys =invalidKeysWeight(limit);
 			for(Token k: keys) if(k.getWeight()>limit) k.setWeight(limit);
@@ -301,7 +301,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
 		else {
-			mondo.setNumero_max_trasportabile(limit);
+			world.setMax_transportable_keys_number(limit);
 			System.out.println(MODIFY_OK);
 		}
 	}
@@ -310,7 +310,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
 		else {
-			mondo.setPeso_max_trasportabile(limit);
+			world.setMax_transportable_keys_weight(limit);
 			System.out.println(MODIFY_OK);
 		}
 	}
@@ -329,10 +329,10 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	
 	private void addTrial(ArrayList<Trial> trials, ArrayList<AdvancedGround> trialSet){
 		String name=LeggiInput.riga(INSERT_NAME_TRIAL);
-		if(CheckValues.existsElement(mondo.searchTrial(name), EXISTS_TRIAL)) return;
+		if(CheckValues.existsElement(world.searchTrial(name), EXISTS_TRIAL)) return;
 		int points=LeggiInput.intero(INSERT_POINTS_TRIAL);
 		if(CheckValues.isNegative(points, NEGATIVE_VALUE)) return;
-		else if (CheckValues.isOverLimit(points, mondo.getPunteggio_max_prova(), OVER_THE_LIMIT_TRIAL)) return;
+		else if (CheckValues.isOverLimit(points, world.getMax_trial_points(), OVER_THE_LIMIT_TRIAL)) return;
 		else{
 			
 			Trial trial= new Trial(points, name);
@@ -355,7 +355,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	
 	private void removeTrial(ArrayList<Trial> trials, ArrayList<AdvancedGround> trialSet){
 		String name=LeggiInput.riga(INSERT_NAME_TRIAL);
-		Trial trial=mondo.searchTrial(name);
+		Trial trial=world.searchTrial(name);
 		if(CheckValues.noElement(trial, NO_TRIAL)) return;
 		else trials.remove(trial);
 		applyKeepTrackTrials(trialSet, trials);
@@ -364,12 +364,12 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	
 	
 	private void modifyTrialPoints(){
-		Trial trial=mondo.searchTrial(LeggiInput.riga(INSERT_NAME_TRIAL));
+		Trial trial=world.searchTrial(LeggiInput.riga(INSERT_NAME_TRIAL));
 		if(CheckValues.noElement(trial, NO_TRIAL)) return;
 		else {
 			int points=Integer.parseInt(LeggiInput.riga(INSERT_POINTS_TRIAL));
 			if(CheckValues.isNegative(points, NEGATIVE_VALUE)) return;
-			else if (CheckValues.isOverLimit(points, mondo.getPunteggio_max_prova(), OVER_THE_LIMIT_TRIAL)) return;
+			else if (CheckValues.isOverLimit(points, world.getMax_trial_points(), OVER_THE_LIMIT_TRIAL)) return;
 			else{
 				trial.setPoints(points);
 				System.out.println(OK_MODIFY);
@@ -382,7 +382,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
 		else{
-			mondo.setPunteggio_max_prova(limit);
+			world.setMax_trial_points(limit);
 			System.out.println(WARNING_LIMIT);
 			ArrayList<Trial> trials =invalidTrialPoints(limit);
 			for(Trial t: trials) if(t.getPoints()>limit) t.setPoints(limit);
@@ -395,7 +395,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
 		else {
-			mondo.setPoints(limit);
+			world.setPoints(limit);
 			System.out.println(MODIFY_OK);
 		}
 	}
@@ -404,7 +404,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
 		else {
-			mondo.setPunteggio_finale(limit);
+			world.setFinal_score(limit);
 			System.out.println(MODIFY_OK);
 		}
 	}

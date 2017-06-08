@@ -20,8 +20,8 @@ public class Main {
 		HashMap<String, String> common_string=null;
 		HashMap<String, String> local_string=null;
 		HashMap<String, String[]> values=null;
-		World mondo = null;
-		Ground luogo_corrente = null;
+		World world = null;
+		Ground current_ground = null;
 		Navigation navigation=null;
 		
 		try {
@@ -35,18 +35,18 @@ public class Main {
 			if(LeggiInput.doppiaScelta(common_string.get("LOADING"))){
 				
 				LeggiInput.terminaRiga();
-				String percorso= LeggiInput.riga(common_string.get("LOAD_LOCATION"));
-				File fgame = new File(percorso);
+				String path= LeggiInput.riga(common_string.get("LOAD_LOCATION"));
+				File fgame = new File(path);
 				Save save = null;
-				boolean caricamentoRiuscito = false;
+				boolean loadingOK = false;
 				
 				if ( fgame.exists() )
 				{
 				 try 
 				  {
 					 save = (Save)SalvataggioFile.caricaOggetto(fgame);
-					 mondo = save.getMondo();
-					 luogo_corrente = save.getLuogo_corrente();
+					 world = save.getMondo();
+					 current_ground = save.getLuogo_corrente();
 					 local_string=save.getLocalString();
 					 values=save.getValues();
 					 navigation=save.getNavigation();
@@ -57,15 +57,15 @@ public class Main {
 					}
 				   finally
 					{
-				      if ( (mondo != null) && (luogo_corrente != null) &&(local_string!=null) &&(values!=null) &&(navigation!=null))
+				      if ( (world != null) && (current_ground != null) &&(local_string!=null) &&(values!=null) &&(navigation!=null))
 					    {
 						 System.out.println(common_string.get("MSG_OK_FILE"));
-						 caricamentoRiuscito = true;
+						 loadingOK = true;
 						 }
 					  }
 				 }
 					
-				if (!caricamentoRiuscito)
+				if (!loadingOK)
 				   {
 					System.out.println(common_string.get("MSG_NO_FILE"));
 	                return;
@@ -75,7 +75,7 @@ public class Main {
 			//-----------------------------------------------------------------------------------------------Alternativa a caricamento (Creazione nuovo gioco)
 			else{
 				
-				File nome_mondo;
+				File world_name;
 				Iterator<File> fileList = FolderExplorer.listFiles("files").iterator();
 				ArrayList<File> directoryList = new ArrayList<>();
 				while(fileList.hasNext()) { 
@@ -93,15 +93,15 @@ public class Main {
 				
 				int num_mondo=LeggiInput.intero(common_string.get("CHOOSE_WORLD"));
 				try{
-					nome_mondo=directoryList.get(num_mondo);
+					world_name=directoryList.get(num_mondo);
 				}catch(IndexOutOfBoundsException e){
 					System.out.println(common_string.get("NO_WORLD"));
 					return;
 				}
 				
 				try {
-					local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\local_string.txt").convertToString();
-					values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\values.txt").convertToArray();
+					local_string=new TxtToHashmap(world_name.getAbsolutePath()+"\\local_string.txt").convertToString();
+					values= new TxtToHashmap(world_name.getAbsolutePath()+"\\values.txt").convertToArray();
 				} catch (IOException e) {
 						System.out.println("Errore nel caricamento dei file delle stringhe locali o valori");
 						return;
@@ -109,9 +109,9 @@ public class Main {
 				
 				Factory factory= SetupGame.getFactory(values, common_string, local_string);
 				if(factory==null) return;
-				mondo=factory.getWorld();
-				if(mondo==null) return;
-				luogo_corrente=mondo.getStartGround();
+				world=factory.getWorld();
+				if(world==null) return;
+				current_ground=world.getStartGround();
 				navigation=factory.getNavigation();
 				
 				if(LeggiInput.doppiaScelta(common_string.get("MODIFY_WORLD"))){
@@ -123,31 +123,31 @@ public class Main {
 			}
 			
 			//-------------------------------------------------------------------------------------------------Inizio gioco
-			System.out.println(local_string.get("START_MSG")+mondo.searchGround(convertValues(values, "END_H"), convertValues(values, "END_W"), convertValues(values, "END_D")).getName()+".");
+			System.out.println(local_string.get("START_MSG")+world.searchGround(convertValues(values, "END_H"), convertValues(values, "END_W"), convertValues(values, "END_D")).getName()+".");
 			System.out.println(local_string.get("START_MSG2")+"\n"+local_string.get("START_MSG3")+"\n"+local_string.get("START_MSG4"));
 			
-			Menu elenco = new Menu(MENU_PRINCIPALE);
-			int scelta;
+			Menu list = new Menu(MENU_PRINCIPALE);
+			int choice;
 			
 			do {
 				
-				System.out.println(local_string.get("CURRENT_GROUND")+luogo_corrente.getName());
-				scelta=elenco.stampaMenu();
+				System.out.println(local_string.get("CURRENT_GROUND")+current_ground.getName());
+				choice=list.stampaMenu();
 			
-				switch(scelta){
+				switch(choice){
 				
 				case 0: {};	
 				break;
 				
 				case 1: {
-					luogo_corrente=navigation.navigate(luogo_corrente);
-					if(luogo_corrente==null) return;
+					current_ground=navigation.navigate(current_ground);
+					if(current_ground==null) return;
 				}
 				break;
 				
 				case 2:{
 					
-					Save save = new Save(mondo,luogo_corrente, local_string, values, navigation);
+					Save save = new Save(world,current_ground, local_string, values, navigation);
 					LeggiInput.terminaRiga();
 					File fgame = new File(LeggiInput.riga(common_string.get("SAVE_LOCATION")));
 					if(fgame.exists()) {
@@ -163,7 +163,7 @@ public class Main {
 				break;
 				}
 				
-			}while(scelta!=0);
+			}while(choice!=0);
 			
 			
 	}

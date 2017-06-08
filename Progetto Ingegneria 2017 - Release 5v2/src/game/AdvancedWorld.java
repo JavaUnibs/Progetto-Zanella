@@ -11,39 +11,39 @@ public class AdvancedWorld extends World{
 	private ArrayList<Token> keytypes;
 	private ArrayList<Token> playerkeys;
 	private ArrayList<Trial> trials;
-	private boolean depositata;
-	private boolean prova_fatta;
+	private boolean deposited;
+	private boolean trial_done;
 	private Integer points;
-	private int peso_max_trasportabile;
-	private int numero_max_trasportabile;
-	private int peso_max_chiave;
-	private int punteggio_finale;
-	private int punteggio_max_prova;
+	private int max_transportable_keys_weight;
+	private int max_transportable_keys_number;
+	private int max_key_weight;
+	private int final_score;
+	private int max_trial_points;
 	
 	
 	
-	AdvancedWorld(int height, int width, int depth, int peso_max_trasportabile, int numero_max_trasportabile, int peso_max_chiave, int punteggio_finale, int punteggio_max_prova, int points, String nome_luoghi){
+	AdvancedWorld(int height, int width, int depth, int max_transportable_keys_weight, int max_transportable_keys_number, int max_key_weight, int final_score, int max_trial_points, int points, String _ground_name){
 
 		grounds= new ArrayList<AdvancedGround>();
 		passages= new ArrayList<MediumPassage>();
 		keytypes= new ArrayList<Token>();
 		playerkeys= new ArrayList<Token>();
 		trials= new ArrayList<Trial>();
-		depositata=true;
-		prova_fatta=false;
+		deposited=true;
+		trial_done=false;
 
-		this.peso_max_trasportabile=peso_max_trasportabile;
-		this.numero_max_trasportabile=numero_max_trasportabile;
-		this.peso_max_chiave=peso_max_chiave;
-		this.punteggio_finale=punteggio_finale;
-		this.punteggio_max_prova=punteggio_max_prova;
+		this.max_transportable_keys_weight=max_transportable_keys_weight;
+		this.max_transportable_keys_number=max_transportable_keys_number;
+		this.max_key_weight=max_key_weight;
+		this.final_score=final_score;
+		this.max_trial_points=max_trial_points;
 		this.points=points;
 		
 		for(int h=0;h<height;h++){                                             //genera tutti luoghi combinando le max coordinate
 			for(int w=0;w<width;w++){
 				for(int d=0;d<depth;d++){
 					
-					grounds.add(new AdvancedGround(h, w, d, nome_luoghi+" "+h+""+w+""+d));
+					grounds.add(new AdvancedGround(h, w, d, _ground_name+" "+h+""+w+""+d));
 				}
 			}
 		}
@@ -160,15 +160,15 @@ public class AdvancedWorld extends World{
 
 
 
-	public boolean isDepositata() {
-		return depositata;
+	public boolean isDeposited() {
+		return deposited;
 	}
 
 
 
 
-	public boolean isProva_fatta() {
-		return prova_fatta;
+	public boolean isTrialDone() {
+		return trial_done;
 	}
 
 
@@ -181,36 +181,36 @@ public class AdvancedWorld extends World{
 
 
 
-	public int getPeso_max_trasportabile() {
-		return peso_max_trasportabile;
+	public int getMax_transportable_keys_weight() {
+		return max_transportable_keys_weight;
 	}
 
 
 
 
-	public int getNumero_max_trasportabile() {
-		return numero_max_trasportabile;
+	public int getMax_transportable_keys_number() {
+		return max_transportable_keys_number;
 	}
 
 
 
 
-	public int getPeso_max_chiave() {
-		return peso_max_chiave;
+	public int getMax_key_weight() {
+		return max_key_weight;
 	}
 
 
 
 
-	public int getPunteggio_finale() {
-		return punteggio_finale;
+	public int getFinal_score() {
+		return final_score;
 	}
 
 
 
 
-	public int getPunteggio_max_prova() {
-		return punteggio_max_prova;
+	public int getMax_trial_points() {
+		return max_trial_points;
 	}
 
 
@@ -237,15 +237,15 @@ public class AdvancedWorld extends World{
 
 
 
-	public void setDepositata(boolean depositata) {
-		this.depositata = depositata;
+	public void setDeposited(boolean deposited) {
+		this.deposited = deposited;
 	}
 
 
 
 
-	public void setProva_fatta(boolean prova_fatta) {
-		this.prova_fatta = prova_fatta;
+	public void setTrial_done(boolean trial_done) {
+		this.trial_done = trial_done;
 	}
 
 
@@ -258,36 +258,36 @@ public class AdvancedWorld extends World{
 
 
 
-	public void setPeso_max_trasportabile(int peso_max_trasportabile) {
-		this.peso_max_trasportabile = peso_max_trasportabile;
+	public void setMax_transportable_keys_weight(int max_transportable_keys_weight) {
+		this.max_transportable_keys_weight = max_transportable_keys_weight;
 	}
 
 
 
 
-	public void setNumero_max_trasportabile(int numero_max_trasportabile) {
-		this.numero_max_trasportabile = numero_max_trasportabile;
+	public void setMax_transportable_keys_number(int max_transportable_keys_number) {
+		this.max_transportable_keys_number = max_transportable_keys_number;
 	}
 
 
 
 
-	public void setPeso_max_chiave(int peso_max_chiave) {
-		this.peso_max_chiave = peso_max_chiave;
+	public void setMax_key_weight(int max_key_weight) {
+		this.max_key_weight = max_key_weight;
 	}
 
 
 
 
-	public void setPunteggio_finale(int punteggio_finale) {
-		this.punteggio_finale = punteggio_finale;
+	public void setFinal_score(int final_score) {
+		this.final_score = final_score;
 	}
 
 
 
 
-	public void setPunteggio_max_prova(int punteggio_max_prova) {
-		this.punteggio_max_prova = punteggio_max_prova;
+	public void setMax_trial_points(int max_trial_points) {
+		this.max_trial_points = max_trial_points;
 	}
 
 

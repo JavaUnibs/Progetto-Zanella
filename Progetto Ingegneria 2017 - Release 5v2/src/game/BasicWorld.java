@@ -8,23 +8,23 @@ public class BasicWorld extends World{
 	private static final long serialVersionUID = 2L;
 	private ArrayList<BasicGround> grounds;
 	private ArrayList<BasicPassage> passages; 
-	private boolean depositata;
-	private boolean prova_fatta;
+	private boolean deposited;
+	private boolean trial_done;
 	
 	
 	
-	BasicWorld(int height, int width, int depth, String nome_luoghi){
+	BasicWorld(int height, int width, int depth, String ground_name){
 
 		grounds= new ArrayList<BasicGround>();
 		passages= new ArrayList<BasicPassage>();
-		depositata=true;
-		prova_fatta=false;
+		deposited=true;
+		trial_done=false;
 		
 		for(int h=0;h<height;h++){                                             //genera tutti luoghi combinando le max coordinate
 			for(int w=0;w<width;w++){
 				for(int d=0;d<depth;d++){
 					
-					grounds.add(new BasicGround(h, w, d, nome_luoghi+" "+h+""+w+""+d));
+					grounds.add(new BasicGround(h, w, d, ground_name+" "+h+""+w+""+d));
 				}
 			}
 		}
@@ -98,20 +98,20 @@ public class BasicWorld extends World{
 	}
 
 	public boolean isDepositata() {
-		return depositata;
+		return deposited;
 	}
 
 
 	public void setDepositata(boolean depositata) {
-		this.depositata = depositata;
+		this.deposited = depositata;
 	}
 
 	public boolean isProva_fatta() {
-		return prova_fatta;
+		return trial_done;
 	}
 
 	public void setProva_fatta(boolean prova_fatta) {
-		this.prova_fatta = prova_fatta;
+		this.trial_done = prova_fatta;
 	}
 
 	public BasicGround getStartGround() {

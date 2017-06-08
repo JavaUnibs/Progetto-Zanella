@@ -10,29 +10,29 @@ public class MediumWorld extends World{
 	private ArrayList<MediumPassage> passages; 
 	private ArrayList<Token> keytypes;
 	private ArrayList<Token> playerkeys;
-	private boolean depositata;
-	private int peso_max_trasportabile;
-	private int numero_max_trasportabile;
-	private int peso_max_chiave;
+	private boolean deposited;
+	private int max_transportable_keys_weight;
+	private int max_transportable_keys_number;
+	private int max_key_weight;
 	
 	
 	
-	MediumWorld(int height, int width, int depth, int peso_max_trasportabile, int numero_max_trasportabile, int peso_max_chiave, String nome_luoghi){
+	MediumWorld(int height, int width, int depth, int max_transportable_keys_weight, int max_transportable_keys_number, int max_key_weight, String _ground_name){
 
 		grounds= new ArrayList<MediumGround>();
 		passages= new ArrayList<MediumPassage>();
 		keytypes= new ArrayList<Token>();
 		playerkeys= new ArrayList<Token>();
-		depositata=true;
-		this.peso_max_trasportabile=peso_max_trasportabile;
-		this.numero_max_trasportabile=numero_max_trasportabile;
-		this.peso_max_chiave=peso_max_chiave;
+		deposited=true;
+		this.max_transportable_keys_weight=max_transportable_keys_weight;
+		this.max_transportable_keys_number=max_transportable_keys_number;
+		this.max_key_weight=max_key_weight;
 		
 		for(int h=0;h<height;h++){                                             //genera tutti luoghi combinando le max coordinate
 			for(int w=0;w<width;w++){
 				for(int d=0;d<depth;d++){
 					
-					grounds.add(new MediumGround(h, w, d, nome_luoghi+" "+h+""+w+""+d));
+					grounds.add(new MediumGround(h, w, d, _ground_name+" "+h+""+w+""+d));
 				}
 			}
 		}
@@ -123,27 +123,27 @@ public class MediumWorld extends World{
 
 
 
-	public boolean isDepositata() {
-		return depositata;
+	public boolean isDeposited() {
+		return deposited;
 	}
 
 
-	public int getPeso_max_trasportabile() {
-		return peso_max_trasportabile;
-	}
-
-
-
-
-	public int getNumero_max_trasportabile() {
-		return numero_max_trasportabile;
+	public int getMax_transportable_keys_weight() {
+		return max_transportable_keys_weight;
 	}
 
 
 
 
-	public int getPeso_max_chiave() {
-		return peso_max_chiave;
+	public int getMax_transportable_keys_number() {
+		return max_transportable_keys_number;
+	}
+
+
+
+
+	public int getMax_key_weight() {
+		return max_key_weight;
 	}
 
 
@@ -162,27 +162,27 @@ public class MediumWorld extends World{
 	}
 
 
-	public void setDepositata(boolean depositata) {
-		this.depositata = depositata;
+	public void setDeposited(boolean depositata) {
+		this.deposited = depositata;
 	}
 
 
-	public void setPeso_max_trasportabile(int peso_max_trasportabile) {
-		this.peso_max_trasportabile = peso_max_trasportabile;
-	}
-
-
-
-
-	public void setNumero_max_trasportabile(int numero_max_trasportabile) {
-		this.numero_max_trasportabile = numero_max_trasportabile;
+	public void setMax_transportable_keys_weight(int max_transportable_keys_weight) {
+		this.max_transportable_keys_weight = max_transportable_keys_weight;
 	}
 
 
 
 
-	public void setPeso_max_chiave(int peso_max_chiave) {
-		this.peso_max_chiave = peso_max_chiave;
+	public void setMax_transportable_keys_number(int max_transportable_keys_number) {
+		this.max_transportable_keys_number = max_transportable_keys_number;
+	}
+
+
+
+
+	public void setMax_key_weight(int max_key_weight) {
+		this.max_key_weight = max_key_weight;
 	}
 
 

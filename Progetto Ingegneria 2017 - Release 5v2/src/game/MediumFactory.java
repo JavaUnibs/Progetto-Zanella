@@ -13,7 +13,7 @@ public class MediumFactory extends Factory{
 	private HashMap<String, String[]> values;
 	private HashMap<String, String> common_string;
 	private HashMap<String, String> local_string;
-	private MediumWorld mondo;
+	private MediumWorld world;
 	
 	MediumFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
@@ -33,13 +33,13 @@ public class MediumFactory extends Factory{
 		int end_height=Integer.parseInt(values.get("END_H")[0]);
 		int end_width=Integer.parseInt(values.get("END_W")[0]);
 		int end_depth=Integer.parseInt(values.get("END_D")[0]);
-		int peso_max_trasportabile=Integer.parseInt(values.get("PESO_MAX_TRAS")[0]);
-		int numero_max_trasportabile=Integer.parseInt(values.get("NUM_MAX_TRAS")[0]);
-		int peso_max_chiave=Integer.parseInt(values.get("PESO_MAX_CHIAVE")[0]);
-		String nome_luoghi=values.get("NOME_LUOGHI")[0];
-		mondo=new MediumWorld(height, width, depth, peso_max_trasportabile, numero_max_trasportabile, peso_max_chiave, nome_luoghi);
-		mondo.searchGround(start_height, start_width, start_depth).setStart(true);
-		mondo.searchGround(end_height, end_width, end_depth).setEnd(true);
+		int max_transportable_keys_weight=Integer.parseInt(values.get("PESO_MAX_TRAS")[0]);
+		int max_transportable_keys_number=Integer.parseInt(values.get("NUM_MAX_TRAS")[0]);
+		int max_key_weight=Integer.parseInt(values.get("PESO_MAX_CHIAVE")[0]);
+		String ground_name=values.get("NOME_LUOGHI")[0];
+		world=new MediumWorld(height, width, depth, max_transportable_keys_weight, max_transportable_keys_number, max_key_weight, ground_name);
+		world.searchGround(start_height, start_width, start_depth).setStart(true);
+		world.searchGround(end_height, end_width, end_depth).setEnd(true);
 		
 			if(!openPassages(values.get("PASSAGGI_APERTI"))) return null;
 			addKeys(values.get("CHIAVI"));
@@ -49,19 +49,19 @@ public class MediumFactory extends Factory{
 			System.out.println(INCORRECT_FILE);
 			return null;
 		}
-		return mondo;
+		return world;
 		
 	}
 
 	
 	public Navigation getNavigation() {
-		MediumNavigation navigation= new MediumNavigation(mondo, local_string, common_string);
+		MediumNavigation navigation= new MediumNavigation(world, local_string, common_string);
 		return navigation;
 	}
 
 	
 	public ModifyWorld getModify() {
-		ModifyMediumWorld modify= new ModifyMediumWorld(mondo);
+		ModifyMediumWorld modify= new ModifyMediumWorld(world);
 		return modify;
 	}
 	
@@ -77,13 +77,13 @@ public class MediumFactory extends Factory{
 				int h2=Integer.parseInt(array[i].substring(4, 5));
 				int w2=Integer.parseInt(array[i].substring(5, 6));
 				int d2=Integer.parseInt(array[i].substring(6, 7));
-				MediumGround g1= mondo.searchGround(h1, w1, d1);
-				MediumGround g2= mondo.searchGround(h2, w2, d2);
+				MediumGround g1= world.searchGround(h1, w1, d1);
+				MediumGround g2= world.searchGround(h2, w2, d2);
 
 
 
 				if((g1!=null)&&(g2!=null)){
-					MediumPassage p= mondo.searchPassage(g1, g2);
+					MediumPassage p= world.searchPassage(g1, g2);
 					if (p!=null) {
 						p.setOpen(true);
 					}
@@ -118,7 +118,7 @@ public class MediumFactory extends Factory{
 				Token key=null;
 				
 				boolean exists=false;
-				for(Token a:mondo.getKeytypes()) {
+				for(Token a:world.getKeytypes()) {
 					if (a.getName().equalsIgnoreCase(temp)) {
 						key=a;
 						exists=true;
@@ -133,7 +133,7 @@ public class MediumFactory extends Factory{
 				}
 				
 				
-					if((gtemp=mondo.searchGround(h, w, d))!=null){
+					if((gtemp=world.searchGround(h, w, d))!=null){
 						gtemp.setKey(key);
 					} else{
 						
@@ -165,13 +165,13 @@ public class MediumFactory extends Factory{
 				int w2=Integer.parseInt(array[i].substring(5, 6));
 				int d2=Integer.parseInt(array[i].substring(6, 7));
 				String temp=array[i].substring(8);
-				MediumGround g1= mondo.searchGround(h1, w1, d1);
-				MediumGround g2= mondo.searchGround(h2, w2, d2);
+				MediumGround g1= world.searchGround(h1, w1, d1);
+				MediumGround g2= world.searchGround(h2, w2, d2);
 				Token key=null;
 				
 				
 				boolean exists=false;
-				for(Token a:mondo.getKeytypes()) {
+				for(Token a:world.getKeytypes()) {
 					if (a.getName().equalsIgnoreCase(temp)) {
 						key=a;
 						exists=true;
@@ -187,7 +187,7 @@ public class MediumFactory extends Factory{
 
 
 				if((g1!=null)&&(g2!=null)){
-					MediumPassage p= mondo.searchPassage(g1, g2);
+					MediumPassage p= world.searchPassage(g1, g2);
 					if (p!=null) {
 						if(key!=null){
 							p.setKey(key);
@@ -222,7 +222,7 @@ public class MediumFactory extends Factory{
 			String name= s.substring(s.indexOf("-")+1);
 			
 			boolean exists=false;
-			for(Token b: mondo.getKeytypes()){ 
+			for(Token b: world.getKeytypes()){ 
 				if(b.getName().equalsIgnoreCase(name)) {
 				System.out.println("Questa chiave esiste già");
 				exists=true;
@@ -230,7 +230,7 @@ public class MediumFactory extends Factory{
 			}
 				
 			}
-			if(!exists) mondo.getKeytypes().add(new Token(value, name));
+			if(!exists) world.getKeytypes().add(new Token(value, name));
 		}
 		
 		

@@ -7,14 +7,14 @@ import it.unibs.ing.myutility.Menu;
 public class BasicNavigation extends Navigation{
 	
 	private static final long serialVersionUID = 2L;
-	private final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	private BasicWorld mondo;
+	private final String[] DIRECTION_MENU = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
+	private BasicWorld world;
 	private HashMap<String, String> local_string, common_string;
-	private Menu elenco_dir;
+	private Menu direction_list;
 	
-	BasicNavigation(World mondo, HashMap<String, String> local_string, HashMap<String, String> common_string){
-		elenco_dir= new Menu(MENU_DIREZIONI);
-		this.mondo=(BasicWorld) mondo;
+	BasicNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
+		direction_list= new Menu(DIRECTION_MENU);
+		this.world=(BasicWorld) world;
 		this.local_string=local_string;
 		this.common_string=common_string;
 	}
@@ -22,54 +22,54 @@ public class BasicNavigation extends Navigation{
 	
 	
 	
-	public Ground navigate(Ground luogo_corr) {
-		BasicGround luogo_corrente= (BasicGround) luogo_corr;
-		BasicGround luogo_prossimo;
-		int scelta_dir;
+	public Ground navigate(Ground _current_ground) {
+		BasicGround current_ground= (BasicGround) _current_ground;
+		BasicGround next_ground;
+		int direction_choice;
 		
 		do{
 
-			luogo_prossimo=luogo_corrente;
+			next_ground=current_ground;
 			
-			if(luogo_corrente.isEnd()) {
+			if(current_ground.isEnd()) {
 				System.out.println(local_string.get("END"));
 				return null;	
 			}
 			
-			scelta_dir=elenco_dir.stampaMenu();
+			direction_choice=direction_list.stampaMenu();
 			
-			switch(scelta_dir){
+			switch(direction_choice){
 			
 			case 0:{}; break;
 			case 1: {
 				
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight()+1, luogo_corrente.getWidth(), luogo_corrente.getLevel());
+				next_ground= world.searchGround(current_ground.getHeight()+1, current_ground.getWidth(), current_ground.getLevel());
 			}
 			
 		    break;
 		    
 			case 2:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight()-1, luogo_corrente.getWidth(), luogo_corrente.getLevel());
+				next_ground= world.searchGround(current_ground.getHeight()-1, current_ground.getWidth(), current_ground.getLevel());
 				
 			}break;
 			
 			case 3:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight(), luogo_corrente.getWidth()-1, luogo_corrente.getLevel());
+				next_ground= world.searchGround(current_ground.getHeight(), current_ground.getWidth()-1, current_ground.getLevel());
 				
 			}break;
 			
 			case 4:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight(), luogo_corrente.getWidth()+1, luogo_corrente.getLevel());
+				next_ground= world.searchGround(current_ground.getHeight(), current_ground.getWidth()+1, current_ground.getLevel());
 				
 			}break;
 			
 			case 5:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight(), luogo_corrente.getWidth(), luogo_corrente.getLevel()+1);
+				next_ground= world.searchGround(current_ground.getHeight(), current_ground.getWidth(), current_ground.getLevel()+1);
 				
 			}break;
 			
 			case 6:{
-				luogo_prossimo= mondo.searchGround(luogo_corrente.getHeight(), luogo_corrente.getWidth(), luogo_corrente.getLevel()-1);
+				next_ground= world.searchGround(current_ground.getHeight(), current_ground.getWidth(), current_ground.getLevel()-1);
 				
 			}break;
 			
@@ -78,20 +78,20 @@ public class BasicNavigation extends Navigation{
 			
 			}
 			
-			if(luogo_prossimo==null) System.out.println(local_string.get("NO_GROUND"));
-			else if(luogo_prossimo==luogo_corrente);
+			if(next_ground==null) System.out.println(local_string.get("NO_GROUND"));
+			else if(next_ground==current_ground);
 			else {
 				
-				BasicPassage ptemp=mondo.searchPassage(luogo_corrente, luogo_prossimo);
+				BasicPassage ptemp=world.searchPassage(current_ground, next_ground);
 				if(ptemp==null) System.out.println("Passaggio nullo ---- Incongruenza");
-				else if(ptemp.isOpen()) luogo_corrente=luogo_prossimo;
+				else if(ptemp.isOpen()) current_ground=next_ground;
 				else System.out.println(local_string.get("CLOSED_PASSAGE"));
 			}
 			
-		}while(scelta_dir!=0);
+		}while(direction_choice!=0);
 		
 		
-		return luogo_corrente;
+		return current_ground;
 	}
 	
 
