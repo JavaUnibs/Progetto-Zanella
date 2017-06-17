@@ -25,10 +25,16 @@ public class Main {
 		Navigation navigation=null;
 		
 		try {
-			common_string=new TxtToHashmap("files\\COMMON_STRINGS.txt").convertToString();
+			if(System.getProperty("os.name").equals("Linux")){
+				common_string=new TxtToHashmap("files/COMMON_STRINGS.txt").convertToString();
+			}
+			else{
+				common_string=new TxtToHashmap("files\\COMMON_STRINGS.txt").convertToString();
+			}
+		
 		} catch (IOException e1) {
-			System.out.println("Errore nel caricamento del file delle stringhe comuni");
-			return;
+		System.out.println("Errore nel caricamento del file delle stringhe comuni");
+		return;
 		}
 	
 	//---------------------------------------------------------------------------------------------Scelta di caricamento
