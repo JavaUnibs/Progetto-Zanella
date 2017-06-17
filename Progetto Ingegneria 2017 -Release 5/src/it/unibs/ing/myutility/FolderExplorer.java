@@ -29,6 +29,7 @@ public class FolderExplorer {
 	}
 	
 	public static ArrayList<File> listFiles(String path){
+		getOS();
 		if(opSys.equals("Linux")){
 			File directory= new File(getCurrentDirectory()+"/"+path);
 			return new ArrayList<File>(Arrays.asList(directory.listFiles()));
@@ -40,6 +41,7 @@ public class FolderExplorer {
 	}
 	
 	public static ArrayList<String> listFileNames(String path){
+		getOS();
 		if(opSys.equals("Linux")){
 			File directory= new File(getCurrentDirectory()+"/"+path);
 			return new ArrayList<String>(Arrays.asList(directory.list()));
