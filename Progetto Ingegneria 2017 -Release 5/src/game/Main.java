@@ -24,7 +24,13 @@ public class Main {
 		HashMap<String, String[]> values=null;
 		
 			try {
-				common_string=new TxtToHashmap("files\\COMMON_STRINGS.txt").convertToString();
+					if(System.getProperty("os.name").equals("Linux")){
+						common_string=new TxtToHashmap("files/COMMON_STRINGS.txt").convertToString();
+					}
+					else{
+						common_string=new TxtToHashmap("files\\COMMON_STRINGS.txt").convertToString();
+					}
+				
 			} catch (IOException e1) {
 				System.out.println("Errore nel caricamento del file delle stringhe comuni");
 				return;
@@ -85,7 +91,7 @@ public class Main {
 		else{
 			
 			File nome_mondo;
-			Iterator<File> fileList = FolderExplorer.listFiles("files").iterator();
+			Iterator<File> fileList = FolderExplorer.listFiles("/files").iterator();
 			ArrayList<File> directoryList = new ArrayList<>();
 			while(fileList.hasNext()) { 
 				File file = fileList.next(); 
