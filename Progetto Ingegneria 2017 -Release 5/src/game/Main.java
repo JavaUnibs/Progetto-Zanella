@@ -91,7 +91,7 @@ public class Main {
 		else{
 			
 			File nome_mondo;
-			Iterator<File> fileList = FolderExplorer.listFiles("/files").iterator();
+			Iterator<File> fileList = FolderExplorer.listFiles("files").iterator();
 			ArrayList<File> directoryList = new ArrayList<>();
 			while(fileList.hasNext()) { 
 				File file = fileList.next(); 
