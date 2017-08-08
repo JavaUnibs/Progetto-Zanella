@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import it.unibs.ing.myutility.RandomValues;
 
+/**
+ * Classe che rappresenta l'oggetto Trial, ovvero le prove che il giocatore dovrà sostenere.
+ */
 public class Trial implements Serializable{
 	
 	private static final long serialVersionUID = 2L;
@@ -13,6 +16,12 @@ public class Trial implements Serializable{
 	private String name;
 	private HashMap<String,String> quiz;
 	
+	/**
+	 * Costruttore della classe Trial, inizializza ogni prova attribuendo un punteggio e un nome.
+	 * 
+	 * @param points
+	 * @param name
+	 */
 	Trial(int points, String name){
 		this.points=points;
 		this.name=name;
@@ -43,7 +52,12 @@ public class Trial implements Serializable{
 		this.quiz = quiz;
 	}
 
-
+	/**
+	 * Metodo che ritorna casualmente una prova.
+	 * 
+	 * @pre array non sia vuoto
+	 * @return oggetto Trial presente nell'HashMap quiz 
+	 */
 	String getQuestion(){
 		
 			int rnd=RandomValues.ranIntLimite(0, quiz.size()-1);
@@ -53,6 +67,13 @@ public class Trial implements Serializable{
 			
 	}
 	
+	/**
+	 * Metodo che ritorna true se la risposta alla domanda passata è corretta, altrimenti false
+	 * 
+	 * @param domanda nome della domanda passata
+	 * @param risposta
+	 * @return true se risposta corretta, false se risposta è errata
+	 */
 	boolean getAnswer(String domanda, String risposta){
 		
 		if(quiz.get(domanda).equalsIgnoreCase(risposta)) return true;

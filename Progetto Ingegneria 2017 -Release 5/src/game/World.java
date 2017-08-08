@@ -7,6 +7,9 @@ import java.util.Iterator;
 
 import it.unibs.ing.myutility.RandomValues;
 
+/**
+ * Classe che rappresenta il mondo di gioco caratterizzato da Ground, Passage, Token, Trial
+ */
 public class World implements Serializable{
 
 	private static final long serialVersionUID = 2L;
@@ -25,7 +28,21 @@ public class World implements Serializable{
 	private int punteggio_finale;
 	private int punteggio_max_prova;
 	
-	
+	/**
+	 * Costruttore per la classe World genera il mondo, che permetterà al giocatore di giocare, con i relativi parametri assegnati, che riguardano sia la dimensione del mondo 
+	 * che le caratteristiche relative alla partita, come il punteggio, e al giocatore.
+	 * 
+	 * @param height
+	 * @param width
+	 * @param depth
+	 * @param peso_max_trasportabile
+	 * @param numero_max_trasportabile
+	 * @param peso_max_chiave
+	 * @param punteggio_finale
+	 * @param punteggio_max_prova
+	 * @param points 
+	 * @param nome_luoghi
+ 	 */
 	
 	World(int height, int width, int depth, int peso_max_trasportabile, int numero_max_trasportabile, int peso_max_chiave, int punteggio_finale, int punteggio_max_prova, int points, String nome_luoghi){
 
@@ -84,7 +101,14 @@ public class World implements Serializable{
 	
 	
 	
-	
+	/**
+	 * Metodo per la ricerca di un oggeto di tipo Ground, utilizzato per restituire la posizione del giocatore durante il gioco.
+	 * 
+	 * @param h maggiore di 0 e minore o uguale dell'altezza del mondo
+	 * @param w maggiore di 0 e minore o uguale della larghezza del mondo
+	 * @param d maggiore di 0 e minore o uguale della profondità del mondo
+	 * @return a o null, oggetto di tipo Ground o nullo nel caso non sia stata trovata una corrispondenza
+	 */
 	Ground searchGround(int h, int w, int d){
 		for(Ground a: grounds){
 			if ((a.getHeight()==h) && (a.getWidth()==w) && (a.getLevel()==d)) return a;
@@ -94,7 +118,13 @@ public class World implements Serializable{
 	
 	
 	
-	
+	/**
+	 * Metodo per determinare l'esistenza o meno del passaggio tra due luoghi a e b 
+	 * 
+	 * @param a luogo corrente
+	 * @param b luogo futuro
+	 * @return z o null, oggetto di tipo Passage oppure nullo 
+	 */
 	Passage searchPassage(Ground a, Ground b){
 		for (Passage z: passages){
 			if(z.getGrounda().equals(a)&&z.getGroundb().equals(b)) return z;
@@ -103,6 +133,12 @@ public class World implements Serializable{
 		return null;
 	}
 	
+	/**
+	 * Metodo utilizzato per verificare l'esistenza di una prova nel mondo.
+	 * 
+	 * @param name, nome della prova da cercare
+	 * @return t o null, oggetto Trial o null 
+	 */
 	Trial searchTrial(String name){
 		for(Trial t:trials){
 			if(t.getName().equalsIgnoreCase(name))
@@ -111,6 +147,12 @@ public class World implements Serializable{
 		 return null;
 	}
 	
+	/**
+	 * Metodo utilizzato per verificare l'esistenza di una chiave nel mondo.
+	 * 
+	 * @param name, nome della chiave da cercare
+	 * @return t o null, oggetto Token o null 
+	 */
 	Token searchKeyTypes(String name){
 		for(Token t:keytypes){
 			if(t.getName().equalsIgnoreCase(name))
@@ -128,7 +170,12 @@ public class World implements Serializable{
 	}
 	
 	
-	
+	/**
+	 * Metodo per l'aggiornamento dei punti in base alla risposta data alla prova.
+	 * 
+	 * @param trial, oggetto Trial che identifica la prova sostenuta
+	 * @param correct valore booleano che contiene il risultato della risposta, true o false.
+	 */
 	void updatePoint(Trial trial, boolean correct){
 		int points=trial.getPoints();
 		if(correct) this.points=this.points+points;
@@ -136,6 +183,12 @@ public class World implements Serializable{
 		if(this.points<0) this.points=0;
 	}
 	
+	/**
+	 * Metodo che ritorna il peso totale delle chiavi
+	 * 
+	 * @post weight >= 0
+	 * @return weight peso totale delle chiavi trasportate dal giocatore
+	 */
 	int totWeight(){
 		int weight=0;
 		for(Token key: playerkeys) weight=weight+key.getWeight();
