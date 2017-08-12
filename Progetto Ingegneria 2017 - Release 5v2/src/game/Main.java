@@ -111,11 +111,18 @@ public class Main {
 				}
 				
 				try {
-					local_string=new TxtToHashmap(world_name.getAbsolutePath()+"\\local_string.txt").convertToString();
-					values= new TxtToHashmap(world_name.getAbsolutePath()+"\\values.txt").convertToArray();
+					if(System.getProperty("os.name").equals("Linux")){
+						local_string=new TxtToHashmap(world_name.getAbsolutePath()+"//local_string.txt").convertToString();
+						values= new TxtToHashmap(world_name.getAbsolutePath()+"//values.txt").convertToArray();
+					}
+					else{
+						local_string=new TxtToHashmap(world_name.getAbsolutePath()+"\\local_string.txt").convertToString();
+						values= new TxtToHashmap(world_name.getAbsolutePath()+"\\values.txt").convertToArray();
+					}
+					
 				} catch (IOException e) {
-						System.out.println("Errore nel caricamento dei file delle stringhe locali o valori");
-						return;
+					System.out.println("Errore nel caricamento dei file delle stringhe locali o valori");
+					return;
 				}
 				
 				Factory factory= SetupGame.getFactory(values, common_string, local_string);
