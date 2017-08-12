@@ -116,8 +116,15 @@ public class Main {
 			
 			
 				try {
-					local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\local_string.txt").convertToString();
-					values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\values.txt").convertToArray();
+					if(System.getProperty("os.name").equals("Linux")){
+						local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"//local_string.txt").convertToString();
+						values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"//values.txt").convertToArray();
+					}
+					else{
+						local_string=new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\local_string.txt").convertToString();
+						values= new TxtToHashmap(nome_mondo.getAbsolutePath()+"\\values.txt").convertToArray();
+					}
+					
 				} catch (IOException e) {
 					System.out.println("Errore nel caricamento dei file delle stringhe locali o valori");
 					return;

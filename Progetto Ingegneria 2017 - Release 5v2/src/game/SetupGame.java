@@ -2,6 +2,11 @@ package game;
 
 import java.util.HashMap;
 
+import game.Abstract.Factory;
+import game.Advanced.AdvancedFactory;
+import game.Basic.BasicFactory;
+import game.Medium.MediumFactory;
+
 public class SetupGame {
 	
 	

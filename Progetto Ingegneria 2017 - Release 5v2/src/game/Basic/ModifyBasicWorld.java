@@ -1,4 +1,6 @@
-package game;
+package game.Basic;
+
+import game.Abstract.ModifyWorld;
 
 public class ModifyBasicWorld extends ModifyWorld{
 

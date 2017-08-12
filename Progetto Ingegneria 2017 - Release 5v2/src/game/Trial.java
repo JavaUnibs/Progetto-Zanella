@@ -13,7 +13,7 @@ public class Trial implements Serializable{
 	private String name;
 	private HashMap<String,String> quiz;
 	
-	Trial(int points, String name){
+	public Trial(int points, String name){
 		this.points=points;
 		this.name=name;
 		quiz= new HashMap<String,String>();
@@ -44,7 +44,7 @@ public class Trial implements Serializable{
 	}
 
 
-	String getQuestion(){
+	public String getQuestion(){
 		
 			int rnd=RandomValues.ranIntLimite(0, quiz.size()-1);
 			String[] array = new String[quiz.size()];
@@ -53,7 +53,7 @@ public class Trial implements Serializable{
 			
 	}
 	
-	boolean getAnswer(String question, String answer){
+	public boolean getAnswer(String question, String answer){
 		
 		if(quiz.get(question).equalsIgnoreCase(answer)) return true;
 		return false;

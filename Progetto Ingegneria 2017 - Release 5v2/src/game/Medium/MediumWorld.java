@@ -1,7 +1,12 @@
-package game;
+package game.Medium;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import game.Token;
+import game.Abstract.Ground;
+import game.Abstract.Passage;
+import game.Abstract.World;
 
 public class MediumWorld extends World{
 	

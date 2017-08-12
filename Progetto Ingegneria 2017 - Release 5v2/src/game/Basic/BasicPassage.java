@@ -1,4 +1,7 @@
-package game;
+package game.Basic;
+
+import game.Abstract.Ground;
+import game.Abstract.Passage;
 
 public class BasicPassage extends Passage {
 	

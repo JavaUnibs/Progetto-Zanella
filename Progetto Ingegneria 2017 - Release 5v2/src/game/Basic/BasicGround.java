@@ -1,4 +1,6 @@
-package game;
+package game.Basic;
+
+import game.Abstract.Ground;
 
 public class BasicGround extends Ground{
 	

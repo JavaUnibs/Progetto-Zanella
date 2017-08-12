@@ -1,6 +1,12 @@
-package game;
+package game.Medium;
 
 import java.util.HashMap;
+
+import game.Token;
+import game.Abstract.Factory;
+import game.Abstract.ModifyWorld;
+import game.Abstract.Navigation;
+import game.Abstract.World;
 
 public class MediumFactory extends Factory{
 	private final String NO_GROUND="E' stata immessa una stringa con un luogo inesistente";
@@ -15,7 +21,7 @@ public class MediumFactory extends Factory{
 	private HashMap<String, String> local_string;
 	private MediumWorld world;
 	
-	MediumFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
+	public MediumFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
 		this.local_string=local_string;
 		this.common_string=common_string;

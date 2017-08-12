@@ -3,6 +3,10 @@ package game;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import game.Abstract.Ground;
+import game.Abstract.Navigation;
+import game.Abstract.World;
+
 public class Save implements Serializable{
 
 private static final long serialVersionUID = 2L;

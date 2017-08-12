@@ -1,6 +1,11 @@
-package game;
+package game.Basic;
 
 import java.util.HashMap;
+
+import game.Abstract.Factory;
+import game.Abstract.ModifyWorld;
+import game.Abstract.Navigation;
+import game.Abstract.World;
 
 public class BasicFactory extends Factory{
 	private final String NO_GROUND="E' stata immessa una stringa con un luogo inesistente";
@@ -12,7 +17,7 @@ public class BasicFactory extends Factory{
 	private HashMap<String, String> local_string;
 	private BasicWorld world;
 	
-	BasicFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
+	public BasicFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
 		this.local_string=local_string;
 		this.common_string=common_string;

@@ -1,7 +1,14 @@
-package game;
+package game.Advanced;
 
 import java.util.HashMap;
 
+import game.Token;
+import game.Trial;
+import game.Abstract.Factory;
+import game.Abstract.ModifyWorld;
+import game.Abstract.Navigation;
+import game.Abstract.World;
+import game.Medium.MediumPassage;
 import it.unibs.ing.myutility.RandomValues;
 
 public class AdvancedFactory extends Factory{
@@ -18,7 +25,7 @@ public class AdvancedFactory extends Factory{
 	private HashMap<String, String> local_string;
 	private AdvancedWorld world;
 	
-	AdvancedFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
+	public AdvancedFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
 		this.local_string=local_string;
 		this.common_string=common_string;

@@ -1,7 +1,10 @@
-package game;
+package game.Basic;
 
 import java.util.HashMap;
 
+import game.Abstract.Ground;
+import game.Abstract.Navigation;
+import game.Abstract.World;
 import it.unibs.ing.myutility.Menu;
 
 public class BasicNavigation extends Navigation{

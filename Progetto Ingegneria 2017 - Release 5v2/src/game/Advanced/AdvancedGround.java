@@ -1,6 +1,10 @@
-package game;
+package game.Advanced;
 
-public class MediumGround extends Ground{
+import game.Token;
+import game.Trial;
+import game.Abstract.Ground;
+
+public class AdvancedGround extends Ground {
 	
 	private static final long serialVersionUID = 2L;
 	private int level;
@@ -10,14 +14,15 @@ public class MediumGround extends Ground{
 	private boolean end;
 	private String name;
 	private Token key;
+	private Trial trial;
 	
-	
-	MediumGround(int height, int width, int level, String name){
+	AdvancedGround(int height, int width, int level, String name){
 		this.level=level;
 		this.name=name;
 		this.height=height;
 		this.width=width;
 		key=null;
+		trial=null;
 		start=false;
 		end=false;
 	}
@@ -76,6 +81,14 @@ public class MediumGround extends Ground{
 	
 	public Token getKey(){
 		return key;
+	}
+
+	public Trial getTrial() {
+		return trial;
+	}
+
+	public void setTrial(Trial trial) {
+		this.trial = trial;
 	}
 
 }

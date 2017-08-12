@@ -1,4 +1,8 @@
-package game;
+package game.Medium;
+
+import game.Token;
+import game.Abstract.Ground;
+import game.Abstract.Passage;
 
 public class MediumPassage extends Passage {
 	
@@ -9,7 +13,7 @@ public class MediumPassage extends Passage {
 	private String id;
 	private Token key;
 	
-	MediumPassage(Ground grounda, Ground groundb){
+	public MediumPassage(Ground grounda, Ground groundb){
 		this.grounda=grounda;
 		this.groundb=groundb;
 		key=null;

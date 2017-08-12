@@ -1,4 +1,4 @@
-package game;
+package game.Abstract;
 
 public abstract class ModifyWorld {
 

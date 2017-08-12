@@ -1,30 +1,34 @@
-package game;
+package game.Medium;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import game.Token;
+import game.Abstract.Ground;
+import game.Abstract.Navigation;
+import game.Abstract.World;
 import it.unibs.ing.myutility.LeggiInput;
 import it.unibs.ing.myutility.Menu;
 
-public class AdvancedNavigation extends Navigation{
-	
+public class MediumNavigation extends Navigation{
+
 	private static final long serialVersionUID = 2L;
 	private final String[] DIRECTION_MENU = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
-	private AdvancedWorld world;
+	private MediumWorld world;
 	private HashMap<String, String> local_string, common_string;
 	private Menu direction_list;
 	
-	AdvancedNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
+	MediumNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
 		direction_list= new Menu(DIRECTION_MENU);
-		this.world=(AdvancedWorld) world;
+		this.world=(MediumWorld) world;
 		this.local_string=local_string;
 		this.common_string=common_string;
 	}
 
 	
 	public Ground navigate(Ground _current_ground) {
-		AdvancedGround current_ground= (AdvancedGround) _current_ground;
-		AdvancedGround next_ground;
+		MediumGround current_ground= (MediumGround) _current_ground;
+		MediumGround next_ground;
 		int direction_choice;
 		
 		do{
@@ -32,40 +36,26 @@ public class AdvancedNavigation extends Navigation{
 			
 			if(current_ground.isEnd()) {
 				System.out.println(local_string.get("END"));
-				if(world.getTrials().isEmpty()) 
-					return null;
-				else {
-					if(!world.getTrials().isEmpty() && world.getPoints()<world.getFinal_score()) 
-						System.out.println(local_string.get("INSUFF_POINTS"));
-					else if(!world.getTrials().isEmpty() && world.getPoints()>=world.getFinal_score()) {
-							System.out.println(local_string.get("ENOUGH_POINTS"));
-							return null;
-					}
-				}
+				return null;	
 			}
+			//---------------------------------------------------------------------------------------------------
 			
-			//----------------------------------------------------------------------------------------------------
-	
+			
 			if(current_ground.getKey()!=null&&!world.isDeposited()) {
 				System.out.println(local_string.get("KEY_PRESENT") + current_ground.getKey());
 				if(LeggiInput.doppiaScelta(local_string.get("GET_KEY"))) System.out.println(retrieveKey(current_ground));
 				
 			}
-			
-			//-------------------------------------------------------------------------------------------
+			//-----------------------------------------------------------------------------------------------------
 			
 			else if(!world.getPlayerkeys().isEmpty()&&!current_ground.isEnd()&&!current_ground.isStart()&&current_ground.getKey()==null&&
-					LeggiInput.doppiaScelta(local_string.get("PUT_KEY"))
-					){
-						System.out.println(depositKey(current_ground));
-			}
-			//-------------------------------------------------------------------------------------------------------------------------
-			if(!world.isTrialDone()&&current_ground.getTrial()!=null&&LeggiInput.doppiaScelta(local_string.get("TRIAL")+current_ground.getTrial()+local_string.get("TRIAL2"))){
-			System.out.println(attemptTrial(current_ground));
-			System.out.println(local_string.get("POINTS")+world.getPoints());
+					LeggiInput.doppiaScelta(local_string.get("PUT_KEY"))){
+				
+				System.out.println(depositKey(current_ground));
+
 			}
 			
-			//--------------------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------------------------------------------
 			
 			direction_choice=direction_list.stampaMenu();
 			
@@ -108,16 +98,17 @@ public class AdvancedNavigation extends Navigation{
 			break;
 			
 			}
-			
-			//----------------------------------------------------------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------------------------------
 			attemptEntry(current_ground, next_ground);
 			
 		}while(direction_choice!=0);
 		
 		return current_ground;
+		
 	}
-
-	private String retrieveKey(AdvancedGround current_ground){
+	
+	
+	private String retrieveKey(MediumGround current_ground){
 		int total_weight=world.totWeight();
 		int total_number=world.getPlayerkeys().size();
 		Token key=current_ground.getKey();
@@ -130,7 +121,7 @@ public class AdvancedNavigation extends Navigation{
 			else return local_string.get("WEIGHT");
 	}
 	
-	private String depositKey(AdvancedGround current_ground){
+	private String depositKey(MediumGround current_ground){
 		ArrayList<String> temp= new ArrayList<String>();
 		for(Token a: world.getPlayerkeys()) temp.add(a.toString());
 		String[] temp2= new String[temp.size()];
@@ -150,19 +141,7 @@ public class AdvancedNavigation extends Navigation{
 		}else return common_string.get("NO_OPZ");
 	}
 	
-	private String attemptTrial(AdvancedGround current_ground){
-			Trial trial= current_ground.getTrial();
-			String question=trial.getQuestion();
-			LeggiInput.terminaRiga();
-			String answer=LeggiInput.riga(question);
-			boolean correct= trial.getAnswer(question, answer);
-			world.updatePoint(trial, correct);
-			world.setTrial_done(true);
-			if(correct) return local_string.get("RIGHT");
-			else return local_string.get("WRONG");
-	}
-	
-	private void attemptEntry(AdvancedGround current_ground, AdvancedGround next_ground){
+	private void attemptEntry(MediumGround current_ground, MediumGround next_ground){
 		if(next_ground==null) System.out.println(local_string.get("NO_GROUND"));
 		else if(next_ground==current_ground);
 		else {
@@ -184,10 +163,11 @@ public class AdvancedNavigation extends Navigation{
 						current_ground=next_ground;
 						System.out.println(local_string.get("CURRENT_GROUND")+current_ground.getName());
 						world.setDeposited(false);
-						world.setTrial_done(false);
 					}
 					else if(ptemp.getKey()==null) System.out.println(local_string.get("CLOSED_PASSAGE"));
 				}
 		}
 	}
+	
+	
 }

@@ -1,7 +1,11 @@
-package game;
+package game.Basic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import game.Abstract.Ground;
+import game.Abstract.Passage;
+import game.Abstract.World;
 
 public class BasicWorld extends World{
 	

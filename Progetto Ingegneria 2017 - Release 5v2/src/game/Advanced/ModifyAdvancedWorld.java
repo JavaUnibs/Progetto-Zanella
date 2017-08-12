@@ -1,8 +1,13 @@
-package game;
+package game.Advanced;
 import it.unibs.ing.myutility.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+
+import game.Token;
+import game.Trial;
+import game.Abstract.ModifyWorld;
+import game.Medium.MediumPassage;
 
 public class ModifyAdvancedWorld extends ModifyWorld
 {
@@ -36,7 +41,7 @@ public class ModifyAdvancedWorld extends ModifyWorld
 	private final String MODIFY_OK="Modifica effettuata";
 	private AdvancedWorld world;
 
-	ModifyAdvancedWorld(AdvancedWorld world){
+	public ModifyAdvancedWorld(AdvancedWorld world){
 		this.world=world;
 	}
 	public void initialize() {

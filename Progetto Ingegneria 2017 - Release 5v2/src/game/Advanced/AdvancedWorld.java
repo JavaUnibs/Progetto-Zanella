@@ -1,7 +1,14 @@
-package game;
+package game.Advanced;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import game.Token;
+import game.Trial;
+import game.Abstract.Ground;
+import game.Abstract.Passage;
+import game.Abstract.World;
+import game.Medium.MediumPassage;
 
 public class AdvancedWorld extends World{
 	
@@ -97,7 +104,7 @@ public class AdvancedWorld extends World{
 		return null;
 	}
 	
-	Trial searchTrial(String name){
+	public Trial searchTrial(String name){
 		for(Trial t:trials){
 			if(t.getName().equalsIgnoreCase(name))
 			return t;
@@ -105,7 +112,7 @@ public class AdvancedWorld extends World{
 		 return null;
 	}
 	
-	Token searchKeyTypes(String name){
+	public Token searchKeyTypes(String name){
 		for(Token t:keytypes){
 			if(t.getName().equalsIgnoreCase(name))
 			return t;
