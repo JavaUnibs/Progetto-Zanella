@@ -26,6 +26,7 @@ public class TxtToHashmap {
 
 	    String line;
 	    BufferedReader reader;
+	    String multiple_line=null;
 		try {
 			reader = new BufferedReader(new FileReader(filePath));
 			
@@ -35,10 +36,13 @@ public class TxtToHashmap {
 		        if (parts.length >= 2)
 		        {
 		            String key = parts[0];
+		            multiple_line=key;
 		            String value = parts[1];
 		            map.put(key, value);
 		        } else {
-		            System.out.println("ignoring line: " + line);
+		            
+		            String line2=map.get(multiple_line);
+		            map.put(multiple_line, line2+"\n"+line);
 		        }
 		    }
 			
