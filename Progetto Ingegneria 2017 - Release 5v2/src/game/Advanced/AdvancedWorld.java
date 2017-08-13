@@ -12,7 +12,7 @@ import game.Medium.MediumPassage;
 
 public class AdvancedWorld extends World{
 	
-	private static final long serialVersionUID = 2L;
+
 	private ArrayList<AdvancedGround> grounds;
 	private ArrayList<MediumPassage> passages; 
 	private ArrayList<Token> keytypes;

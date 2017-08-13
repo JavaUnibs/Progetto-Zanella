@@ -4,7 +4,7 @@ import game.Abstract.Ground;
 
 public class BasicGround extends Ground{
 	
-	private static final long serialVersionUID = 2L;
+	
 	private int level;
 	private int height;
 	private int width;

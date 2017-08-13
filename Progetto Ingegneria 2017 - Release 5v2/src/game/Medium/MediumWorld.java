@@ -10,7 +10,7 @@ import game.Abstract.World;
 
 public class MediumWorld extends World{
 	
-	private static final long serialVersionUID = 2L;
+	
 	private ArrayList<MediumGround> grounds;
 	private ArrayList<MediumPassage> passages; 
 	private ArrayList<Token> keytypes;

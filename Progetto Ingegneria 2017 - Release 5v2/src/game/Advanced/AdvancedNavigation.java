@@ -14,7 +14,7 @@ import it.unibs.ing.myutility.Menu;
 
 public class AdvancedNavigation extends Navigation{
 	
-	private static final long serialVersionUID = 2L;
+	
 	private final String[] DIRECTION_MENU = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
 	private AdvancedWorld world;
 	private HashMap<String, String> local_string, common_string;
@@ -116,7 +116,7 @@ public class AdvancedNavigation extends Navigation{
 			}
 			
 			//----------------------------------------------------------------------------------------------------------------------------------
-			attemptEntry(current_ground, next_ground);
+			current_ground=attemptEntry(current_ground, next_ground);
 			
 		}while(direction_choice!=0);
 		
@@ -153,7 +153,8 @@ public class AdvancedNavigation extends Navigation{
 			world.setDeposited(true);
 			return local_string.get("PUT_KEY_OK");
 			
-		}else return common_string.get("NO_OPZ");
+		}else if(key_choice==0) return "";
+		else return common_string.get("NO_OPZ");
 	}
 	
 	private String attemptTrial(AdvancedGround current_ground){
@@ -168,7 +169,8 @@ public class AdvancedNavigation extends Navigation{
 			else return local_string.get("WRONG");
 	}
 	
-	private void attemptEntry(AdvancedGround current_ground, AdvancedGround next_ground){
+	private AdvancedGround attemptEntry(AdvancedGround current_ground, AdvancedGround next_ground){
+		
 		if(next_ground==null) System.out.println(local_string.get("NO_GROUND"));
 		else if(next_ground==current_ground);
 		else {
@@ -195,5 +197,7 @@ public class AdvancedNavigation extends Navigation{
 					else if(ptemp.getKey()==null) System.out.println(local_string.get("CLOSED_PASSAGE"));
 				}
 		}
+		
+		return current_ground;
 	}
 }

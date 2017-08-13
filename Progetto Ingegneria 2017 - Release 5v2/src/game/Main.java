@@ -158,6 +158,7 @@ public class Main {
 				break;
 				
 				case 1: {
+
 					current_ground=navigation.navigate(current_ground);
 					if(current_ground==null) return;
 				}

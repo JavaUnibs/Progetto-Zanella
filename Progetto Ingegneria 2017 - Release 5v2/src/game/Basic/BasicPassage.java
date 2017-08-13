@@ -5,7 +5,7 @@ import game.Abstract.Passage;
 
 public class BasicPassage extends Passage {
 	
-	private static final long serialVersionUID = 2L;
+	
 	private boolean open;
 	private Ground grounda;
 	private Ground groundb;

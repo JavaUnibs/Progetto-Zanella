@@ -99,7 +99,7 @@ public class MediumNavigation extends Navigation{
 			
 			}
 			//----------------------------------------------------------------------------------------------------------
-			attemptEntry(current_ground, next_ground);
+			current_ground=attemptEntry(current_ground, next_ground);
 			
 		}while(direction_choice!=0);
 		
@@ -138,10 +138,11 @@ public class MediumNavigation extends Navigation{
 			world.setDeposited(true);
 			return local_string.get("PUT_KEY_OK");
 			
-		}else return common_string.get("NO_OPZ");
+		}else if(key_choice==0) return "";
+		else return common_string.get("NO_OPZ");
 	}
 	
-	private void attemptEntry(MediumGround current_ground, MediumGround next_ground){
+	private MediumGround attemptEntry(MediumGround current_ground, MediumGround next_ground){
 		if(next_ground==null) System.out.println(local_string.get("NO_GROUND"));
 		else if(next_ground==current_ground);
 		else {
@@ -167,6 +168,8 @@ public class MediumNavigation extends Navigation{
 					else if(ptemp.getKey()==null) System.out.println(local_string.get("CLOSED_PASSAGE"));
 				}
 		}
+		
+		return current_ground;
 	}
 	
 	

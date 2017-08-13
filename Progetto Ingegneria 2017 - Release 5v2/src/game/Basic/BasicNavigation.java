@@ -9,7 +9,7 @@ import it.unibs.ing.myutility.Menu;
 
 public class BasicNavigation extends Navigation{
 	
-	private static final long serialVersionUID = 2L;
+	
 	private final String[] DIRECTION_MENU = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
 	private BasicWorld world;
 	private HashMap<String, String> local_string, common_string;
