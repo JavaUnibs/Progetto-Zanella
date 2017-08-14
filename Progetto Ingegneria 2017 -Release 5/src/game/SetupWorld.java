@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import it.unibs.ing.myutility.RandomValues;
 
+/**
+ * Classe che permette la costruzione del mondo con i valori di default presi dai file di configurazione.
+ */
 public class SetupWorld {
 	
 	
@@ -17,7 +20,11 @@ public class SetupWorld {
 	private World mondo;
 	private HashMap<String,String[]> values;
 	
-	
+	/**
+	 * Costruttore della classe, riceve in ingresso una HashMap con tutti i valori caratterizzanti del mondo e li assegna alle variabili corrispondenti.
+	 * 
+	 * @param map HashMap di String, il nome, e String[], i valori corrispondenti
+	 */
 	SetupWorld(HashMap<String,String[]> map){
 		values=map;
 		int height= Integer.parseInt(values.get("ALTEZZA")[0]);
@@ -35,8 +42,13 @@ public class SetupWorld {
 		
 	}
 	
-	
-	boolean openPassages(String[] array){                     //apre i passaggi voluti partendo da un array di stringhe 
+	/**
+	 * Metodo che dal mondo creato apre i passaggi passati con array.
+	 * 
+	 * @param array contenente i passaggi
+	 * @return false o true per determinare o meno l'apertura del passaggio
+	 */
+	boolean openPassages(String[] array){                     
 
 		try{
 			
@@ -77,8 +89,12 @@ public class SetupWorld {
 		return true;
 	}
 	
-	
-	boolean putTrialsGrounds(String[] array){                                       //Decide in modo random una prova da mettere nei luoghi definiti dall'array 
+	/**
+	 * Metodo che decide di posizonare ina prova random nei luoghi passati per array
+	 * @param array
+	 * @return true o false in base se ha potuto collocare correttamente la prova
+	 */
+	boolean putTrialsGrounds(String[] array){                                      
 		try{
 		for(int i=0;i<array.length;i++){
 			int h1=Integer.parseInt(array[i].substring(0, 1));
@@ -102,7 +118,12 @@ public class SetupWorld {
 		return true;
 	}
 	
-	void addTrials(String[] array){                                           //Aggiunge al mondo le prove definite dall'array (sintassi "punti-prova")
+	/**
+	 * Metodo che aggiunge al mondo le prove definite nell'array.
+	 * 
+	 * @param array
+	 */
+	void addTrials(String[] array){                                          
 		for(int i=0;i<array.length;i++){
 
 
@@ -126,6 +147,11 @@ public class SetupWorld {
 
 	}
 	
+	/**
+	 * Metodo che aggiunge alla prova scelta le domande
+	 * 
+	 * @param qa array di domande e risposte
+	 */
 	void addQA(String[] qa){ //Aggiunge alla prova scelta (primo slot array)  le domande e risposte definite dall'array (sintassi domanda-risposta)
 		String name=qa[0];
 		for(Trial a: mondo.getTrials()){
@@ -137,7 +163,13 @@ public class SetupWorld {
 		}
 	}
 	
-	boolean putKeyGrounds(String[] array){                                  //Aggiunge ai luoghi selezionati le chiavi definite nell'array (sintassi luogo-chiave)
+	/**
+	 * Metodo che aggiunge ai luoghi selezionati le chiavi definite nell'array
+	 * 
+	 * @param array array di luogo e chiave
+	 * @return true o false se è riuscito a posizionare correttamente la chiave o meno
+	 */
+	boolean putKeyGrounds(String[] array){                                  
 		
 		try{
 			for(int i=0;i<array.length;i++){
@@ -181,10 +213,13 @@ public class SetupWorld {
 		return true;
 	}
 	
-	
-	
-	boolean putKeyPassages(String[] array){                               //Aggiunge ai passaggi le chiavi definite nell'array (sintassi: luogo-luogo-chiave)
-
+	/**
+	 * Metodo che aggiunge ai passaggi le chiavi definite nell'array 
+	 * @param array di luogo-luogo-chiave
+	 * @return true o false se è riuscito ad aggiungere correttamente la chiave legata al relativo passaggio o meno
+	 */
+	boolean putKeyPassages(String[] array){                               
+		
 		try{
 			
 			for(int i=0;i<array.length;i++){
@@ -246,7 +281,12 @@ public class SetupWorld {
 		return true;
 	}
 	
-	void addKeys(String[] keys){                                                  //Aggiunge al mondo le chiavi definite nell'array (sintassi valore-nome)
+	/**
+	 * Metodo che aggiunge al mondo le chiavi definite nell'array.
+	 * 
+	 * @param keys array rappresentativo delle chiavi definite con valore e nome
+	 */
+	void addKeys(String[] keys){                                                  
 		
 		for(String s: keys){
 			int value= Integer.parseInt(s.substring(0, s.indexOf("-")));
@@ -267,8 +307,12 @@ public class SetupWorld {
 		
 	}
 
-	
-	HashMap<ArrayList<Ground>, ArrayList<Passage>> keepTrackKeys(){                              //Tiene traccia in un hashmap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilità del goal
+	/**
+	 * Metodo che mantiene traccia in un HashMap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilità del goal
+	 * 
+	 * @return map HashMap di che associa un ArrayList di Ground ad un ArrayList di Passage
+	 */
+	HashMap<ArrayList<Ground>, ArrayList<Passage>> keepTrackKeys(){                              
 		HashMap<ArrayList<Ground>, ArrayList<Passage>> map = new HashMap<ArrayList<Ground>, ArrayList<Passage>>();
 		for(Token t: mondo.getKeytypes()){
 			ArrayList<Ground> grounds= new ArrayList<Ground>();
@@ -290,13 +334,24 @@ public class SetupWorld {
 		
 	}
 	
-	ArrayList<Ground> keepTrackTrials(){													//tiene traccia dei luoghi in cui c'è una prova
+	/**
+	 * Metodo che tiene traccia in un ArrayList di Ground i luoghi in cui c'è una prova
+	 * 
+	 * @return ground, ArrayList di luoghi contenenti una prova
+	 */
+	ArrayList<Ground> keepTrackTrials(){													
 		ArrayList<Ground> grounds=new ArrayList<Ground>();
 		for (Ground g: mondo.getGrounds()) if(g.getTrial()!=null) grounds.add(g);
 		return grounds;
 	}
 	
-	ArrayList<Token> invalidKeysWeight(int max_weight){                    //Restituisce un arraylist contenente le chiavi che non rispettano il vincolo di peso massimo
+	/**
+	 * Metodo che restituisce un ArrayList contenente le chiavi che non rispettano il vincolo di peso massimo
+	 * 
+	 * @param max_weight
+	 * @return temp ArrayList di chiavi che non rispettano i vincoli di peso massimo
+	 */
+	ArrayList<Token> invalidKeysWeight(int max_weight){                   
 		ArrayList<Token> temp= new ArrayList<Token>();
 		for(Token a: mondo.getKeytypes())
 			if(a.getWeight()>=max_weight) temp.add(a);
@@ -304,6 +359,12 @@ public class SetupWorld {
 		
 	}
 	
+	/**
+	 * Metodo che restituisce un ArrayList contenente le prove che non rispettano il vincolo di punteggio massimo
+	 * 
+	 * @param max_points
+	 * @return temp ArrayList di prove che non rispettano i vincoli di punteggiomassimo
+	 */
 	ArrayList<Trial> invalidTrialPoints(int max_points){                   //Restituisce un arraylist contenente le prove che non rispettano il vincolo di punteggio massimo
 		ArrayList<Trial> temp= new ArrayList<Trial>();
 		for(Trial a: mondo.getTrials())
@@ -323,6 +384,11 @@ public class SetupWorld {
 		this.mondo = mondo;
 	}
 	
+	/**
+	 * Metodo che inizializza il mondo con i valori definiti dagli array di configurazione.
+	 * 
+	 * @return result true o false se è riuscito o meno ad inizializzare tutti gli oggetti del mondo.
+	 */
 	public boolean initialize(){
 		boolean result=true;
 		result=result&&openPassages(values.get("PASSAGGI_APERTI"));
