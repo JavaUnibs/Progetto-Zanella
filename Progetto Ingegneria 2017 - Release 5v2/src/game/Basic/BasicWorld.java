@@ -9,7 +9,8 @@ import game.Abstract.World;
 
 public class BasicWorld extends World{
 	
-	
+
+	private static final long serialVersionUID = 1L;
 	private ArrayList<BasicGround> grounds;
 	private ArrayList<BasicPassage> passages; 
 	private boolean deposited;

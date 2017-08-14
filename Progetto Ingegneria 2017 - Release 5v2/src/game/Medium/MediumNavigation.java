@@ -1,5 +1,6 @@
 package game.Medium;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,7 +11,7 @@ import game.Abstract.World;
 import it.unibs.ing.myutility.LeggiInput;
 import it.unibs.ing.myutility.Menu;
 
-public class MediumNavigation extends Navigation{
+public class MediumNavigation extends Navigation implements Serializable{
 
 	private static final long serialVersionUID = 2L;
 	private final String[] DIRECTION_MENU = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};

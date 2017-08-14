@@ -14,7 +14,8 @@ import it.unibs.ing.myutility.Menu;
 
 public class AdvancedNavigation extends Navigation{
 	
-	
+
+	private static final long serialVersionUID = 1L;
 	private final String[] DIRECTION_MENU = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
 	private AdvancedWorld world;
 	private HashMap<String, String> local_string, common_string;

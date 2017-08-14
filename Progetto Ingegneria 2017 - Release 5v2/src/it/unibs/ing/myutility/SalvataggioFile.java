@@ -38,6 +38,8 @@ public class SalvataggioFile {
 
 		} catch (IOException excScrittura) {
 			System.out.println(FILE_NON_SCRITTO + file.getName());
+			
+			
 		}
 
 		finally {

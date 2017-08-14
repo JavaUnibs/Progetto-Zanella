@@ -1,5 +1,7 @@
 package game.Advanced;
 import it.unibs.ing.myutility.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -9,8 +11,12 @@ import game.Trial;
 import game.Abstract.ModifyWorld;
 import game.Medium.MediumPassage;
 
-public class ModifyAdvancedWorld extends ModifyWorld
+public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String[] menu={"Pesi delle chiavi","Tipi di chiavi", "Limite superiore del peso di una chiave", "Numero massimo di chiavi trasportabili", 
 				"Peso massimo di chiavi trasportabili", "Tipi di prove", "Punteggi delle prove", "Limite superiore del valore di una prova",
 				"Punteggio iniziale", "Punteggio di soglia per la vittoria"};

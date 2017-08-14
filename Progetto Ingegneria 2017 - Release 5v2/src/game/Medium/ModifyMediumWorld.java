@@ -1,5 +1,6 @@
 package game.Medium;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -9,25 +10,27 @@ import game.Abstract.ModifyWorld;
 import it.unibs.ing.myutility.*;
 
 
-public class ModifyMediumWorld extends ModifyWorld{
+public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	
-private final String[] menu={"Pesi delle chiavi","Tipi di chiavi", "Limite superiore del peso di una chiave", "Numero massimo di chiavi trasportabili", 
-			"Peso massimo di chiavi trasportabili"};
-private final String[] menu_addremove={"Aggiungi", "Rimuovi"};
-private final String INSERT_NAME_KEY="Inserire il nome della chiave";
-private final String INSERT_WEIGHT_KEY="Inserire il peso della chiave";
-private final String OK_MODIFY="Modifica effettuata";
-private final String NO_KEY="Non esistono chiavi con il nome inserito";
-private final String NEGATIVE_VALUE="Il valore inserito non è valido";
-private final String OVER_THE_LIMIT="Il valore inserito è maggiore del limite superiore del peso di una chiave";
-private final String ADDREMOVEKEY="Vuoi aggiungere o rimuovere una chiave?";
-private final String KEY_ADDED="Chiave aggiunta";
-private final String KEY_REMOVED="Chiave rimossa";
-private final String EXISTS_KEY="Esiste già una chiave con lo stesso nome";
-private final String LIMIT="Inserire il nuovo limite";
-private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
-private final String MODIFY_OK="Modifica effettuata";
-private MediumWorld world;
+
+	private static final long serialVersionUID = 1L;
+	private final String[] menu={"Pesi delle chiavi","Tipi di chiavi", "Limite superiore del peso di una chiave", "Numero massimo di chiavi trasportabili", 
+				"Peso massimo di chiavi trasportabili"};
+	private final String[] menu_addremove={"Aggiungi", "Rimuovi"};
+	private final String INSERT_NAME_KEY="Inserire il nome della chiave";
+	private final String INSERT_WEIGHT_KEY="Inserire il peso della chiave";
+	private final String OK_MODIFY="Modifica effettuata";
+	private final String NO_KEY="Non esistono chiavi con il nome inserito";
+	private final String NEGATIVE_VALUE="Il valore inserito non è valido";
+	private final String OVER_THE_LIMIT="Il valore inserito è maggiore del limite superiore del peso di una chiave";
+	private final String ADDREMOVEKEY="Vuoi aggiungere o rimuovere una chiave?";
+	private final String KEY_ADDED="Chiave aggiunta";
+	private final String KEY_REMOVED="Chiave rimossa";
+	private final String EXISTS_KEY="Esiste già una chiave con lo stesso nome";
+	private final String LIMIT="Inserire il nuovo limite";
+	private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
+	private final String MODIFY_OK="Modifica effettuata";
+	private MediumWorld world;
 	
 	ModifyMediumWorld(MediumWorld world){
 		this.world=world;

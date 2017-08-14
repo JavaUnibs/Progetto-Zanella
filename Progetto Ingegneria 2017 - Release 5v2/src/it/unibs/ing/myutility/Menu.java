@@ -1,7 +1,13 @@
 package it.unibs.ing.myutility;
 
-public class Menu {
+import java.io.Serializable;
 
+public class Menu implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final String USCITA = "0) Esci";
 	private static final String RITORNO ="0) Ritorna al precedente menu";
 	private static final String SCELTA = "Inserisci la tua scelta";

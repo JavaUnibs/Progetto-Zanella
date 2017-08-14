@@ -1,5 +1,6 @@
 package game.Advanced;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import game.Token;
@@ -11,7 +12,9 @@ import game.Abstract.World;
 import game.Medium.MediumPassage;
 import it.unibs.ing.myutility.RandomValues;
 
-public class AdvancedFactory extends Factory{
+public class AdvancedFactory extends Factory implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private final String NO_GROUND="E' stata immessa una stringa con un luogo inesistente";
 	private final String NO_PASSAGE="E' stata immessa una stringa con un passaggio inesistente";
 	private final String INCORRECT_STRING="I passaggi aperti non sono definiti in modo corretto";

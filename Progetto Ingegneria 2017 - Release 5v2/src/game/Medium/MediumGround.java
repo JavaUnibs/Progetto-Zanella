@@ -5,7 +5,7 @@ import game.Abstract.Ground;
 
 public class MediumGround extends Ground{
 	
-	
+	private static final long serialVersionUID = 1L;
 	private int level;
 	private int height;
 	private int width;
