@@ -2,11 +2,11 @@ package game;
 
 import java.io.Serializable;
 
+/**
+ * Classe che rappresenta i passaggi tra duo luoghi
+ */
 public class Passage implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	private boolean open;
 	private Ground grounda;
@@ -14,6 +14,12 @@ public class Passage implements Serializable{
 	private String id;
 	private Token key;
 	
+	/**
+	 * Costruttore della classe Passage, crea un passaggio tra i due loghi forniti
+	 * @param grounda
+	 * @param groundb
+	 * @pre i loghi non devono esistere
+	 */
 	Passage(Ground grounda, Ground groundb){
 		this.grounda=grounda;
 		this.groundb=groundb;

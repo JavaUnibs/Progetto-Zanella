@@ -23,6 +23,7 @@ public class SetupWorld {
 	/**
 	 * Costruttore della classe, riceve in ingresso una HashMap con tutti i valori caratterizzanti del mondo e li assegna alle variabili corrispondenti.
 	 * 
+	 * @pre map non deve essere vuota
 	 * @param map HashMap di String, il nome, e String[], i valori corrispondenti
 	 */
 	SetupWorld(HashMap<String,String[]> map){
@@ -46,7 +47,9 @@ public class SetupWorld {
 	 * Metodo che dal mondo creato apre i passaggi passati con array.
 	 * 
 	 * @param array contenente i passaggi
-	 * @return false o true per determinare o meno l'apertura del passaggio
+	 * @pre array non deve essere vuoto
+	 * @post true ovvero che il passaggio è stato aperto correttamente
+	 * @return false o true 
 	 */
 	boolean openPassages(String[] array){                     
 
@@ -91,8 +94,11 @@ public class SetupWorld {
 	
 	/**
 	 * Metodo che decide di posizonare ina prova random nei luoghi passati per array
+	 * 
 	 * @param array
-	 * @return true o false in base se ha potuto collocare correttamente la prova
+	 * @pre array non deve essere vuoto
+	 * @post true ovvero che la prova è stato posizionata correttamente
+	 * @return true o false 
 	 */
 	boolean putTrialsGrounds(String[] array){                                      
 		try{
@@ -122,6 +128,7 @@ public class SetupWorld {
 	 * Metodo che aggiunge al mondo le prove definite nell'array.
 	 * 
 	 * @param array
+	 * @pre array non deve essere vuoto
 	 */
 	void addTrials(String[] array){                                          
 		for(int i=0;i<array.length;i++){
@@ -151,6 +158,7 @@ public class SetupWorld {
 	 * Metodo che aggiunge alla prova scelta le domande
 	 * 
 	 * @param qa array di domande e risposte
+	 * @pre qa non deve essere vuoto
 	 */
 	void addQA(String[] qa){ //Aggiunge alla prova scelta (primo slot array)  le domande e risposte definite dall'array (sintassi domanda-risposta)
 		String name=qa[0];
@@ -167,7 +175,9 @@ public class SetupWorld {
 	 * Metodo che aggiunge ai luoghi selezionati le chiavi definite nell'array
 	 * 
 	 * @param array array di luogo e chiave
-	 * @return true o false se è riuscito a posizionare correttamente la chiave o meno
+	 * @pre array non deve essere vuoto
+	 * @post true ovvero che la chiave è stato posizionata correttamente
+	 * @return true o false 
 	 */
 	boolean putKeyGrounds(String[] array){                                  
 		
@@ -215,7 +225,9 @@ public class SetupWorld {
 	
 	/**
 	 * Metodo che aggiunge ai passaggi le chiavi definite nell'array 
+	 * 
 	 * @param array di luogo-luogo-chiave
+	 * @pre array non deve essere vuoto
 	 * @return true o false se è riuscito ad aggiungere correttamente la chiave legata al relativo passaggio o meno
 	 */
 	boolean putKeyPassages(String[] array){                               
@@ -285,6 +297,7 @@ public class SetupWorld {
 	 * Metodo che aggiunge al mondo le chiavi definite nell'array.
 	 * 
 	 * @param keys array rappresentativo delle chiavi definite con valore e nome
+	 * @pre keys non deve essere vuoto
 	 */
 	void addKeys(String[] keys){                                                  
 		
@@ -310,6 +323,7 @@ public class SetupWorld {
 	/**
 	 * Metodo che mantiene traccia in un HashMap dei luoghi e dei passaggi con chiavi coincidenti per mantenere la raggiungibilità del goal
 	 * 
+	 * @post map non sia vuoto in modo da poter associare luoghi e chiavi correttamente
 	 * @return map HashMap di che associa un ArrayList di Ground ad un ArrayList di Passage
 	 */
 	HashMap<ArrayList<Ground>, ArrayList<Passage>> keepTrackKeys(){                              
@@ -337,6 +351,7 @@ public class SetupWorld {
 	/**
 	 * Metodo che tiene traccia in un ArrayList di Ground i luoghi in cui c'è una prova
 	 * 
+	 * @post ground non deve essere vuoto 
 	 * @return ground, ArrayList di luoghi contenenti una prova
 	 */
 	ArrayList<Ground> keepTrackTrials(){													
@@ -349,6 +364,7 @@ public class SetupWorld {
 	 * Metodo che restituisce un ArrayList contenente le chiavi che non rispettano il vincolo di peso massimo
 	 * 
 	 * @param max_weight
+	 * @pre max_weight deve essere > 0
 	 * @return temp ArrayList di chiavi che non rispettano i vincoli di peso massimo
 	 */
 	ArrayList<Token> invalidKeysWeight(int max_weight){                   
@@ -363,6 +379,7 @@ public class SetupWorld {
 	 * Metodo che restituisce un ArrayList contenente le prove che non rispettano il vincolo di punteggio massimo
 	 * 
 	 * @param max_points
+	 * @pre max_points deve essere > 0
 	 * @return temp ArrayList di prove che non rispettano i vincoli di punteggiomassimo
 	 */
 	ArrayList<Trial> invalidTrialPoints(int max_points){                   //Restituisce un arraylist contenente le prove che non rispettano il vincolo di punteggio massimo
@@ -387,6 +404,7 @@ public class SetupWorld {
 	/**
 	 * Metodo che inizializza il mondo con i valori definiti dagli array di configurazione.
 	 * 
+	 * @post valore di ritorno true identifica la corretta inizializzazione
 	 * @return result true o false se è riuscito o meno ad inizializzare tutti gli oggetti del mondo.
 	 */
 	public boolean initialize(){

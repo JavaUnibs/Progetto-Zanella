@@ -2,11 +2,11 @@ package game;
 
 import java.io.Serializable;
 
+/**
+ * Classe che rappresenta ogni luogo di cui è composto il mondo
+ */
 public class Ground implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	private int level;
 	private int height;
@@ -17,6 +17,14 @@ public class Ground implements Serializable{
 	private Token key;
 	private Trial trial;
 	
+	/**
+	 * Costruttore della classe Ground, inizializza le variabili con i valori forniti
+	 * @param height
+	 * @param width
+	 * @param level
+	 * @param name
+	 * @pre i valori non devono essere nulli
+	 */
 	Ground(int height, int width, int level, String name){
 		this.level=level;
 		this.name=name;

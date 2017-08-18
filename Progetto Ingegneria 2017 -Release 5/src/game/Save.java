@@ -2,6 +2,10 @@ package game;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * Classe che permette il salvataggio e il caricamento del mondo
+ *
+ */
 public class Save implements Serializable{
 	
 	private static final long serialVersionUID = 2L;
@@ -11,6 +15,15 @@ public class Save implements Serializable{
 	private HashMap<String, String> local_string;
 	private HashMap<String, String[]> values;
 	
+	/**
+	 * Costruttore della classe Save, crea un oggetto contenente i dati relativi al mondo e alla posizione del giocatore
+	 * 
+	 * @param mondo
+	 * @param luogo
+	 * @param map
+	 * @param map1
+	 * @pre i valori non devono essere nulli
+	 */
 	Save(World mondo, Ground luogo, HashMap<String, String> map, HashMap<String, String[]> map1){
 		this.mondo=mondo;
 		luogo_corrente=luogo;
