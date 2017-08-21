@@ -107,6 +107,8 @@ public class World implements Serializable{
 	 * @param h maggiore di 0 e minore o uguale dell'altezza del mondo
 	 * @param w maggiore di 0 e minore o uguale della larghezza del mondo
 	 * @param d maggiore di 0 e minore o uguale della profondità del mondo
+	 * @pre h w d non devono essere null
+	 * @post valore ritornato non null
 	 * @return a o null, oggetto di tipo Ground o nullo nel caso non sia stata trovata una corrispondenza
 	 */
 	Ground searchGround(int h, int w, int d){
@@ -123,6 +125,8 @@ public class World implements Serializable{
 	 * 
 	 * @param a luogo corrente
 	 * @param b luogo futuro
+	 * @pre a e b non devono essere null
+	 * @post valore ritornato non null
 	 * @return z o null, oggetto di tipo Passage oppure nullo 
 	 */
 	Passage searchPassage(Ground a, Ground b){
@@ -137,6 +141,8 @@ public class World implements Serializable{
 	 * Metodo utilizzato per verificare l'esistenza di una prova nel mondo.
 	 * 
 	 * @param name, nome della prova da cercare
+	 * @pre name non deve essere null
+	 * @post valore ritornato non null
 	 * @return t o null, oggetto Trial o null 
 	 */
 	Trial searchTrial(String name){
@@ -151,6 +157,8 @@ public class World implements Serializable{
 	 * Metodo utilizzato per verificare l'esistenza di una chiave nel mondo.
 	 * 
 	 * @param name, nome della chiave da cercare
+	 * @pre name non deve essere null
+	 * @post valore ritornato non null
 	 * @return t o null, oggetto Token o null 
 	 */
 	Token searchKeyTypes(String name){
@@ -161,6 +169,13 @@ public class World implements Serializable{
 		 return null;
 	}
 	
+	/**
+	 * Metodo che cerca una chiave tra le chiavi del giocatore.
+	 * @param name
+	 * @pre name non deve essere null
+	 * @post valore ritornato non null
+	 * @return
+	 */
 	Token searchPlayerKeys(String name){
 		for(Token t:playerkeys){
 			if(t.getName().equalsIgnoreCase(name))
@@ -195,184 +210,210 @@ public class World implements Serializable{
 		return weight;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna un ArrayList di tutti i luoghi del mondo.
+	 * @return grounds
+	 */
 	public ArrayList<Ground> getGrounds() {
 		return grounds;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna un ArrayList di tutti i passaggi del mondo.
+	 * @return passages
+	 */
 	public ArrayList<Passage> getPassages() {
 		return passages;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna un ArrayList di tutte le prove del mondo.
+	 * @return trials
+	 */
 	public ArrayList<Trial> getTrials() {
 		return trials;
 	}
 
-
-
-
+	/**
+	 * Metodo che verifica se la chiave è stata depositata nel mondo.
+	 * @return depositata valore booleano
+	 */
 	public boolean isDepositata() {
 		return depositata;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna true se è stata sostenuta la prova
+	 * @return prova_fatta
+	 */
 	public boolean isProva_fatta() {
 		return prova_fatta;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna i punti di una prova
+	 * @return points
+	 */
 	public Integer getPoints() {
 		return points;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna il peso massimo trasportabile
+	 * @return peso_max_trasportabile
+	 */
 	public int getPeso_max_trasportabile() {
 		return peso_max_trasportabile;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna il nuemro massimo di chiavi trasportabile
+	 * @return nmero_max_trasportabile
+	 */
 	public int getNumero_max_trasportabile() {
 		return numero_max_trasportabile;
 	}
 
-
-
-
+	 /**
+	  * Metodo che ritorna il peso massimo per chiave
+	  * @return peso_max_chiave
+	  */
 	public int getPeso_max_chiave() {
 		return peso_max_chiave;
 	}
 
-
-
-
+	/**
+	 * Metodo ceh ritorna il punteggio finale 
+	 * @return punteggio_finale
+	 */
 	public int getPunteggio_finale() {
 		return punteggio_finale;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna il punteggio massimo di una prova
+	 * @return punteggio_max_prova
+	 */
 	public int getPunteggio_max_prova() {
 		return punteggio_max_prova;
 	}
 
-
-
-
+	/**
+	 * Metodo per settare i lugohi del mondo
+	 * @param grounds
+	 */
 	public void setGrounds(ArrayList<Ground> grounds) {
 		this.grounds = grounds;
 	}
 
-
-
-
+	/**
+	 * Metodo per settare i passaggi del mondo
+	 * @param passages
+	 */
 	public void setPassages(ArrayList<Passage> passages) {
 		this.passages = passages;
 	}
 
-
-
-
+	/**
+	 * Metodo per settare le prove del mondo
+	 * @param trials
+	 */
 	public void setTrials(ArrayList<Trial> trials) {
 		this.trials = trials;
 	}
 
-
-
-
+	/**
+	 * Metodo per definire quando una chiave è stata depositata
+	 * @param depositata
+	 */
 	public void setDepositata(boolean depositata) {
 		this.depositata = depositata;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta se una prova è stata sostenuta
+	 * @param prova_fatta
+	 */
 	public void setProva_fatta(boolean prova_fatta) {
 		this.prova_fatta = prova_fatta;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta il punteggio del giocatore
+	 * @param points
+	 */
 	public void setPoints(Integer points) {
 		this.points = points;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta il massimo peso trasportabile
+	 * @param peso_max_trasportabile
+	 */
 	public void setPeso_max_trasportabile(int peso_max_trasportabile) {
 		this.peso_max_trasportabile = peso_max_trasportabile;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta il massimo numero di chiavi trasportabile
+	 * @param peso_max_trasportabile
+	 */
 	public void setNumero_max_trasportabile(int numero_max_trasportabile) {
 		this.numero_max_trasportabile = numero_max_trasportabile;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta il peso massimo di una chiave
+	 * @param peso_max_chiave
+	 */
 	public void setPeso_max_chiave(int peso_max_chiave) {
 		this.peso_max_chiave = peso_max_chiave;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta il punteggio finale
+	 * @param punteggio_finale
+	 */
 	public void setPunteggio_finale(int punteggio_finale) {
 		this.punteggio_finale = punteggio_finale;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta il punteggio massimo di una prova
+	 * @param punteggio_max_prova
+	 */
 	public void setPunteggio_max_prova(int punteggio_max_prova) {
 		this.punteggio_max_prova = punteggio_max_prova;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna un ArrayList contenente i tipi di tutte le chiavi
+	 * @return keytypes
+	 */
 	public ArrayList<Token> getKeytypes() {
 		return keytypes;
 	}
 
-
-
-
+	/**
+	 * Metodo che ritorna un ArrayList contenente i tipi di tutte le chiavi possedute dal giocatore
+	 * @return playertypes
+	 */
 	public ArrayList<Token> getPlayerkeys() {
 		return playerkeys;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta l'ArrayList contenente i tipi delle chiavi
+	 * @return keytypes
+	 */
 	public void setKeytypes(ArrayList<Token> keytypes) {
 		this.keytypes = keytypes;
 	}
 
-
-
-
+	/**
+	 * Metodo che setta l'ArrayList contenente i tipi di chiavi del giocatore
+	 * @return keytypes
+	 */
 	public void setPlayerkeys(ArrayList<Token> playerkeys) {
 		this.playerkeys = playerkeys;
 	}

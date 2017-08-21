@@ -8,6 +8,10 @@ import it.unibs.ing.myutility.LeggiInput;
 import it.unibs.ing.myutility.Menu;
 import it.unibs.ing.myutility.RandomValues;
 
+/**
+ * Classe InterfaceSetupWorld ha il copito di gestire il caricamento dei dati e la modifica degli stessi da parte dell'utente.
+ */
+
 public class InterfaceSetupWorld {
 	
 	private SetupWorld setup;
@@ -43,11 +47,19 @@ public class InterfaceSetupWorld {
 	private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
 	private final String MODIFY_OK="Modifica effettuata";
 	
+	/**
+	 * Costruttore della classe InterfaceSetupWorld, carica i dati forniti dall'oggetto SetupWorld e ne permette la modifica al giocatore.
+	 * @param setup
+	 */
 	InterfaceSetupWorld(SetupWorld setup){
 		this.setup=setup;
 		
 	}
 	
+	/**
+	 * Metodo initialize che permette all'utente personalizzare le chiavi e le prove presenti nel mondo, tramite un menù, 
+	 * consente la modifica di un oggetto, la rimozione o l'aggiunta.
+	 */
 	public void initialize(){
 		
 		boolean emptyTrials=setup.getMondo().getTrials().isEmpty();
@@ -332,7 +344,13 @@ public class InterfaceSetupWorld {
 		
 	}
 	
-	
+	/**
+	 * Metodo che testa se il valore è negativo
+	 * 
+	 * @param value
+	 * @pre value non deve essere null
+	 * @return false o true
+	 */
 	boolean isNegative (int value){
 		if( value<0) {
 			System.out.println(NEGATIVE_VALUE);
@@ -341,6 +359,15 @@ public class InterfaceSetupWorld {
 		return false;
 	}
 	
+	/**
+	 * Metodo che testa se il valore supera il limite
+	 * 
+	 * @param value
+	 * @param limit
+	 * @param message testo da mostrare
+	 * @pre value e limit non devono essere null
+	 * @return false o true
+	 */
 	boolean isOverLimit (int value, int limit, String message){
 		if(value>limit) {
 			System.out.println(message);
@@ -349,6 +376,12 @@ public class InterfaceSetupWorld {
 		return false;
 	}
 	
+	/**
+	 * Metodo che torna un messaggio se il parametro è vero
+	 * @param message messaggio da ritornare
+	 * @param value
+	 * @return true o false
+	 */
 	boolean empty(String message, boolean value){
 		if(value) {
 			System.out.println(message);
@@ -357,6 +390,12 @@ public class InterfaceSetupWorld {
 		return value;
 	}
 	
+	/**
+	 * Metodo che controlla se l'oggetto è nullo 
+	 * @param obj
+	 * @param message
+	 * @return false o true
+	 */
 	boolean noElement(Object obj, String message){
 		if(obj==null) {
 			System.out.println(message);
@@ -365,6 +404,12 @@ public class InterfaceSetupWorld {
 		return false;
 	}
 	
+	/**
+	 * Metodo 
+	 * @param groundSet
+	 * @param keys
+	 * @param keyMap
+	 */
 	void applyKeepTrackKeys(Set<ArrayList<Ground>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<Ground>, ArrayList<Passage>> keyMap){
 		Token tempkey=null;
 		for(ArrayList<Ground> array: groundSet){
@@ -384,6 +429,12 @@ public class InterfaceSetupWorld {
 		
 	}
 	
+	/**
+	 * Metodo che verifica l'esistenza di un oggetto 
+	 * @param obj
+	 * @param message
+	 * @return false o true
+	 */
 	boolean existsElement(Object obj, String message){
 		if(obj!=null) {
 			System.out.println(message);
@@ -392,6 +443,11 @@ public class InterfaceSetupWorld {
 		return false;
 	}
 	
+	/**
+	 * Metodo 
+	 * @param trialSet
+	 * @param trials
+	 */
 	void applyKeepTrackTrials(ArrayList<Ground> trialSet, ArrayList<Trial> trials){
 		Trial tempTrial=null;
 		for(Ground g: trialSet) {

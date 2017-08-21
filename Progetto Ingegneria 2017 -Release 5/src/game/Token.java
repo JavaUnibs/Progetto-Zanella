@@ -26,23 +26,41 @@ public class Token implements Serializable{
 		this.name = name;
 	}
 
+	/**
+	 * Metodo che ritorna il peso della chiave
+	 * @return weight
+	 */
 	public int getWeight() {
 		return weight;
 	}
-
+	/**
+	 * Metodo che ritorna il nome associato alla chiave
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
-
+	
+	/**
+	 * Metodo che permette di settare il peso della chiave
+	 * @param weight
+	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-
+	
+	/**
+	 * Metodo che permette di settare il nome associato alla chiave
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	
+	/**
+	 * Metodo che ritorna una  stringa con nome e peso della chiave
+	 * @return name + weight della chiave
+	 */
 	public String toString() {
 		return name+" ("+weight+") \n ";
 	}

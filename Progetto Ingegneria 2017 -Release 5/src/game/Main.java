@@ -14,7 +14,8 @@ public class Main {
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
 	/**
-	 * Prova
+	 * Metodo main che permette all'utente di giocare, ha il compito di fornire un menu testuale con il quale l'utente può interagire
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

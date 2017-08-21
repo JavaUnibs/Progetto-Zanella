@@ -31,18 +31,33 @@ public class Save implements Serializable{
 		values=map1;
 	}
 
+	/**
+	 * Metodo che ritorna il mondo
+	 * @return mondo
+	 */
 	public World getMondo() {
 		return mondo;
 	}
 
+	/**
+	 * Metodo che ritorna il luogo corrente 
+	 * @return luogo_corrente
+	 */
 	public Ground getLuogo_corrente() {
 		return luogo_corrente;
 	}
-
+	/**
+	 * Metodo che ritorna le stringhe locali
+	 * @return local_string
+	 */
 	public HashMap<String, String> getLocalString(){
 		return local_string;
 	}
 	
+	/**
+	 * Metodo che ritorna i valori relativi al mondo
+	 * @return
+	 */
 	public HashMap<String, String[]> getValues(){
 		return values;
 	}
