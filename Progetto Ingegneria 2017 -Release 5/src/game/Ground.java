@@ -37,7 +37,7 @@ public class Ground implements Serializable{
 	}
 
 	/**
-	 * Fornisce il livello
+	 * Metodo che ritorna la coordinata z
 	 * @return level valore del livello
 	 */
 	public int getLevel() {
@@ -85,7 +85,7 @@ public class Ground implements Serializable{
 	}
 	
 	/**
-	 * Metodo che setta il livello
+	 * Metodo che setta la coordinata z
 	 * @param level
 	 */
 	public void setLevel(int level) {

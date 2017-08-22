@@ -405,7 +405,8 @@ public class InterfaceSetupWorld {
 	}
 	
 	/**
-	 * Metodo 
+	 * Metodo che aggiorna la lista delle chiavi nel mondo per permettere la raggiungibilità del goal
+	 * 
 	 * @param groundSet
 	 * @param keys
 	 * @param keyMap
@@ -444,7 +445,7 @@ public class InterfaceSetupWorld {
 	}
 	
 	/**
-	 * Metodo 
+	 * Metodo che aggiorna la lista di prove nel mondo per permettere la raggiungibilità del goal.
 	 * @param trialSet
 	 * @param trials
 	 */
