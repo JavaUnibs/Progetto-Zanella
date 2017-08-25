@@ -8,6 +8,9 @@ import java.util.Iterator;
 
 import it.unibs.ing.myutility.*;
 
+/**
+ * Classe Main del gioco, rappresenta la classe che viene eseguita.
+ */
 public class Main {	
 	
 	
@@ -359,7 +362,12 @@ public class Main {
 
 	}
 	
-
+	/**
+	 * Metodo che permette la conversione dei valori in interi.
+	 * @param map
+	 * @param key
+	 * @return valore intero
+	 */
 	static int convertValues(HashMap<String, String[]> map, String key){
 		return Integer.parseInt(map.get(key)[0]);
 		

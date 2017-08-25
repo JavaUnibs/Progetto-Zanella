@@ -2,6 +2,11 @@ package game.Abstract;
 
 import java.io.Serializable;
 
+/**
+ * Classe astratta Ground, rappresenta i luooghi di cui è costituito il mondo.
+ * @author vxrich
+ *
+ */
 public abstract class Ground implements Serializable{
 	
 

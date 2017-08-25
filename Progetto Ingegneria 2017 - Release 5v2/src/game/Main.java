@@ -17,10 +17,18 @@ import it.unibs.ing.myutility.Menu;
 import it.unibs.ing.myutility.SalvataggioFile;
 import it.unibs.ing.myutility.TxtToHashmap;
 
+/**
+ * Classe Main del gioco, rappresenta la classe che viene eseguita.
+ */
 public class Main {
 	
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"};
 
+	/**
+	 * Metodo main che permette all'utente di giocare, ha il compito di fornire un menu testuale con il quale l'utente può interagire
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		HashMap<String, String> common_string=null;
 		HashMap<String, String> local_string=null;
@@ -187,6 +195,12 @@ public class Main {
 			
 	}
 	
+	/**
+	 * Metodo che permette la conversione dei valori in interi.
+	 * @param map
+	 * @param key
+	 * @return valore intero
+	 */
 	static int convertValues(HashMap<String, String[]> map, String key){
 		return Integer.parseInt(map.get(key)[0]);
 	}

@@ -6,7 +6,6 @@ import java.io.Serializable;
  * Classe che rappresenta le chiavi per l'apertura dei passaggi chiusi.
  *
  */
-
 public class Token implements Serializable{
 	
 	
