@@ -9,6 +9,9 @@ import game.Abstract.ModifyWorld;
 import game.Abstract.Navigation;
 import game.Abstract.World;
 
+/**
+ * Classe concreta che estende l'abstract product Factory. Ha il compito di costruire e restituire un oggetto MediumWorld.
+ */
 public class MediumFactory extends Factory implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -24,13 +27,22 @@ public class MediumFactory extends Factory implements Serializable{
 	private HashMap<String, String> local_string;
 	private MediumWorld world;
 	
+	/**
+	 * Costruttore della classe MediumFactory, legge i valori da un HashMap di ingresso e li salva nella HashMap locale.
+	 * @param values
+	 * @param common_string
+	 * @param local_string
+	 */
 	public MediumFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
 		this.local_string=local_string;
 		this.common_string=common_string;
 	}
 
-	
+	/**
+	 * Metodo che inizializza i valori del mondo con i valori contenuti nelle HashMap.
+	 * @return world, oggetto di tipo MediumWorld
+	 */
 	public World getWorld() {
 		try{
 		int height= Integer.parseInt(values.get("ALTEZZA")[0]);
@@ -62,18 +74,31 @@ public class MediumFactory extends Factory implements Serializable{
 		
 	}
 
-	
+	/**
+	 * Metodo che crea un oggetto Navigation
+	 * return navigation, oggetto Navigation
+	 */
 	public Navigation getNavigation() {
 		MediumNavigation navigation= new MediumNavigation(world, local_string, common_string);
 		return navigation;
 	}
 
-	
+	/**
+	 * Metodo che crea un oggetto ModifyWorld.
+	 * return modify, oggetto ModifyWorld
+	 */
 	public ModifyWorld getModify() {
 		ModifyMediumWorld modify= new ModifyMediumWorld(world);
 		return modify;
 	}
 	
+	/**
+	 * Metodo che apre i passaggi voluti partendo da un array di stringhe
+	 * @param array
+	 * @pre array non deve essere nullo
+	 * @post valore ritornato true, non vi sono stati errori
+	 * @return true o false
+	 */
 	boolean openPassages(String[] array){                     //apre i passaggi voluti partendo da un array di stringhe 
 
 		try{
@@ -115,7 +140,14 @@ public class MediumFactory extends Factory implements Serializable{
 		return true;
 	}
 	
-	boolean putKeyGrounds(String[] array){                                  //Aggiunge ai luoghi selezionati le chiavi definite nell'array (sintassi luogo-chiave)
+	/**
+	 * Metodo che aggiunge ai luoghi selezionati le chiavi definite nell'array (sintassi luogo-chiave)
+	 * @param array
+	 * @pre array non deve essere nullo
+	 * @post valore ritornato true
+	 * @return true o false
+	 */
+	boolean putKeyGrounds(String[] array){                                 
 		
 		try{
 			for(int i=0;i<array.length;i++){
@@ -160,8 +192,14 @@ public class MediumFactory extends Factory implements Serializable{
 	}
 	
 	
-	
-	boolean putKeyPassages(String[] array){                               //Aggiunge ai passaggi le chiavi definite nell'array (sintassi: luogo-luogo-chiave)
+	/**
+	 * Metodo che aggiunge ai passaggi le chiavi definite nell'array (sintassi: luogo-luogo-chiave)
+	 * @param array
+	 * @pre array non deve essere nullo
+	 * @post valore ritornato true
+	 * @return true o false
+	 */
+	boolean putKeyPassages(String[] array){                                
 
 		try{
 			
@@ -224,7 +262,12 @@ public class MediumFactory extends Factory implements Serializable{
 		return true;
 	}
 	
-	void addKeys(String[] keys){                                                  //Aggiunge al mondo le chiavi definite nell'array (sintassi valore-nome)
+	/**
+	 * Metodo per aggiungere al mondo le chiavi definite nell'array (sintassi valore-nome)
+	 * @param keys
+	 * @pre keys non deve essere nullo
+	 */
+	void addKeys(String[] keys){                                                  
 		
 		for(String s: keys){
 			int value= Integer.parseInt(s.substring(0, s.indexOf("-")));

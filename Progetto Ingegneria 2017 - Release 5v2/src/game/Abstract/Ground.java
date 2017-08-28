@@ -3,7 +3,7 @@ package game.Abstract;
 import java.io.Serializable;
 
 /**
- * Classe astratta Ground, rappresenta i luooghi di cui è costituito il mondo.
+ * Classe astratta Ground, rappresenta i luoghi di cui è costituito il mondo ed è l'abstract product esteso alle varianti di Ground .
  * @author vxrich
  *
  */

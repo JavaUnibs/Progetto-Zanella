@@ -12,6 +12,9 @@ import game.Medium.MediumPassage;
 import it.unibs.ing.myutility.LeggiInput;
 import it.unibs.ing.myutility.Menu;
 
+/**
+ * Classe concreta che estende l'abstract product Navigation. Rappresenta il menu di navigazione del mondo di livello avanzato.
+ */
 public class AdvancedNavigation extends Navigation{
 	
 
@@ -21,6 +24,12 @@ public class AdvancedNavigation extends Navigation{
 	private HashMap<String, String> local_string, common_string;
 	private Menu direction_list;
 	
+	/**
+	 * Costruttore della classe AdvancedNavigation.
+	 * @param world
+	 * @param local_string
+	 * @param common_string
+	 */
 	AdvancedNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
 		direction_list= new Menu(DIRECTION_MENU);
 		this.world=(AdvancedWorld) world;
@@ -28,7 +37,11 @@ public class AdvancedNavigation extends Navigation{
 		this.common_string=common_string;
 	}
 
-	
+	/**
+	 * Metodo che permette al giocatore di muoversi nel mondo.
+	 * @param _current_ground
+	 * @return oggetto ground, rappresenta il luogo nel quale si è spostato il giocatore
+	 */
 	public Ground navigate(Ground _current_ground) {
 		AdvancedGround current_ground= (AdvancedGround) _current_ground;
 		AdvancedGround next_ground;
@@ -124,6 +137,12 @@ public class AdvancedNavigation extends Navigation{
 		return current_ground;
 	}
 
+	/**
+	 * Metodo che permette al giocatore di raccogliere una chiave da un luogo.
+	 * @param current_ground
+	 * @pre requisiti di spazio e peso soddisfatti
+	 * @return string 
+	 */
 	private String retrieveKey(AdvancedGround current_ground){
 		int total_weight=world.totWeight();
 		int total_number=world.getPlayerkeys().size();
@@ -137,6 +156,11 @@ public class AdvancedNavigation extends Navigation{
 			else return local_string.get("WEIGHT");
 	}
 	
+	/**
+	 * Metodo che permette al giocatore di depositare una chiave in luogo.
+	 * @param current_ground
+	 * @return string
+	 */
 	private String depositKey(AdvancedGround current_ground){
 		ArrayList<String> temp= new ArrayList<String>();
 		for(Token a: world.getPlayerkeys()) temp.add(a.toString());
@@ -158,6 +182,11 @@ public class AdvancedNavigation extends Navigation{
 		else return common_string.get("NO_OPZ");
 	}
 	
+	/**
+	 * Metodo per provare la risoluzione della prova.
+	 * @param current_ground
+	 * @return string, di successo o insuccesso.
+	 */
 	private String attemptTrial(AdvancedGround current_ground){
 			Trial trial= current_ground.getTrial();
 			String question=trial.getQuestion();
@@ -170,6 +199,12 @@ public class AdvancedNavigation extends Navigation{
 			else return local_string.get("WRONG");
 	}
 	
+	/**
+	 * Metodo per passare in un passaggio.
+	 * @param current_ground
+	 * @param next_ground
+	 * @return current_ground, rappresenta luogo corrente che potrebbe essere lo stesso in caso di insuccesso
+	 */
 	private AdvancedGround attemptEntry(AdvancedGround current_ground, AdvancedGround next_ground){
 		
 		if(next_ground==null) System.out.println(local_string.get("NO_GROUND"));

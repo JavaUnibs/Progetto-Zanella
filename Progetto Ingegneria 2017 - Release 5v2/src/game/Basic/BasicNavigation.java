@@ -7,6 +7,9 @@ import game.Abstract.Navigation;
 import game.Abstract.World;
 import it.unibs.ing.myutility.Menu;
 
+/**
+ * Classe concreta che estende l'abstract product Navigation. Rappresenta il menu di navigazione del mondo di base.
+ */
 public class BasicNavigation extends Navigation{
 	
 	private static final long serialVersionUID = 1L;
@@ -15,6 +18,12 @@ public class BasicNavigation extends Navigation{
 	private HashMap<String, String> local_string, common_string;
 	private Menu direction_list;
 	
+	/**
+	 * Costruttore della classe BasicNavigation.
+	 * @param world
+	 * @param local_string
+	 * @param common_string
+	 */
 	BasicNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
 		direction_list= new Menu(DIRECTION_MENU);
 		this.world=(BasicWorld) world;
@@ -22,9 +31,11 @@ public class BasicNavigation extends Navigation{
 		this.common_string=common_string;
 	}
 	
-	
-	
-	
+	/**
+	 * Metodo che permette al giocatore di muoversi nel mondo
+	 * @param _current_ground
+	 * @return oggetto ground, rappresenta il luogo nel quale si è spostato il giocatore
+	 */
 	public Ground navigate(Ground _current_ground) {
 		BasicGround current_ground= (BasicGround) _current_ground;
 		BasicGround next_ground;

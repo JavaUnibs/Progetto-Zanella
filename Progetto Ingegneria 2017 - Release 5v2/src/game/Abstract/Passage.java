@@ -2,6 +2,9 @@ package game.Abstract;
 
 import java.io.Serializable;
 
+/**
+ * Classe astratta Passage, rappresenta l'abstract product estendibile dai vari passaggi dei vari mondi.
+ */
 public abstract class Passage implements Serializable{
 
 	private static final long serialVersionUID = 2L;

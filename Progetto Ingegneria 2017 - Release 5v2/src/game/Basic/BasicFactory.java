@@ -8,6 +8,9 @@ import game.Abstract.ModifyWorld;
 import game.Abstract.Navigation;
 import game.Abstract.World;
 
+/**
+ * Classe concreta che estende l'abstract product Factory. Ha il compito di costruire e restituire un oggetto BasicWorld.
+ */
 public class BasicFactory extends Factory implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -20,12 +23,22 @@ public class BasicFactory extends Factory implements Serializable{
 	private HashMap<String, String> local_string;
 	private BasicWorld world;
 	
+	/**
+	 * Costruttore della classe BasicFactory, legge i valori da un HashMap di ingresso e li salva nella HashMap locale.
+	 * @param values
+	 * @param common_string
+	 * @param local_string
+	 */
 	public BasicFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
 		this.local_string=local_string;
 		this.common_string=common_string;
 	}
 	
+	/**
+	 * Metodo che inizializza i valori del mondo con i valori contenuti nelle HashMap.
+	 * @return world, oggetto di tipo BasicWorld
+	 */
 	public World getWorld() {
 		try{
 		int height= Integer.parseInt(values.get("ALTEZZA")[0]);
@@ -52,20 +65,32 @@ public class BasicFactory extends Factory implements Serializable{
 		return world;
 	}
 
-	
+	/**
+	 * Metodo che crea un oggetto Navigation
+	 * return navigation, oggetto Navigation
+	 */
 	public Navigation getNavigation() {
 		BasicNavigation navigation= new BasicNavigation(world, local_string, common_string);
 		return navigation;
 	}
 
-	
+	/**
+	 * Metodo che crea un oggetto ModifyWorld.
+	 * return modify, oggetto ModifyWorld
+	 */
 	public ModifyWorld getModify() {
 		ModifyBasicWorld modify= new ModifyBasicWorld();
 		return modify;
 	}
 
-	
-	boolean openPassages(String[] array){                     //apre i passaggi voluti partendo da un array di stringhe 
+	/**
+	 * Metodo che apre i passaggi voluti partendo da un array di stringhe
+	 * @param array
+	 * @pre array non deve essere nullo
+	 * @post valore ritornato true, non vi sono stati errori
+	 * @return true o false
+	 */
+	boolean openPassages(String[] array){                 
 
 		try{
 			

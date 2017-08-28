@@ -7,6 +7,9 @@ import game.Abstract.Ground;
 import game.Abstract.Passage;
 import game.Abstract.World;
 
+/**
+ * Classe concreta che estende l'abstract product World. Rappresenta il mondo di gioco.
+ */
 public class BasicWorld extends World{
 	
 
@@ -17,7 +20,13 @@ public class BasicWorld extends World{
 	private boolean trial_done;
 	
 	
-	
+	/**
+	 * Costruttore della classe BasicWorld, che genera il mondo.
+	 * @param height
+	 * @param width
+	 * @param depth
+	 * @param ground_name
+	 */
 	BasicWorld(int height, int width, int depth, String ground_name){
 
 		grounds= new ArrayList<BasicGround>();
@@ -64,7 +73,16 @@ public class BasicWorld extends World{
 	
 	
 	
-	
+	/**
+	 * Metodo per la ricerca di un oggeto di tipo BasicGround, utilizzato per restituire la posizione del giocatore durante il gioco.
+	 * 
+	 * @param h maggiore di 0 e minore o uguale dell'altezza del mondo
+	 * @param w maggiore di 0 e minore o uguale della larghezza del mondo
+	 * @param d maggiore di 0 e minore o uguale della profondità del mondo
+	 * @pre h w d non devono essere null
+	 * @post valore ritornato non null
+	 * @return a o null, oggetto di tipo BasicGround o nullo nel caso non sia stata trovata una corrispondenza
+	 */
 	public BasicGround searchGround(int h, int w, int d){
 		for(BasicGround a: grounds){
 			if ((a.getHeight()==h) && (a.getWidth()==w) && (a.getLevel()==d)) return a;
@@ -72,9 +90,15 @@ public class BasicWorld extends World{
 		return null;
 	}
 	
-	
-	
-	
+	/**
+	 * Metodo per determinare l'esistenza o meno del passaggio tra due luoghi a e b 
+	 * 
+	 * @param a luogo corrente
+	 * @param b luogo futuro
+	 * @pre a e b non devono essere null
+	 * @post valore ritornato non null
+	 * @return z o null, oggetto di tipo BasicPassage oppure nullo 
+	 */
 	public BasicPassage searchPassage(Ground a, Ground b){
 		for (BasicPassage z: passages){
 			if(z.getGrounda().equals(a)&&z.getGroundb().equals(b)) return z;
@@ -84,41 +108,43 @@ public class BasicWorld extends World{
 	}
 	
 
-
+	/**
+	 * Metodo che ritorna un ArrayList di tutti i luoghi del mondo.
+	 * @return grounds
+	 */
 	public ArrayList<BasicGround> getGrounds() {
 		return grounds;
 	}
 
-
+	/**
+	 * Metodo che ritorna un ArrayList di tutti i passaggi del mondo.
+	 * @return passages
+	 */
 	public ArrayList<BasicPassage> getPassages() {
 		return passages;
 	}
 	
+	/**
+	 * Metodo per settare i lugohi del mondo
+	 * @param grounds
+	 */
 	public void setGrounds(ArrayList<BasicGround> grounds) {
 		this.grounds = grounds;
 	}
 	
+	/**
+	 * Metodo per settare i passaggi del mondo
+	 * @param passages
+	 */
 	public void setPassages(ArrayList<BasicPassage> passages) {
 		this.passages = passages;
 	}
 
-	public boolean isDepositata() {
-		return deposited;
-	}
-
-
-	public void setDepositata(boolean depositata) {
-		this.deposited = depositata;
-	}
-
-	public boolean isProva_fatta() {
-		return trial_done;
-	}
-
-	public void setProva_fatta(boolean prova_fatta) {
-		this.trial_done = prova_fatta;
-	}
-
+	/**
+	 * Metodo che ritorna il luogo di partenza
+	 * @post ground non deve essere nullo
+	 * @return ground
+	 */
 	public BasicGround getStartGround() {
 		for(BasicGround ground: grounds) if(ground.isStart()) return ground;
 		return null;

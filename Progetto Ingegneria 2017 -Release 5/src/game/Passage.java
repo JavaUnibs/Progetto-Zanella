@@ -3,7 +3,7 @@ package game;
 import java.io.Serializable;
 
 /**
- * Classe che rappresenta i passaggi tra duo luoghi
+ * Classe che rappresenta i passaggi tra due luoghi
  */
 public class Passage implements Serializable{
 	
@@ -15,10 +15,10 @@ public class Passage implements Serializable{
 	private Token key;
 	
 	/**
-	 * Costruttore della classe Passage, crea un passaggio tra i due loghi forniti
+	 * Costruttore della classe Passage, crea un passaggio tra i due luoghi forniti.
 	 * @param grounda
 	 * @param groundb
-	 * @pre i loghi non devono esistere
+	 * @pre i luoghi non devono esistere
 	 */
 	Passage(Ground grounda, Ground groundb){
 		this.grounda=grounda;

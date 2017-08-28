@@ -268,7 +268,7 @@ public class World implements Serializable{
 
 	/**
 	 * Metodo che ritorna il nuemro massimo di chiavi trasportabile
-	 * @return nmero_max_trasportabile
+	 * @return numero_max_trasportabile
 	 */
 	public int getNumero_max_trasportabile() {
 		return numero_max_trasportabile;
@@ -404,7 +404,7 @@ public class World implements Serializable{
 
 	/**
 	 * Metodo che setta l'ArrayList contenente i tipi delle chiavi
-	 * @return keytypes
+	 * @param keytypes
 	 */
 	public void setKeytypes(ArrayList<Token> keytypes) {
 		this.keytypes = keytypes;
@@ -412,7 +412,7 @@ public class World implements Serializable{
 
 	/**
 	 * Metodo che setta l'ArrayList contenente i tipi di chiavi del giocatore
-	 * @return keytypes
+	 * @param playerkey
 	 */
 	public void setPlayerkeys(ArrayList<Token> playerkeys) {
 		this.playerkeys = playerkeys;

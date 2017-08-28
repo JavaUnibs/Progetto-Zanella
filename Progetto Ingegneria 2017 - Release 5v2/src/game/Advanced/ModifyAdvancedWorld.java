@@ -11,11 +11,12 @@ import game.Trial;
 import game.Abstract.ModifyWorld;
 import game.Medium.MediumPassage;
 
+/**
+ * Classe concreta che estende l'abstract product ModifyWorld.
+ */
 public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private final String[] menu={"Pesi delle chiavi","Tipi di chiavi", "Limite superiore del peso di una chiave", "Numero massimo di chiavi trasportabili", 
 				"Peso massimo di chiavi trasportabili", "Tipi di prove", "Punteggi delle prove", "Limite superiore del valore di una prova",
@@ -47,9 +48,18 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 	private final String MODIFY_OK="Modifica effettuata";
 	private AdvancedWorld world;
 
+	/**
+	 * Costruttore della classe ModifyAdvancedWorld.
+	 * @param world
+	 */
 	public ModifyAdvancedWorld(AdvancedWorld world){
 		this.world=world;
 	}
+	
+
+	/**
+	 * Metodo che permette la modifica del parametri del MediumWorld.
+	 */
 	public void initialize() {
 		HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keyMap=keepTrackKeys();
 		Set<ArrayList<AdvancedGround>> groundSet = keyMap.keySet();
@@ -204,6 +214,10 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		
 	}
 
+	/**
+	 * Metodo che permette la raggiungibilità delle chiavi.
+	 * @return map, HashMap di AdvancedGround e AdvancedPassage.
+	 */
 	private HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keepTrackKeys(){   
 			
 			HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> map = new HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>>();
@@ -221,12 +235,23 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 			return map;	
 		}
 	
+	/**
+	 * Metodo che permette la raggiungibilità delle prove.
+	 * @return ground, ArrayList di AdvancedGround.
+	 */
 	private ArrayList<AdvancedGround> keepTrackTrials(){													
 			ArrayList<AdvancedGround> grounds=new ArrayList<AdvancedGround>();
 			for (AdvancedGround g: world.getGrounds()) if(g.getTrial()!=null) grounds.add(g);
 			return grounds;
 		}
 
+	/**
+	 * Metodo che aggiorna la lista delle chiavi nel mondo per permettere la raggiungibilità del goal
+	 * 
+	 * @param groundSet
+	 * @param keys
+	 * @param keyMap
+	 */
 	private void applyKeepTrackKeys(Set<ArrayList<AdvancedGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keyMap){
 		Token tempkey=null;
 		for(ArrayList<AdvancedGround> array: groundSet){
@@ -244,6 +269,12 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}	
 	}
 	
+	/**
+	 * Metodo che ritorna una lista di chiavi che non rispettano il vincolo di peso massimo.
+	 * 
+	 * @param max_weight
+	 * @return temp, ArrayList di oggetti Token.
+	 */
 	private ArrayList<Token> invalidKeysWeight(int max_weight){                    
 		ArrayList<Token> temp= new ArrayList<Token>();
 		for(Token a: world.getKeytypes())
@@ -252,7 +283,13 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		
 	}
 	
-	ArrayList<Trial> invalidTrialPoints(int max_points){                   //Restituisce un arraylist contenente le prove che non rispettano il vincolo di punteggio massimo
+	/**
+	 * Metodo che ritorna una lista di prove che non rispettano il vincolo di punteggio massimo.
+	 * 
+	 * @param max_points
+	 * @return temp, ArrayList di oggetti Trial.
+	 */
+	ArrayList<Trial> invalidTrialPoints(int max_points){                   
 		ArrayList<Trial> temp= new ArrayList<Trial>();
 		for(Trial a: world.getTrials())
 			if(a.getPoints()>=max_points) temp.add(a);
@@ -261,6 +298,9 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 	
 	}
 	
+	/**
+	 * Metodo che permette la modifica del peso delle chiavi.
+	 */
 	private void modifyKeyWeights(){
 		Token key=world.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
 		if(CheckValues.noElement(key, NO_KEY)) return;
@@ -275,6 +315,12 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che permette l'aggiunta di chiavi.
+	 * @param groundSet
+	 * @param keys
+	 * @param keyMap
+	 */
 	private void addKey(Set<ArrayList<AdvancedGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keyMap){
 		String name= LeggiInput.riga(INSERT_NAME_KEY);
 		if(CheckValues.existsElement(world.searchKeyTypes(name), EXISTS_KEY)) return;
@@ -288,6 +334,12 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che permette di rimuovere le chiavi.
+	 * @param groundSet
+	 * @param keys
+	 * @param keyMap
+	 */
 	private void removeKey(Set<ArrayList<AdvancedGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<AdvancedGround>, ArrayList<MediumPassage>> keyMap){
 		Token key=world.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
 		if(CheckValues.noElement(key, NO_KEY)) return;
@@ -308,6 +360,9 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che permette la modifica del numero di chiavi trasportabili.
+	 */
 	private void modifyMaxTotalKeyNumber(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
@@ -317,6 +372,9 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che permette la modifica del limite di peso per le chiavi.
+	 */
 	private void modifyMaxTotalKeyWeight(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
@@ -326,6 +384,11 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che aggiorna la lista delle prove nel mondo per permettere la raggiungibilità.
+	 * @param trialSet
+	 * @param trials
+	 */
 	private	void applyKeepTrackTrials(ArrayList<AdvancedGround> trialSet, ArrayList<Trial> trials){
 		Trial tempTrial=null;
 		for(AdvancedGround g: trialSet) {
@@ -338,6 +401,11 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che permette di aggiungere prove.
+	 * @param trials
+	 * @param trialSet
+	 */
 	private void addTrial(ArrayList<Trial> trials, ArrayList<AdvancedGround> trialSet){
 		String name=LeggiInput.riga(INSERT_NAME_TRIAL);
 		if(CheckValues.existsElement(world.searchTrial(name), EXISTS_TRIAL)) return;
@@ -364,6 +432,11 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		System.out.println(TRIAL_ADDED);
 	}
 	
+	/**
+	 * Metodo che permette di rimuovere prove
+	 * @param trials
+	 * @param trialSet
+	 */
 	private void removeTrial(ArrayList<Trial> trials, ArrayList<AdvancedGround> trialSet){
 		String name=LeggiInput.riga(INSERT_NAME_TRIAL);
 		Trial trial=world.searchTrial(name);
@@ -373,7 +446,9 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		System.out.println(TRIAL_REMOVED);
 	}
 	
-	
+	/**
+	 * Metodo che permette la modifica del punteggio delle prove.
+	 */
 	private void modifyTrialPoints(){
 		Trial trial=world.searchTrial(LeggiInput.riga(INSERT_NAME_TRIAL));
 		if(CheckValues.noElement(trial, NO_TRIAL)) return;
@@ -389,6 +464,9 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che permette di modificare il limite del punteggio massimo di una prova
+	 */
 	private void modifyTrialPointsLimit(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
@@ -402,6 +480,9 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che permette di moficiare il punteggio iniziale
+	 */
 	private void modifyStartingPoints(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
@@ -411,6 +492,9 @@ public class ModifyAdvancedWorld extends ModifyWorld implements Serializable
 		}
 	}
 	
+	/**
+	 * Metodo che permette di modificare il punteggio finale di obbiettivo.
+	 */
 	private void modifyFinalPoints(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;

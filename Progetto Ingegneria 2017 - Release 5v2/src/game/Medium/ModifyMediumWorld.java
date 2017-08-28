@@ -9,7 +9,9 @@ import game.Token;
 import game.Abstract.ModifyWorld;
 import it.unibs.ing.myutility.*;
 
-
+/**
+ * Classe concreta che estende l'abstract product ModifyWorld.
+ */
 public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	
 
@@ -32,11 +34,17 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	private final String MODIFY_OK="Modifica effettuata";
 	private MediumWorld world;
 	
+	/**
+	 * Costruttore della classe ModifyMediumWorld.
+	 * @param world
+	 */
 	ModifyMediumWorld(MediumWorld world){
 		this.world=world;
 	}
 
-
+	/**
+	 * Metodo che permette la modifica del parametri del MediumWorld.
+	 */
 	public void initialize() {
 		HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keyMap=keepTrackKeys();
 		Set<ArrayList<MediumGround>> groundSet = keyMap.keySet();
@@ -124,6 +132,10 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		
 	}
 	
+	/**
+	 * Metodo che permette la raggiungibilità delle chiavi.
+	 * @return map, HashMap di MediumGround e MediumPassage.
+	 */
 	private HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keepTrackKeys(){   
 		
 		HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> map = new HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>>();
@@ -141,7 +153,13 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		return map;	
 	}
 	
-
+	/**
+	 * Metodo che aggiorna la lista delle chiavi nel mondo per permettere la raggiungibilità del goal
+	 * 
+	 * @param groundSet
+	 * @param keys
+	 * @param keyMap
+	 */
 	private void applyKeepTrackKeys(Set<ArrayList<MediumGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keyMap){
 		Token tempkey=null;
 		for(ArrayList<MediumGround> array: groundSet){
@@ -159,6 +177,12 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		}	
 	}
 	
+	/**
+	 * Metodo che ritorna una lista di chiavi che non rispettano il vincolo di peso massimo.
+	 * 
+	 * @param max_weight
+	 * @return temp, ArrayList di oggetti Token.
+	 */
 	private ArrayList<Token> invalidKeysWeight(int max_weight){                    
 		ArrayList<Token> temp= new ArrayList<Token>();
 		for(Token a: world.getKeytypes())
@@ -167,6 +191,9 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		
 	}
 	
+	/**
+	 * Metodo che permette la modifica del peso delle chiavi.
+	 */
 	private void modifyKeyWeights(){
 		Token key=world.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
 		if(CheckValues.noElement(key, NO_KEY)) return;
@@ -181,6 +208,12 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		}
 	}
 	
+	/**
+	 * Metodo che permette l'aggiunta di chiavi.
+	 * @param groundSet
+	 * @param keys
+	 * @param keyMap
+	 */
 	private void addKey(Set<ArrayList<MediumGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keyMap){
 		String name= LeggiInput.riga(INSERT_NAME_KEY);
 		if(CheckValues.existsElement(world.searchKeyTypes(name), EXISTS_KEY)) return;
@@ -194,6 +227,12 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		}
 	}
 	
+	/**
+	 * Metodo che permette di rimuovere le chiavi.
+	 * @param groundSet
+	 * @param keys
+	 * @param keyMap
+	 */
 	private void removeKey(Set<ArrayList<MediumGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keyMap){
 		Token key=world.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
 		if(CheckValues.noElement(key, NO_KEY)) return;
@@ -202,6 +241,9 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		System.out.println(KEY_REMOVED);
 	}
 	
+	/**
+	 * Metodo che permette la modifica del limite di peso per le chiavi.
+	 */
 	private void modifyKeyWeightLimit(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
@@ -214,6 +256,9 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		}
 	}
 	
+	/**
+	 * Metodo che permette la modifica del numero di chiavi trasportabili.
+	 */
 	private void modifyMaxTotalKeyNumber(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
@@ -223,6 +268,9 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 		}
 	}
 	
+	/**
+	 * Metodo che permette di modificare il peso massimo trasportabile di chiavi.
+	 */
 	private void modifyMaxTotalKeyWeight(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
