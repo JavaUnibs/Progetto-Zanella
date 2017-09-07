@@ -29,6 +29,7 @@ public class AdvancedNavigation extends Navigation{
 	 * @param world
 	 * @param local_string
 	 * @param common_string
+	 * @pre i parametri non siano null
 	 */
 	AdvancedNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
 		direction_list= new Menu(DIRECTION_MENU);
@@ -41,6 +42,7 @@ public class AdvancedNavigation extends Navigation{
 	 * Metodo che permette al giocatore di muoversi nel mondo.
 	 * @param _current_ground
 	 * @return oggetto ground, rappresenta il luogo nel quale si è spostato il giocatore
+	 * @pre la variabile world e i suoi campi non siano null
 	 */
 	public Ground navigate(Ground _current_ground) {
 		AdvancedGround current_ground= (AdvancedGround) _current_ground;
@@ -140,7 +142,8 @@ public class AdvancedNavigation extends Navigation{
 	/**
 	 * Metodo che permette al giocatore di raccogliere una chiave da un luogo.
 	 * @param current_ground
-	 * @pre requisiti di spazio e peso soddisfatti
+	 * @pre current_ground, world e local_string non siano null
+	 * @post il campo world.playerkeys possieda la chiave recuperata, mentre il campo key di current_ground sia null (se le condizioni sono soddisfatte)
 	 * @return string 
 	 */
 	private String retrieveKey(AdvancedGround current_ground){
@@ -158,6 +161,8 @@ public class AdvancedNavigation extends Navigation{
 	
 	/**
 	 * Metodo che permette al giocatore di depositare una chiave in luogo.
+	 * @pre current_ground, world, local_string e common_string non siano null
+	 * @post il campo world.playerkeys non possieda la chiave depositata, mentre il campo key di current_ground abbia un riferimento ad essa (se le condizioni sono soddisfatte)
 	 * @param current_ground
 	 * @return string
 	 */
@@ -185,6 +190,8 @@ public class AdvancedNavigation extends Navigation{
 	/**
 	 * Metodo per provare la risoluzione della prova.
 	 * @param current_ground
+	 * @pre current_ground, world e local_string non siano null
+	 * @post il campo world.point risulti aggiornato e il campo world.trial_done sia true
 	 * @return string, di successo o insuccesso.
 	 */
 	private String attemptTrial(AdvancedGround current_ground){
@@ -204,6 +211,9 @@ public class AdvancedNavigation extends Navigation{
 	 * @param current_ground
 	 * @param next_ground
 	 * @return current_ground, rappresenta luogo corrente che potrebbe essere lo stesso in caso di insuccesso
+	 * @pre currentr_ground, world e local_string non siano null
+	 * @post i campi open e key dell'oggetto passaggio corrispondente ai luoghi current_ground e next_ground siano aggiornati secondo la logica del gioco (se esistente),
+	 * i campi world.deposited e world-trial_done posti false (se soddisfatte le condizioni)
 	 */
 	private AdvancedGround attemptEntry(AdvancedGround current_ground, AdvancedGround next_ground){
 		

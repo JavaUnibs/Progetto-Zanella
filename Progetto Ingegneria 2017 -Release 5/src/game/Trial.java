@@ -18,7 +18,7 @@ public class Trial implements Serializable{
 	
 	/**
 	 * Costruttore della classe Trial, inizializza ogni prova attribuendo un punteggio e un nome.
-	 * 
+	 * @pre points >=0, name diverso da null
 	 * @param points
 	 * @param name
 	 */
@@ -79,7 +79,7 @@ public class Trial implements Serializable{
 	/**
 	 * Metodo che ritorna casualmente una prova.
 	 * 
-	 * @pre array non sia vuoto
+	 * @pre il campo quiz non sia vuoto
 	 * @return oggetto Trial presente nell'HashMap quiz 
 	 */
 	String getQuestion(){
@@ -93,7 +93,7 @@ public class Trial implements Serializable{
 	
 	/**
 	 * Metodo che ritorna true se la risposta alla domanda passata è corretta, altrimenti false
-	 * 
+	 * @pre domanda e risposta non siano null
 	 * @param domanda nome della domanda passata
 	 * @param risposta
 	 * @return true se risposta corretta, false se risposta è errata

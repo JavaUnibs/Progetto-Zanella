@@ -3,7 +3,7 @@ package game.Abstract;
 import java.io.Serializable;
 
 /**
- * Classe astratta World, rappresenta l'abstract product estendibile dalle varie tipologie di mondi.
+ * Classe astratta World, rappresenta l'abstract product estendibile dalle sue varianti (concrete products).
  */
 public abstract class World implements Serializable{
 

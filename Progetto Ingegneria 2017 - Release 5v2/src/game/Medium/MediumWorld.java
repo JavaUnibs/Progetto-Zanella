@@ -34,6 +34,7 @@ public class MediumWorld extends World{
 	 * @param max_transportable_keys_number
 	 * @param max_key_weight
 	 * @param _ground_name
+	 * @pre i parametri passati non siano null
 	 */
 	MediumWorld(int height, int width, int depth, int max_transportable_keys_weight, int max_transportable_keys_number, int max_key_weight, String _ground_name){
 
@@ -92,7 +93,6 @@ public class MediumWorld extends World{
 	 * @param w maggiore di 0 e minore o uguale della larghezza del mondo
 	 * @param d maggiore di 0 e minore o uguale della profondità del mondo
 	 * @pre h w d non devono essere null
-	 * @post valore ritornato non null
 	 * @return a o null, oggetto di tipo MediumGround o nullo nel caso non sia stata trovata una corrispondenza
 	 */
 	public MediumGround searchGround(int h, int w, int d){
@@ -108,7 +108,6 @@ public class MediumWorld extends World{
 	 * @param a luogo corrente
 	 * @param b luogo futuro
 	 * @pre a e b non devono essere null
-	 * @post valore ritornato non null
 	 * @return z o null, oggetto di tipo MediumPassage oppure nullo 
 	 */
 	public MediumPassage searchPassage(Ground a, Ground b){
@@ -125,7 +124,6 @@ public class MediumWorld extends World{
 	 * 
 	 * @param name, nome della chiave da cercare
 	 * @pre name non deve essere null
-	 * @post valore ritornato non null
 	 * @return t o null, oggetto Token o null 
 	 */
 	Token searchKeyTypes(String name){
@@ -140,7 +138,6 @@ public class MediumWorld extends World{
 	 * Metodo che cerca una chiave tra le chiavi del giocatore.
 	 * @param name
 	 * @pre name non deve essere null
-	 * @post valore ritornato non null
 	 * @return t
 	 */
 	Token searchPlayerKeys(String name){

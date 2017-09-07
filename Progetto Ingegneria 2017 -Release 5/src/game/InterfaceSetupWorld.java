@@ -46,6 +46,8 @@ public class InterfaceSetupWorld {
 	private final String LIMIT="Inserire il nuovo limite";
 	private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
 	private final String MODIFY_OK="Modifica effettuata";
+	private final String NO_REMOVE="Impossibile rimuovere ulteriori elementi";
+	private final String OVER_THE_LIMIT_WEIGHT="Il valore inserito viola i vincoli di integrità tra\nil limite superiore del peso di una chiave e peso massimo trasportabile";
 	
 	/**
 	 * Costruttore della classe InterfaceSetupWorld, carica i dati forniti dall'oggetto SetupWorld e ne permette la modifica al giocatore.
@@ -143,6 +145,10 @@ public class InterfaceSetupWorld {
 				break;
 				
 				case 2:{															//rimozione
+					if(keys.size()==1){
+						System.out.println(NO_REMOVE);
+						break;
+					}
 					LeggiInput.terminaRiga();
 					Token key=setup.getMondo().searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
 					if(noElement(key, NO_KEY)) break;
@@ -167,6 +173,7 @@ public class InterfaceSetupWorld {
 				System.out.println("Limite superiore del peso di una chiave: "+setup.getMondo().getPeso_max_chiave()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(isNegative(limit)) break;
+				if(isOverLimit(limit, setup.getMondo().getPeso_max_trasportabile(), OVER_THE_LIMIT_WEIGHT)) break;
 				else{
 					setup.getMondo().setPeso_max_chiave(limit);
 					System.out.println(WARNING_LIMIT);
@@ -199,6 +206,7 @@ public class InterfaceSetupWorld {
 				System.out.println("Peso massimo trasportabile: "+setup.getMondo().getPeso_max_trasportabile()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(isNegative(limit)) break;
+				if(isOverLimit(setup.getMondo().getPeso_max_chiave(), limit, OVER_THE_LIMIT_WEIGHT)) break;
 				else {
 					setup.getMondo().setPeso_max_trasportabile(limit);
 					System.out.println(MODIFY_OK);
@@ -252,6 +260,10 @@ public class InterfaceSetupWorld {
 				break;
 				
 				case 2:{																	//rimozione prova
+					if(trials.size()==1){
+						System.out.println(NO_REMOVE);
+						break;
+					}
 					LeggiInput.terminaRiga();
 					String name=LeggiInput.riga(INSERT_NAME_TRIAL);
 					Trial trial=setup.getMondo().searchTrial(name);
@@ -296,6 +308,7 @@ public class InterfaceSetupWorld {
 				System.out.println("Limite superiore del valore di una prova: "+setup.getMondo().getPunteggio_max_prova()+"\n");
 				int limit=LeggiInput.intero(LIMIT);
 				if(isNegative(limit)) break;
+				if(isOverLimit(limit, setup.getMondo().getPeso_max_trasportabile(), OVER_THE_LIMIT_WEIGHT)) break;
 				else{
 					setup.getMondo().setPunteggio_max_prova(limit);
 					System.out.println(WARNING_LIMIT);
@@ -352,7 +365,7 @@ public class InterfaceSetupWorld {
 	 * @return false o true
 	 */
 	boolean isNegative (int value){
-		if( value<0) {
+		if( value<=0) {
 			System.out.println(NEGATIVE_VALUE);
 			return true;
 		}
@@ -378,6 +391,7 @@ public class InterfaceSetupWorld {
 	
 	/**
 	 * Metodo che torna un messaggio se il parametro è vero
+	 * @pre value non sia null
 	 * @param message messaggio da ritornare
 	 * @param value
 	 * @return true o false
@@ -406,7 +420,8 @@ public class InterfaceSetupWorld {
 	
 	/**
 	 * Metodo che aggiorna la lista delle chiavi nel mondo per permettere la raggiungibilità del goal
-	 * 
+	 * @pre groundSet, keys e keyMap non siano nulli, e i luoghi e i passaggi specificati esistano in mondo.grounds e mondo.passages 
+	 * @post i campi key dei luoghi e passaggi specificati siano diversi da null e siano aggiornati secondo la logica voluta
 	 * @param groundSet
 	 * @param keys
 	 * @param keyMap
@@ -446,6 +461,8 @@ public class InterfaceSetupWorld {
 	
 	/**
 	 * Metodo che aggiorna la lista di prove nel mondo per permettere la raggiungibilità del goal.
+	 * @pre trialSet e trials non siano null, e i luoghi e le prove specificati esistano in mondo.trials e mondo.grounds
+	 * @post il campo trial dei luoghi specificati non sia null 
 	 * @param trialSet
 	 * @param trials
 	 */

@@ -26,6 +26,7 @@ public class BasicWorld extends World{
 	 * @param width
 	 * @param depth
 	 * @param ground_name
+	 * @pre i parametri passati non siano null
 	 */
 	BasicWorld(int height, int width, int depth, String ground_name){
 
@@ -80,7 +81,6 @@ public class BasicWorld extends World{
 	 * @param w maggiore di 0 e minore o uguale della larghezza del mondo
 	 * @param d maggiore di 0 e minore o uguale della profondità del mondo
 	 * @pre h w d non devono essere null
-	 * @post valore ritornato non null
 	 * @return a o null, oggetto di tipo BasicGround o nullo nel caso non sia stata trovata una corrispondenza
 	 */
 	public BasicGround searchGround(int h, int w, int d){
@@ -96,7 +96,6 @@ public class BasicWorld extends World{
 	 * @param a luogo corrente
 	 * @param b luogo futuro
 	 * @pre a e b non devono essere null
-	 * @post valore ritornato non null
 	 * @return z o null, oggetto di tipo BasicPassage oppure nullo 
 	 */
 	public BasicPassage searchPassage(Ground a, Ground b){

@@ -11,7 +11,7 @@ public class CheckValues {
 	}
 	
 	public static boolean isNegative (int value, String message){
-		if( value<0) {
+		if( value<=0) {
 			System.out.println(message);
 			return true;
 		}

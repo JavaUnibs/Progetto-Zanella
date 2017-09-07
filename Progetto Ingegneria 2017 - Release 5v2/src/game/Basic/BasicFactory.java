@@ -9,7 +9,7 @@ import game.Abstract.Navigation;
 import game.Abstract.World;
 
 /**
- * Classe concreta che estende l'abstract product Factory. Ha il compito di costruire e restituire un oggetto BasicWorld.
+ * Classe concreta che estende l'abstract product Factory. Ha il compito di costruire e restituire i concrete products relativi al tipo di mondo Advanced.
  */
 public class BasicFactory extends Factory implements Serializable{
 
@@ -28,6 +28,7 @@ public class BasicFactory extends Factory implements Serializable{
 	 * @param values
 	 * @param common_string
 	 * @param local_string
+	 * @pre values, common_string e local_string non siano null
 	 */
 	public BasicFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
@@ -38,6 +39,7 @@ public class BasicFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che inizializza i valori del mondo con i valori contenuti nelle HashMap.
 	 * @return world, oggetto di tipo BasicWorld
+	 * @pre la variabile values deve contenere valori validi corrispondenti agli argomenti del costruttore di World
 	 */
 	public World getWorld() {
 		try{
@@ -67,7 +69,8 @@ public class BasicFactory extends Factory implements Serializable{
 
 	/**
 	 * Metodo che crea un oggetto Navigation
-	 * return navigation, oggetto Navigation
+	 * @return navigation, oggetto Navigation
+	 * @pre values, common_string e local_string non siano null
 	 */
 	public Navigation getNavigation() {
 		BasicNavigation navigation= new BasicNavigation(world, local_string, common_string);
@@ -76,7 +79,8 @@ public class BasicFactory extends Factory implements Serializable{
 
 	/**
 	 * Metodo che crea un oggetto ModifyWorld.
-	 * return modify, oggetto ModifyWorld
+	 * @return modify, oggetto ModifyWorld
+	 * @pre il campo world non sia null
 	 */
 	public ModifyWorld getModify() {
 		ModifyBasicWorld modify= new ModifyBasicWorld();
@@ -86,8 +90,8 @@ public class BasicFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che apre i passaggi voluti partendo da un array di stringhe
 	 * @param array
-	 * @pre array non deve essere nullo
-	 * @post valore ritornato true, non vi sono stati errori
+	 * @pre i luoghi e i passaggi specificati nell'array devono esistere nei campi mondo.grounds e mondo.passages
+	 * @post il campo open dei passaggi specificati deve essere true nel caso non vi siano errori
 	 * @return true o false
 	 */
 	boolean openPassages(String[] array){                 

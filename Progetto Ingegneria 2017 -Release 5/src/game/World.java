@@ -108,7 +108,6 @@ public class World implements Serializable{
 	 * @param w maggiore di 0 e minore o uguale della larghezza del mondo
 	 * @param d maggiore di 0 e minore o uguale della profondità del mondo
 	 * @pre h w d non devono essere null
-	 * @post valore ritornato non null
 	 * @return a o null, oggetto di tipo Ground o nullo nel caso non sia stata trovata una corrispondenza
 	 */
 	Ground searchGround(int h, int w, int d){
@@ -126,7 +125,6 @@ public class World implements Serializable{
 	 * @param a luogo corrente
 	 * @param b luogo futuro
 	 * @pre a e b non devono essere null
-	 * @post valore ritornato non null
 	 * @return z o null, oggetto di tipo Passage oppure nullo 
 	 */
 	Passage searchPassage(Ground a, Ground b){
@@ -142,7 +140,6 @@ public class World implements Serializable{
 	 * 
 	 * @param name, nome della prova da cercare
 	 * @pre name non deve essere null
-	 * @post valore ritornato non null
 	 * @return t o null, oggetto Trial o null 
 	 */
 	Trial searchTrial(String name){
@@ -158,7 +155,6 @@ public class World implements Serializable{
 	 * 
 	 * @param name, nome della chiave da cercare
 	 * @pre name non deve essere null
-	 * @post valore ritornato non null
 	 * @return t o null, oggetto Token o null 
 	 */
 	Token searchKeyTypes(String name){
@@ -173,7 +169,6 @@ public class World implements Serializable{
 	 * Metodo che cerca una chiave tra le chiavi del giocatore.
 	 * @param name
 	 * @pre name non deve essere null
-	 * @post valore ritornato non null
 	 * @return
 	 */
 	Token searchPlayerKeys(String name){
@@ -187,7 +182,8 @@ public class World implements Serializable{
 	
 	/**
 	 * Metodo per l'aggiornamento dei punti in base alla risposta data alla prova.
-	 * 
+	 * @pre trial e correct non devono essere null
+	 * @post il campo points risulta aggiornato
 	 * @param trial, oggetto Trial che identifica la prova sostenuta
 	 * @param correct valore booleano che contiene il risultato della risposta, true o false.
 	 */

@@ -3,7 +3,7 @@ package game.Abstract;
 import java.io.Serializable;
 
 /**
- * Classe astratta Passage, rappresenta l'abstract product estendibile dai vari passaggi dei vari mondi.
+ * Classe astratta Passage, rappresenta l'abstract product estendibile dalle sue varianti (concrete products).
  */
 public abstract class Passage implements Serializable{
 

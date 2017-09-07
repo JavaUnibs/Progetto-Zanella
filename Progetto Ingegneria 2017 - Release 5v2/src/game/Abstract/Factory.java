@@ -1,7 +1,7 @@
 package game.Abstract;
 
 /**
- * Classe astratta Factory, rappresenta l'abstract product estendibile dalle varie modalità di mondo.
+ * Classe astratta Factory, rappresenta l'abstract factory estendibile dalle varie tipologie di concrete factory.
  */
 public abstract class Factory {
 	

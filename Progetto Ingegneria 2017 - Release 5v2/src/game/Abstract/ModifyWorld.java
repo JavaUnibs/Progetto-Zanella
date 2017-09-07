@@ -3,7 +3,7 @@ package game.Abstract;
 import java.io.Serializable;
 
 /**
- * Classe astratta ModifyWorld, rappresenta l'abstract product estendibile dai vari mondi.
+ * Classe astratta ModifyWorld, rappresenta l'abstract product estendibile dalle sue varianti (concrete products).
  *
  */
 public abstract class ModifyWorld implements Serializable{

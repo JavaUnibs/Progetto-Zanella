@@ -32,6 +32,8 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	private final String LIMIT="Inserire il nuovo limite";
 	private final String WARNING_LIMIT="I valori superiori al limite verranno troncati";
 	private final String MODIFY_OK="Modifica effettuata";
+	private final String NO_REMOVE="Impossibile rimuovere ulteriori elementi";
+	private final String OVER_THE_LIMIT_WEIGHT="Il valore inserito viola i vincoli di integrità tra\nil limite superiore del peso di una chiave e peso massimo trasportabile";
 	private MediumWorld world;
 	
 	/**
@@ -44,6 +46,7 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 
 	/**
 	 * Metodo che permette la modifica del parametri del MediumWorld.
+	 * @pre la variabile world e tutti i suoi campi non siano null
 	 */
 	public void initialize() {
 		HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keyMap=keepTrackKeys();
@@ -135,6 +138,7 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	/**
 	 * Metodo che permette la raggiungibilità delle chiavi.
 	 * @return map, HashMap di MediumGround e MediumPassage.
+	 * @pre i campi mondo.grounds, mondo.passages non siano null
 	 */
 	private HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keepTrackKeys(){   
 		
@@ -159,6 +163,8 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	 * @param groundSet
 	 * @param keys
 	 * @param keyMap
+	 * @pre groundSet, keys e keyMap non siano nulli, e i luoghi e i passaggi specificati esistano in world.grounds e world.passages 
+	 * @post i campi key dei luoghi e passaggi specificati siano diversi da null e siano aggiornati secondo la logica voluta
 	 */
 	private void applyKeepTrackKeys(Set<ArrayList<MediumGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keyMap){
 		Token tempkey=null;
@@ -182,6 +188,7 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	 * 
 	 * @param max_weight
 	 * @return temp, ArrayList di oggetti Token.
+	 * @pre max_weight deve essere > 0
 	 */
 	private ArrayList<Token> invalidKeysWeight(int max_weight){                    
 		ArrayList<Token> temp= new ArrayList<Token>();
@@ -193,6 +200,7 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	
 	/**
 	 * Metodo che permette la modifica del peso delle chiavi.
+	 * @post il campo weight della chiave specificata risulti aggiornato con il nuovo valore (se valido)
 	 */
 	private void modifyKeyWeights(){
 		Token key=world.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
@@ -213,6 +221,8 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	 * @param groundSet
 	 * @param keys
 	 * @param keyMap
+	 * @pre groundSet, keys e keyMap non siano null, e i luoghi e i passaggi specificati esistano in world.grounds e world.passages 
+	 * @post il nuovo oggetto di tipo Token risulti in world.keytypes
 	 */
 	private void addKey(Set<ArrayList<MediumGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keyMap){
 		String name= LeggiInput.riga(INSERT_NAME_KEY);
@@ -232,8 +242,14 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	 * @param groundSet
 	 * @param keys
 	 * @param keyMap
+	 * @pre groundSet, keys e keyMap non siano nulli, e i luoghi e i passaggi specificati esistano in world.grounds e world.passages
+	 * @post la chiave specificata sia assente da world.keytypes (se esistente)
 	 */
 	private void removeKey(Set<ArrayList<MediumGround>> groundSet, ArrayList<Token> keys, HashMap<ArrayList<MediumGround>, ArrayList<MediumPassage>> keyMap){
+		if(keys.size()==1) {
+			System.out.println(NO_REMOVE);
+			return;
+		}
 		Token key=world.searchKeyTypes(LeggiInput.riga(INSERT_NAME_KEY));
 		if(CheckValues.noElement(key, NO_KEY)) return;
 		else keys.remove(key);
@@ -243,10 +259,12 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	
 	/**
 	 * Metodo che permette la modifica del limite di peso per le chiavi.
+	 * @post il campo world.max_key_weight risulti aggiornato con il nuovo valore (se valido)
 	 */
 	private void modifyKeyWeightLimit(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
+		if(CheckValues.isOverLimit(limit, world.getMax_transportable_keys_weight(), OVER_THE_LIMIT_WEIGHT)) return;
 		else{
 			world.setMax_key_weight(limit);
 			System.out.println(WARNING_LIMIT);
@@ -258,6 +276,7 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	
 	/**
 	 * Metodo che permette la modifica del numero di chiavi trasportabili.
+	 * @post il campo world.max_transportable_keys_number risulti aggiornato con il nuovo valore (se valido)
 	 */
 	private void modifyMaxTotalKeyNumber(){
 		int limit=LeggiInput.intero(LIMIT);
@@ -270,10 +289,12 @@ public class ModifyMediumWorld extends ModifyWorld implements Serializable{
 	
 	/**
 	 * Metodo che permette di modificare il peso massimo trasportabile di chiavi.
+	 * @post il campo world.max_transportable_keys_weight risulti aggiornato con il nuovo valore (se valido)
 	 */
 	private void modifyMaxTotalKeyWeight(){
 		int limit=LeggiInput.intero(LIMIT);
 		if(CheckValues.isNegative(limit, NEGATIVE_VALUE)) return;
+		if(CheckValues.isOverLimit(world.getMax_key_weight(), limit, OVER_THE_LIMIT_WEIGHT)) return;
 		else {
 			world.setMax_transportable_keys_weight(limit);
 			System.out.println(MODIFY_OK);

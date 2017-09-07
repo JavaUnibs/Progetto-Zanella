@@ -20,7 +20,7 @@ public class BasicPassage extends Passage {
 	 * Costruttore della classe BasicPassage, crea un passaggio tra i due luoghi forniti
 	 * @param grounda
 	 * @param groundb
-	 * @pre i luoghi non devono esistere
+	 * @pre i luoghi non devono essere nulli
 	 */
 	BasicPassage(Ground grounda, Ground groundb){
 		this.grounda=grounda;

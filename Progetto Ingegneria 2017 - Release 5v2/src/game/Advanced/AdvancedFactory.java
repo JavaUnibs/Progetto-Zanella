@@ -13,7 +13,7 @@ import game.Medium.MediumPassage;
 import it.unibs.ing.myutility.RandomValues;
 
 /**
- * Classe concreta che estende l'abstract product Factory. Ha il compito di costruire e restituire un oggetto AdvancedWorld.
+ * Classe concreta che estende l'abstract product Factory. Ha il compito di costruire e restituire i concrete products relativi al tipo di mondo Advanced.
  */
 public class AdvancedFactory extends Factory implements Serializable{
 
@@ -36,6 +36,7 @@ public class AdvancedFactory extends Factory implements Serializable{
 	 * @param values
 	 * @param common_string
 	 * @param local_string
+	 * @pre values, common_string e local_string non siano null
 	 */
 	public AdvancedFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
@@ -45,7 +46,7 @@ public class AdvancedFactory extends Factory implements Serializable{
 
 	/**
 	 * Metodo che inizializza i valori del mondo con i valori contenuti nelle HashMap.
-	 * @return world, oggetto di tipo AdvancedWorld
+	 * @return world, oggetto di tipo AdvancedWorld o null
 	 */
 	public World getWorld() {
 		try{
@@ -93,7 +94,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 
 	/**
 	 * Metodo che crea un oggetto Navigation
-	 * return navigation, oggetto Navigation
+	 * @pre values, common_string e local_string non siano null
+	 * @return navigation, oggetto Navigation
 	 */
 	public Navigation getNavigation() {
 		AdvancedNavigation navigation= new AdvancedNavigation(world, local_string, common_string);
@@ -102,7 +104,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 
 	/**
 	 * Metodo che crea un oggetto ModifyWorld.
-	 * return modify, oggetto ModifyWorld
+	 * @pre il campo world non sia null
+	 * @return modify, oggetto ModifyWorld
 	 */
 	public ModifyWorld getModify() {
 		ModifyAdvancedWorld modify= new ModifyAdvancedWorld(world);
@@ -112,8 +115,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che apre i passaggi voluti partendo da un array di stringhe
 	 * @param array
-	 * @pre array non deve essere nullo
-	 * @post valore ritornato true, non vi sono stati errori
+	 * @pre i luoghi e i passaggi specificati nell'array devono esistere nei campi mondo.grounds e mondo.passages
+	 * @post il campo open dei passaggi specificati deve essere true nel caso non vi siano errori
 	 * @return true o false
 	 */
 	boolean openPassages(String[] array){                     //apre i passaggi voluti partendo da un array di stringhe 
@@ -160,8 +163,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che aggiunge ai luoghi selezionati le chiavi definite nell'array (sintassi luogo-chiave)
 	 * @param array
-	 * @pre array non deve essere nullo
-	 * @post valore ritornato true
+	 * @pre i luoghi e le chiavi specificati nell'array devono esistere nei campi mondo.grounds e mondo.keytypes
+	 * @post il campo key dei luoghi specificati non deve essere null nel caso non vi siano errori
 	 * @return true o false
 	 */
 	boolean putKeyGrounds(String[] array){                                 
@@ -212,8 +215,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che aggiunge ai passaggi le chiavi definite nell'array (sintassi: luogo-luogo-chiave)
 	 * @param array
-	 * @pre array non deve essere nullo
-	 * @post valore ritornato true
+	 * @pre i passaggi e le chiavi specificati nell'array devono esistere nei campi mondo.passages e mondo.keytypes
+	 * @post il campo key dei passaggi specificati non deve essere null nel caso non vi siano errori
 	 * @return teue o false
 	 */
 	boolean putKeyPassages(String[] array){                               
@@ -282,7 +285,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 	/**
 	 * Metodo per aggiungere al mondo le chiavi definite nell'array (sintassi valore-nome)
 	 * @param keys
-	 * @pre keys non deve essere nullo
+	 * @pre keys non deve essere vuoto
+	 * @post il campo mondo.keytypes non deve essere null nel caso non vi siano errori
 	 */
 	void addKeys(String[] keys){                                                  
 		
@@ -308,8 +312,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che aggiunge in modo random una prova da mettere nei luoghi definiti dall'array
 	 * @param array
-	 * @pre array non deve essere nullo
-	 * @post valore ritornato true
+	 * @pre i luoghi e le prove specificati nell'array devono esistere nei campi mondo.grounds e mondo.trials
+	 * @post il campo trial dei luoghi specificati non deve essere null nel caso non vi siano errori
 	 * @return true o false
 	 */
 	boolean putTrialsGrounds(String[] array){                                      
@@ -340,7 +344,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 	/**
 	 * Metodo per aggiungere al mondo le prove definite nell'array (sintassi valore-nome)
 	 * @param array
-	 * @pre array non deve essere nullo
+	 * @pre array non deve essere vuoto
+	 * @post il campo mondo.keytypes non deve essere null nel caso non vi siano errori
 	 */
 	void addTrials(String[] array){                                           
 		for(int i=0;i<array.length;i++){
@@ -369,7 +374,8 @@ public class AdvancedFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che aggiunge alla prova scelta (primo slot array)  le domande e risposte definite dall'array (sintassi domanda-risposta)
 	 * @param qa
-	 * @pre qa non deve essere nullo
+	 * @pre le prove specificate nell'array devono esistere nel campo mondo.trials
+	 * @post il campo quiz delle prove specificate non deve essere vuoto
 	 */
 	void addQA(String[] qa){ 
 		String name=qa[0];

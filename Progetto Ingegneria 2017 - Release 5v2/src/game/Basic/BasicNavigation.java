@@ -23,6 +23,7 @@ public class BasicNavigation extends Navigation{
 	 * @param world
 	 * @param local_string
 	 * @param common_string
+	 * @pre i parametri non siano null
 	 */
 	BasicNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
 		direction_list= new Menu(DIRECTION_MENU);
@@ -35,6 +36,7 @@ public class BasicNavigation extends Navigation{
 	 * Metodo che permette al giocatore di muoversi nel mondo
 	 * @param _current_ground
 	 * @return oggetto ground, rappresenta il luogo nel quale si è spostato il giocatore
+	 * @pre la variabile world e i suoi campi non siano null
 	 */
 	public Ground navigate(Ground _current_ground) {
 		BasicGround current_ground= (BasicGround) _current_ground;

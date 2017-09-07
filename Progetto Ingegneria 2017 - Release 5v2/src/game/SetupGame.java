@@ -9,7 +9,7 @@ import game.Basic.BasicFactory;
 import game.Medium.MediumFactory;
 
 /**
- * Classe SetupGame, ha il compito del setup del gioco basandosi sul pattern abstract factory.
+ * Classe SetupGame, ha il compito di fungere da punto di controllo per la decisione del tipo di Factory da usare
  */
 public class SetupGame implements Serializable{
 	

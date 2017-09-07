@@ -3,7 +3,7 @@ package game.Abstract;
 import java.io.Serializable;
 
 /**
- * Classe astratta Navigation, rappresenta l'abstract product estendibile dai vari mondi.
+ * Classe astratta Navigation, rappresenta l'abstract product estendibile dalle sue varianti (concrete products).
  */
 public abstract class Navigation implements Serializable{
 

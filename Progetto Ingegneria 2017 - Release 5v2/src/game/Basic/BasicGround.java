@@ -21,6 +21,7 @@ public class BasicGround extends Ground{
 	 * @param width 
 	 * @param level 
 	 * @param name
+	 * @pre i valori non devono essere nulli
 	 */
 	BasicGround(int height, int width, int level, String name){
 		this.level=level;

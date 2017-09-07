@@ -32,6 +32,7 @@ public class MediumFactory extends Factory implements Serializable{
 	 * @param values
 	 * @param common_string
 	 * @param local_string
+	 * @pre values, common_string e local_string non siano null
 	 */
 	public MediumFactory(HashMap<String, String[]> values, HashMap<String, String> common_string, HashMap<String, String> local_string){
 		this.values=values;
@@ -41,7 +42,7 @@ public class MediumFactory extends Factory implements Serializable{
 
 	/**
 	 * Metodo che inizializza i valori del mondo con i valori contenuti nelle HashMap.
-	 * @return world, oggetto di tipo MediumWorld
+	 * @return world, oggetto di tipo MediumWorld o null
 	 */
 	public World getWorld() {
 		try{
@@ -76,7 +77,8 @@ public class MediumFactory extends Factory implements Serializable{
 
 	/**
 	 * Metodo che crea un oggetto Navigation
-	 * return navigation, oggetto Navigation
+	 * @return navigation, oggetto Navigation
+	 * @pre values, common_string e local_string non siano null
 	 */
 	public Navigation getNavigation() {
 		MediumNavigation navigation= new MediumNavigation(world, local_string, common_string);
@@ -85,7 +87,8 @@ public class MediumFactory extends Factory implements Serializable{
 
 	/**
 	 * Metodo che crea un oggetto ModifyWorld.
-	 * return modify, oggetto ModifyWorld
+	 * @return modify, oggetto ModifyWorld
+	 * @pre il campo world non sia null
 	 */
 	public ModifyWorld getModify() {
 		ModifyMediumWorld modify= new ModifyMediumWorld(world);
@@ -95,8 +98,8 @@ public class MediumFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che apre i passaggi voluti partendo da un array di stringhe
 	 * @param array
-	 * @pre array non deve essere nullo
-	 * @post valore ritornato true, non vi sono stati errori
+	 * @pre i luoghi e i passaggi specificati nell'array devono esistere nei campi mondo.grounds e mondo.passages
+	 * @post il campo open dei passaggi specificati deve essere true nel caso non vi siano errori
 	 * @return true o false
 	 */
 	boolean openPassages(String[] array){                     //apre i passaggi voluti partendo da un array di stringhe 
@@ -143,8 +146,8 @@ public class MediumFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che aggiunge ai luoghi selezionati le chiavi definite nell'array (sintassi luogo-chiave)
 	 * @param array
-	 * @pre array non deve essere nullo
-	 * @post valore ritornato true
+	 * @pre i luoghi e le chiavi specificati nell'array devono esistere nei campi mondo.grounds e mondo.keytypes
+	 * @post il campo key dei luoghi specificati non deve essere null nel caso non vi siano errori
 	 * @return true o false
 	 */
 	boolean putKeyGrounds(String[] array){                                 
@@ -195,8 +198,8 @@ public class MediumFactory extends Factory implements Serializable{
 	/**
 	 * Metodo che aggiunge ai passaggi le chiavi definite nell'array (sintassi: luogo-luogo-chiave)
 	 * @param array
-	 * @pre array non deve essere nullo
-	 * @post valore ritornato true
+	 * @pre i passaggi e le chiavi specificati nell'array devono esistere nei campi mondo.passages e mondo.keytypes
+	 * @post il campo key dei passaggi specificati non deve essere null nel caso non vi siano errori
 	 * @return true o false
 	 */
 	boolean putKeyPassages(String[] array){                                
@@ -264,8 +267,8 @@ public class MediumFactory extends Factory implements Serializable{
 	
 	/**
 	 * Metodo per aggiungere al mondo le chiavi definite nell'array (sintassi valore-nome)
-	 * @param keys
-	 * @pre keys non deve essere nullo
+	 * @pre keys non deve essere vuoto
+	 * @post il campo mondo.keytypes non deve essere null nel caso non vi siano errori
 	 */
 	void addKeys(String[] keys){                                                  
 		

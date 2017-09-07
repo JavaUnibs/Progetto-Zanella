@@ -18,7 +18,7 @@ public class Passage implements Serializable{
 	 * Costruttore della classe Passage, crea un passaggio tra i due luoghi forniti.
 	 * @param grounda
 	 * @param groundb
-	 * @pre i luoghi non devono esistere
+	 * @pre i luoghi devono esistere
 	 */
 	Passage(Ground grounda, Ground groundb){
 		this.grounda=grounda;

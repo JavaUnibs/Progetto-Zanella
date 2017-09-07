@@ -27,6 +27,7 @@ public class MediumNavigation extends Navigation implements Serializable{
 	 * @param world
 	 * @param local_string
 	 * @param common_string
+	 * @pre i parametri non siano null
 	 */
 	MediumNavigation(World world, HashMap<String, String> local_string, HashMap<String, String> common_string){
 		direction_list= new Menu(DIRECTION_MENU);
@@ -39,6 +40,7 @@ public class MediumNavigation extends Navigation implements Serializable{
 	 * Metodo che permette al giocatore di muoversi nel mondo
 	 * @param _current_ground
 	 * @return oggetto ground, rappresenta il luogo nel quale si è spostato il giocatore
+	 * @pre la variabile world e i suoi campi non siano null
 	 */
 	public Ground navigate(Ground _current_ground) {
 		MediumGround current_ground= (MediumGround) _current_ground;
@@ -124,7 +126,8 @@ public class MediumNavigation extends Navigation implements Serializable{
 	/**
 	 * Metodo che permette al giocatore di raccogliere una chiave da un luogo.
 	 * @param current_ground
-	 * @pre requisiti di spazio e peso soddisfatti
+	 * @pre current_ground, world e local_string non siano null
+	 * @post il campo world.playerkeys possieda la chiave recuperata, mentre il campo key di current_ground sia null (se le condizioni sono soddisfatte)
 	 * @return string 
 	 */
 	private String retrieveKey(MediumGround current_ground){
@@ -144,6 +147,8 @@ public class MediumNavigation extends Navigation implements Serializable{
 	 * Metodo che permette al giocatore di depositare una chiave in luogo.
 	 * @param current_ground
 	 * @return string
+	 * @pre current_ground, world, local_string e common_string non siano null
+	 * @post il campo world.playerkeys non possieda la chiave depositata, mentre il campo key di current_ground abbia un riferimento ad essa (se le condizioni sono soddisfatte)
 	 */
 	private String depositKey(MediumGround current_ground){
 		ArrayList<String> temp= new ArrayList<String>();
@@ -171,6 +176,9 @@ public class MediumNavigation extends Navigation implements Serializable{
 	 * @param current_ground
 	 * @param next_ground
 	 * @return current_ground, rappresenta luogo corrente che potrebbe essere lo stesso in caso di insuccesso
+	 * @pre currentr_ground, world e local_string non siano null
+	 * @post i campi open e key dell'oggetto passaggio corrispondente ai luoghi current_ground e next_ground siano aggiornati secondo la logica del gioco (se esistente),
+	 * i campi world.deposited e world-trial_done posti false (se soddisfatte le condizioni)
 	 */
 	private MediumGround attemptEntry(MediumGround current_ground, MediumGround next_ground){
 		if(next_ground==null) System.out.println(local_string.get("NO_GROUND"));

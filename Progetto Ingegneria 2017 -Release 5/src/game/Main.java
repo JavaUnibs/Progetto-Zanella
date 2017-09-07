@@ -17,7 +17,8 @@ public class Main {
 	static final String[] MENU_PRINCIPALE= {"Vai in una direzione", "Salva la sessione"}; 
 	static final String[] MENU_DIREZIONI = {"Avanti", "Indietro", "Sinistra", "Destra", "Sopra", "Sotto"};
 	/**
-	 * Metodo main che permette all'utente di giocare, ha il compito di fornire un menu testuale con il quale l'utente può interagire
+	 * Metodo main che permette all'utente di giocare, ha il compito di fornire un menu testuale con il quale l'utente può interagire, dare la possibilità di salvare
+	 * o caricare una partita, caricare i file necessari all'avvio del gioco
 	 * 
 	 * @param args
 	 */
@@ -366,6 +367,7 @@ public class Main {
 	 * Metodo che permette la conversione dei valori in interi.
 	 * @param map
 	 * @param key
+	 * @pre map e key non siano null e map contenga il valore specificato in key
 	 * @return valore intero
 	 */
 	static int convertValues(HashMap<String, String[]> map, String key){

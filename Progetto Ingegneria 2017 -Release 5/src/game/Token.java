@@ -17,7 +17,7 @@ public class Token implements Serializable{
 	 * Costruttore della classe, inizializza le chiavi con i valori di peso e nome con il quale viene chiamato.
 	 * @param weight
 	 * @param name
-	 * @pre weight > 0
+	 * @pre weight > 0, name diverso da null
 	 */
 	public Token(int weight, String name) {
 		super();
